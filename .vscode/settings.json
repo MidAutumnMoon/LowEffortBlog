@@ -1,0 +1,9 @@
+{
+
+    "explorer.sortOrder": "filesFirst",
+
+    "[markdown]": {
+        "editor.wordWrap": "on",
+    }
+
+}
