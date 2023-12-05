@@ -9,3 +9,8 @@ my own website.
 Maybe later on there will be a proper blog website
 built with some proper static site generator... Meh,
 that's much an effort.
+
+## License
+
+Articles, pictures, illustrations and musics etc. 
+are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) if not explictly declared otherwise.
