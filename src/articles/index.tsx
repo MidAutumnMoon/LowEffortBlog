@@ -48,6 +48,7 @@ const Article = (
 
     return <li class="
         flex flex-row flex-nowrap
+        items-center
         gap-2
     ">
         { date_elem }
