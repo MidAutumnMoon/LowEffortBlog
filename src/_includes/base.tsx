@@ -64,6 +64,7 @@ export default ( data: Lume.Data ) => {
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <title> {data.title ?? data.default_title} </title>
+            <link rel="preload" href="/uno.css" as="style" />
             <link rel="stylesheet" href={ `/uno.css?cache=${build_time}` } />
         </head>
 
