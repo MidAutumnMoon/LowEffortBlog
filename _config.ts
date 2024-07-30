@@ -13,12 +13,18 @@ import UnoPresetTypography from "@unocss/preset-typography"
 
 import SlugifyUrls from "lume/plugins/slugify_urls.ts"
 import Toml from "lume/plugins/toml.ts"
+import Feed from "lume/plugins/feed.ts"
 
 
 const site = Lume( {
     src: "src",
     location: new URL( "https://br.418.im/" )
 } )
+
+
+/**
+ * Plugins
+ */
 
 site.use( Esbuild() )
 site.use( JsxPreact() )
@@ -41,6 +47,22 @@ site.use( Unocss( {
 
 site.use( SlugifyUrls() )
 site.use( Toml() )
+
+// site.use( Feed() )
+
+
+/**
+ * Data
+ */
+
+site.data( "default_title", "Brrr" )
+
+
+/**
+ * Static assets
+ */
+
+site.copy( "public" )
 
 
 export default site

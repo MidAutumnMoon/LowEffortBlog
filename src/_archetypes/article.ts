@@ -1,5 +1,7 @@
 import CreateSlugifier from "lume/core/slugifier.ts"
 
+import { BrDate } from "@lib/date.ts"
+
 
 export default ( title: string ) => {
 
@@ -12,24 +14,15 @@ export default ( title: string ) => {
         return slugifier( title )
     })()
 
-    const [ year, month, day ] = (() => {
-        const date = new Date()
-        // Rubbish JS
-        const parts = [
-            date.getFullYear(),
-            date.getMonth() + 1,
-            date.getDate(),
-        ] as const
-        return parts
-            .map( p => p.toString() )
-            .map( p => p.padStart( 2, "0" ) )
-    })()
+    const brdate = BrDate.today()
+    const { year, month } = brdate
 
     return {
         path: `/articles/${year}/${month}/${slug}/index.md`,
         content: {
             title,
-            date: `${year}-${month}-${day}`,
+            date: brdate.toString(),
+            updated: brdate.toString(),
             content: `\n# ${title}`
         }
     }
