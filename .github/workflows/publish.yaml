@@ -41,5 +41,8 @@ jobs:
                 apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                 accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                 wranglerVersion: 3
+                # The reason behind specifing branch "main"
+                # is so miserable and a post has been written
+                # just for it. Check it out :(
                 command: |
                     pages deploy --project-name="brrr" --branch main --commit-dirty=true "_site"
