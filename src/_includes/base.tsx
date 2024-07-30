@@ -57,15 +57,16 @@ const Main = ( data: Lume.Data ) => <>
 
 export default ( data: Lume.Data ) => {
 
-    const build_time = ( new Date() ).getTime()
+    const stylesheet =
+        `/styles.css?cb=${ (new Date()).getTime() }`
 
     return <html lang="en" class="overflow-x-hidden">
         <head>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <title> {data.title ?? data.default_title} </title>
-            <link rel="preload" href="/uno.css" as="style" />
-            <link rel="stylesheet" href={ `/uno.css?cache=${build_time}` } />
+            <link rel="preload" href={stylesheet} as="style" />
+            <link rel="stylesheet" href={stylesheet} />
         </head>
 
         <body class="

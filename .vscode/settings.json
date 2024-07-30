@@ -1,6 +1,9 @@
 {
     "explorer.sortOrder": "filesFirst",
     "cSpell.ignoreWords": [
-        "brdate"
+        "Preact",
+        "Unocss",
+        "brdate",
+        "tailwindcss"
     ],
 }

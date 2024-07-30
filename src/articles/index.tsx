@@ -82,7 +82,7 @@ const ArticlesByYear = ( prop: {
     ">
         <h2 class="text-xl">{year}</h2>
         <ul class="
-            pl-2ch
+            pl-[2ch]
             flex flex-col flex-nowrap
             gap-4
         ">

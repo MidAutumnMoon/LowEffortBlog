@@ -6,10 +6,8 @@ import JsxPreact from "lume/plugins/jsx_preact.ts"
 import Postcss from "lume/plugins/postcss.ts"
 import PostcssNesting from "npm:postcss-nesting"
 
-import Unocss from "lume/plugins/unocss.ts"
-import UnoPresetUno from "@unocss/preset-uno"
-import UnoPresetIcons from "@unocss/preset-icons"
-import UnoPresetTypography from "@unocss/preset-typography"
+import Tailwind from "lume/plugins/tailwindcss.ts"
+import TailwindTypography from "npm:@tailwindcss/typography";
 
 import SlugifyUrls from "lume/plugins/slugify_urls.ts"
 import Toml from "lume/plugins/toml.ts"
@@ -29,20 +27,12 @@ const site = Lume( {
 site.use( Esbuild() )
 site.use( JsxPreact() )
 
-site.use( Postcss( {
-    plugins:[ PostcssNesting ]
+site.use( Tailwind( {
+    options: { plugins: [ TailwindTypography ] }
 } ) )
 
-site.use( Unocss( {
-    options: {
-        presets: [
-            UnoPresetUno,
-            // UnoPresetIcons(),
-            UnoPresetTypography
-        ],
-    },
-    reset: "eric-meyer",
-    cssFile: "uno.css",
+site.use( Postcss( {
+    plugins:[ PostcssNesting ]
 } ) )
 
 site.use( SlugifyUrls() )
@@ -62,7 +52,7 @@ site.data( "default_title", "Brrr" )
  * Static assets
  */
 
-site.copy( "public" )
+site.copy( "public", "." )
 
 
 export default site
