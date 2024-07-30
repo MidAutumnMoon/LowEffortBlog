@@ -1,7 +1,9 @@
 import Lume from "lume/mod.ts"
 
 import Esbuild from "lume/plugins/esbuild.ts"
+import EsbuildMinicss from "./_plugins/EsbuildMinicss.ts"
 import JsxPreact from "lume/plugins/jsx_preact.ts"
+import Minify from "lume/plugins/minify_html.ts"
 
 import Postcss from "lume/plugins/postcss.ts"
 import PostcssNesting from "npm:postcss-nesting"
@@ -12,6 +14,8 @@ import TailwindTypography from "npm:@tailwindcss/typography";
 import SlugifyUrls from "lume/plugins/slugify_urls.ts"
 import Toml from "lume/plugins/toml.ts"
 import Feed from "lume/plugins/feed.ts"
+
+import * as esbuild from "esbuild"
 
 
 const site = Lume( {
@@ -24,7 +28,7 @@ const site = Lume( {
  * Plugins
  */
 
-site.use( Esbuild() )
+
 site.use( JsxPreact() )
 
 site.use( Tailwind( {
@@ -35,10 +39,16 @@ site.use( Postcss( {
     plugins:[ PostcssNesting ]
 } ) )
 
+site.use( Esbuild() )
+site.use( EsbuildMinicss() )
+
 site.use( SlugifyUrls() )
 site.use( Toml() )
 
+site.use( Minify() )
+
 // site.use( Feed() )
+
 
 
 /**
