@@ -1,0 +1,3 @@
+layout = "base.tsx"
+type = "article"
+index = true
