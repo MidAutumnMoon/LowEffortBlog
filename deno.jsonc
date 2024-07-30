@@ -1,8 +1,7 @@
 {
     "imports": {
         "@lib/": "./_lib/",
-        "lume/": "https://deno.land/x/lume@v2.2.4/",
-        "@unocss": "npm:@unocss"
+        "lume/": "https://deno.land/x/lume@v2.2.4/"
     },
 
     "tasks": {
