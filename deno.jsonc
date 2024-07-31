@@ -2,7 +2,8 @@
     "imports": {
         "@lib/": "./_lib/",
         "lume/": "https://deno.land/x/lume@v2.2.4/",
-        "esbuild": "npm:esbuild"
+        "esbuild": "npm:esbuild",
+        "@tailwindcss": "npm:@tailwindcss"
     },
 
     "tasks": {

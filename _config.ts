@@ -9,13 +9,12 @@ import Postcss from "lume/plugins/postcss.ts"
 import PostcssNesting from "npm:postcss-nesting"
 
 import Tailwind from "lume/plugins/tailwindcss.ts"
-import TailwindTypography from "npm:@tailwindcss/typography";
+import TailwindOption from "./tailwind.config.ts"
 
 import SlugifyUrls from "lume/plugins/slugify_urls.ts"
 import Toml from "lume/plugins/toml.ts"
 import Feed from "lume/plugins/feed.ts"
-
-import * as esbuild from "esbuild"
+import Sitemap from "lume/plugins/sitemap.ts"
 
 
 const site = Lume( {
@@ -32,7 +31,7 @@ const site = Lume( {
 site.use( JsxPreact() )
 
 site.use( Tailwind( {
-    options: { plugins: [ TailwindTypography ] }
+    options: TailwindOption
 } ) )
 
 site.use( Postcss( {
@@ -46,6 +45,7 @@ site.use( SlugifyUrls() )
 site.use( Toml() )
 
 site.use( Minify() )
+site.use( Sitemap() )
 
 // site.use( Feed() )
 
