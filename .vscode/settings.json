@@ -2,6 +2,7 @@
     "explorer.sortOrder": "filesFirst",
     "cSpell.ignoreWords": [
         "Minicss",
+        "NOHZ",
         "Preact",
         "Unocss",
         "brdate",

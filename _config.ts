@@ -28,6 +28,8 @@ const site = Lume( {
  */
 
 
+site.use( SlugifyUrls() )
+site.use( Toml() )
 site.use( JsxPreact() )
 
 site.use( Tailwind( {
@@ -40,11 +42,8 @@ site.use( Postcss( {
 
 site.use( Esbuild() )
 site.use( EsbuildMinicss() )
-
-site.use( SlugifyUrls() )
-site.use( Toml() )
-
 site.use( Minify() )
+
 site.use( Sitemap() )
 
 // site.use( Feed() )
