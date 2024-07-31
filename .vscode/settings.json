@@ -1,10 +1,13 @@
 {
     "explorer.sortOrder": "filesFirst",
     "cSpell.ignoreWords": [
+        "Matz",
         "Minicss",
         "NOHZ",
         "Preact",
+        "Slugifier",
         "Unocss",
+        "YARV",
         "brdate",
         "tailwindcss"
     ],

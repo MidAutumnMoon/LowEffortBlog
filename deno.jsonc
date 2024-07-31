@@ -1,9 +1,11 @@
 {
     "imports": {
+        "@iconify-json/mdi": "npm:@iconify-json/mdi",
+        "@iconify/tailwind": "npm:@iconify/tailwind",
         "@lib/": "./_lib/",
-        "lume/": "https://deno.land/x/lume@v2.2.4/",
+        "@tailwindcss": "npm:@tailwindcss",
         "esbuild": "npm:esbuild",
-        "@tailwindcss": "npm:@tailwindcss"
+        "lume/": "https://deno.land/x/lume@v2.2.4/"
     },
 
     "tasks": {
@@ -14,9 +16,8 @@
     },
 
     "compilerOptions": {
-        "types": [ "lume/types.ts" ],
+        "types": ["lume/types.ts"],
         "jsx": "react-jsx",
         "jsxImportSource": "npm:preact"
     }
-
 }

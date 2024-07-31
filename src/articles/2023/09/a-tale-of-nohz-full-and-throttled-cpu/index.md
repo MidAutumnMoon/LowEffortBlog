@@ -1,12 +1,10 @@
 ---
-title: A Tale of Linux NOHZ_FULL and Throttled CPU
+title: A Tale of NOHZ_FULL and Throttled CPU
 date: '2023-09-11'
 updated: '2023-09-11'
 tags:
     - linux
 ---
-
-# A Tale of Linux NOHZ_FULL and Throttled CPU
 
 > For some background knowledge on Linux dynticks and NOHZ_FULL, checkout the wonderful [*CPU Isolation*](https://www.suse.com/c/cpu-isolation-introduction-part-1/) series from SUSE Labs.
 

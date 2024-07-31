@@ -7,8 +7,6 @@ tags:
     - nix
 ---
 
-# Notes on NixOS in systemd-nspawn
-
 - <https://hub.nspawn.org/images/> provides NixOS tarball
     - Has a sane default configuration.nix
         - Has `boot.loader.initScript.enable = true;` (otherwise nspawn won't be able to boot the system)

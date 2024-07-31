@@ -6,8 +6,6 @@ tags:
     - rant
 ---
 
-# Cloudflare and Its Miserable UX
-
 To start off, Cloudflare Pages (abbreviated as Pages)
 has the concept of "preview" and "production" deployments.
 

@@ -1,7 +1,5 @@
-import CreateSlugifier from "lume/core/slugifier.ts"
-
 import { BrDate } from "@lib/date.ts"
-
+import { Slug } from "@lib/slug.ts"
 
 export default ( title: string ) => {
 
@@ -9,10 +7,7 @@ export default ( title: string ) => {
         throw "New article requires a title"
     }
 
-    const slug = (() => {
-        const slugifier = CreateSlugifier()
-        return slugifier( title )
-    })()
+    const slug = Slug( title )
 
     const brdate = BrDate.today()
     const { year, month } = brdate

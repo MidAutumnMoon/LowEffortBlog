@@ -1,10 +1,14 @@
 @tailwind base;
 
 @layer base {
+    /* TODO: better transition and color */
     a {
         @apply underline;
+        @apply hover:text-blue-600;
+        @apply transition-color;
     }
 }
 
 @tailwind components;
+
 @tailwind utilities;
