@@ -8,30 +8,39 @@ export const layout = "base.tsx"
 
 const MaxTagsAtDisplay = 3
 
-const Tags = ( prop: { tags: string[] } ) => {
-    let { tags } = prop
-
+/**
+ * Show a list of #tags
+ */
+const Tags = (
+    { tags }: { tags: string[] }
+) => {
     if ( !tags ) {
         return <></>
     }
 
     if ( tags.length > MaxTagsAtDisplay ) {
-        tags = tags.slice( 0, MaxTagsAtDisplay + 0 )
+        // slice() does NOT include the end element
+        // pitfall + 1
+        tags = tags.slice( 0, MaxTagsAtDisplay )
     }
 
-    return <ul class="
-        text-xs
-        flex flex-row flex-nowrap
-        gap-1.5
-        text-slate-500/70
-    ">
+    return <ul
+        class="
+            text-xs
+            flex flex-row flex-nowrap
+            gap-1.5
+            text-slate-500/70
+        "
+    >
         { tags.map( t => <li>#{t}</li> ) }
     </ul>
 }
 
 
 const MissingTitle = <>
-    <span class="italic text-slate/80">&lt;Missing Title&gt;</span>
+    <span class="italic text-slate/70">
+        &lt;Missing Title&gt;
+    </span>
 </>
 
 const Article = (
@@ -39,18 +48,22 @@ const Article = (
 ) => {
     const brdate = new BrDate( article.date )
 
-    const date_elem = <div class="
-        text-xs
-        text-slate-500/80
-    ">
+    const date_elem = <div
+        class="
+            text-xs
+            text-slate-500/80
+        "
+    >
         { brdate.to_mm_dd() }
     </div>
 
-    return <li class="
-        flex flex-row flex-nowrap
-        items-center
-        gap-2
-    ">
+    return <li
+        class="
+            flex flex-row flex-nowrap
+            items-center
+            gap-2
+        "
+    >
         { date_elem }
         <a href={article.url}>
             { article.title ?? MissingTitle }
@@ -73,20 +86,24 @@ const ArticlesByYear = ( prop: {
             a.date.getTime() - b.date.getTime()
         )
         // reverse it so that the newer articles
-        // are displayed first
+        // are sorted first
         .reverse()
         .map( a => <Article article={a}/> )
 
-    return <section class="
-        flex flex-col flex-nowrap
-        gap-2
-    ">
-        <h2 class="text-xl">{year}</h2>
-        <ul class="
-            pl-[2ch]
+    return <section
+        class="
             flex flex-col flex-nowrap
-            gap-4
-        ">
+            gap-2
+        "
+    >
+        <h2 class="text-xl">{year}</h2>
+        <ul
+            class="
+                pl-[2ch]
+                flex flex-col flex-nowrap
+                gap-4
+            "
+        >
             {articles_elems}
         </ul>
     </section>
@@ -112,11 +129,13 @@ export default ( data: Lume.Data ) => {
             <ArticlesByYear year={year} articles={articles! as Lume.Data[]} />
         )
 
-    return <div class="
-        py-4
-        flex flex-col flex-nowrap
-        gap-10
-    ">
+    return <div
+        class="
+            py-4
+            flex flex-col flex-nowrap
+            gap-10
+        "
+    >
         {years_elems}
     </div>
 
