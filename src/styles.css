@@ -5,7 +5,7 @@
     a {
         @apply underline;
         @apply hover:text-blue-600;
-        @apply transition-color;
+        @apply transition-colors;
     }
 }
 
