@@ -1,11 +1,11 @@
 @tailwind base;
 
 @layer base {
-    /* TODO: better transition and color */
     a {
+        @apply inline-block;
         @apply underline;
-        @apply hover:text-blue-600;
-        @apply transition-colors;
+        @apply transition-transform;
+        @apply active:translate-y-[2px];
     }
 }
 

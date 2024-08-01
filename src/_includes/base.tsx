@@ -1,5 +1,5 @@
 const Nav = () => <>
-    <nav class="text-lg">
+    <nav class="text-xl">
         <ul class="
             flex flex-row flex-nowrap
             justify-between
