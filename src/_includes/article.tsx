@@ -14,9 +14,18 @@ const Heading = (
 export default ( data: Lume.Data ) => {
 
     return <article>
-        <Heading title={data.title ?? "<Missing Title>"}/>
-        <div class="prose">
-            {data.children}
-        </div>
+
+        <Heading title={ data.title ?? "<Missing Title>" }/>
+
+        <main
+            class="
+                prose
+                leading-6
+                max-w-full
+            "
+        >
+            { data.children }
+        </main>
+
     </article>
 }
