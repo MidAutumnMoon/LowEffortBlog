@@ -5,8 +5,7 @@
     "@lib/": "./_lib/",
     "@tailwindcss": "npm:@tailwindcss",
     "esbuild": "npm:esbuild",
-    "lume/": "https://deno.land/x/lume@v2.2.4/",
-    "nanoid": "npm:nanoid"
+    "lume/": "https://deno.land/x/lume@v2.2.4/"
   },
 
   "tasks": {
