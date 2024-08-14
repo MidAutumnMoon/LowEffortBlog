@@ -11,7 +11,12 @@ const Heading = (
 ) => {
 
     return <>
-        <h1 class="text-4xl font-semibold leading-loose">
+        <h1
+            class="
+                text-4xl font-bold leading-tight
+                mb-8 mt-4
+            "
+        >
             { title }
         </h1>
     </>

@@ -1,3 +1,6 @@
+@import "/base16_github.css";
+
+
 @tailwind base;
 
 @layer base {
@@ -5,6 +8,7 @@
         @apply overflow-x-hidden;
         @apply relative;
         @apply mx-4 lg:mx-auto lg:max-w-[70ch];
+        @apply text-lg lg:text-base;
     }
 
     a {
@@ -45,15 +49,32 @@
         }
 
         /*
-            Paragraph
+            Blocks
          */
 
-        & p {
+        & p,blockquote,pre {
             @apply mt-[1ch] mb-[1.5ch];
         }
 
         & code {
             @apply font-mono;
+            @apply bg-slate-200/70;
+            @apply px-1;
+        }
+
+        & blockquote {
+            @apply italic;
+            @apply border-l-4 pl-3 py-1;
+            @apply text-gray-600;
+        }
+
+        & pre {
+            & code { @apply bg-transparent p-0; }
+            @apply border;
+            @apply overflow-x-auto;
+            @apply whitespace-pre hyphens-none;
+            @apply py-1 px-2;
+            tab-size: 4;
         }
     }
 

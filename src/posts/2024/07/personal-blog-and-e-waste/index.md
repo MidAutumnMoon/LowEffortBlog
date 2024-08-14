@@ -65,3 +65,26 @@ This part checks out some basic text styling.
 ***bold italian***
 
 `Monospace Code`
+
+
+# Various Blocks
+
+> Quote of another quote
+>
+> Someone somehow said:
+>
+> "Somebody at sometime will inevitably do something
+> somewhat without some meaning"
+
+```
+Code block with no language specified.
+```
+
+```rust
+// highlight.js works well enough (tm)
+fn fw() -> ft {
+    let fm = f!();
+    fm.fq();
+    fm
+}
+```

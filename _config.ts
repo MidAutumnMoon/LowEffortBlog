@@ -4,6 +4,7 @@ import Esbuild from "lume/plugins/esbuild.ts"
 import EsbuildMinicss from "./_plugins/EsbuildMinicss.ts"
 import JsxPreact from "lume/plugins/jsx_preact.ts"
 import Minify from "lume/plugins/minify_html.ts"
+import Highlight from "lume/plugins/code_highlight.ts"
 
 import Postcss from "lume/plugins/postcss.ts"
 import Tailwind from "lume/plugins/tailwindcss.ts"
@@ -32,6 +33,13 @@ site.use( Toml() )
 site.use( JsxPreact() )
 site.use( ResolveUrls() )
 // site.use( Link2Heading() )
+
+site.use( Highlight( {
+    theme: {
+        name: "base16/github",
+        path: "/_includes/base16_github.css"
+    }
+} ) )
 
 site.use( Tailwind( {
     options: TailwindOption
