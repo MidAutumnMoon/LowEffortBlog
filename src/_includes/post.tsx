@@ -13,17 +13,34 @@ const Title = (
     { title }: { title: string }
 ) => {
     return <>
-        <h1 class="text-4xl font-bold leading-tight mb-8">
+        <h1 class="text-4xl font-bold leading-tight my-4">
             { title }
         </h1>
     </>
 }
 
-export default ( data: Lume.Data ) => {
+
+const Meta = (
+    { words, tags }: { words: number, tags: string[] }
+) => {
+    return <span
+        class="
+            inline-block mb-8 w-full
+            text-sm text-gray-600 italic
+        "
+    >
+        { words } words
+        &nbsp;&middot;&nbsp;
+        { tags.map( t => `#${t}` ).join( "\u00A0" ) }
+    </span>
+}
+
+
+export default ( page: Lume.Data ) => {
+    const { title, readingInfo, tags } = page
     return <article>
-        <Title title={ data.title ?? "<<Missing Title>>" }/>
-        <main class="prose">
-            { data.children }
-        </main>
+        <Title title={ title ?? "<<Missing Title>>" }/>
+        <Meta words={ readingInfo.words } tags={ tags } />
+        <main class="prose">{ page.children }</main>
     </article>
 }
