@@ -67,12 +67,5 @@ site.data( "default_title", "Swoosh" )
 
 site.copy( "public", "." )
 
-site.copy( [
-    ".jpg",
-    ".png",
-    ".avif",
-    ".svg"
-] );
-
 
 export default site

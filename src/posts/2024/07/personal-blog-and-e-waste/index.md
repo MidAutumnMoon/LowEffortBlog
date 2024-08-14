@@ -1,7 +1,7 @@
 ---
 title: Personal Blog and E-Waste
 id: WRUkKxLjLLWw
-date: '2024-07-30'
+date: '2024-07-29'
 updated: '2024-08-14'
 tags:
     - rant
@@ -23,8 +23,8 @@ Here I document some I have done or would do to this very website.
 
 ## `lang` Attribute
 
-Every rookie HTMLer learnt to write `<html lang="en">` at some point
-and never gives it another tough ever again.
+Every HTMLer learnt to write `<html lang="en">` at some point
+and never gives it another thought ever again.
 
 This may not be that relevant to westerners
 
@@ -92,7 +92,7 @@ fn fw() -> ft {
 
 # All Sorts of Lists
 
-1. S
+1. Several lists are more lister than others
 2. O
 3. M
 4. E
@@ -106,3 +106,10 @@ fn fw() -> ft {
     * ET
 * B
     * ORED
+
+
+# Links and Multimedia Resources
+
+[Link to front page](/)
+
+[External link to Wikipedia](https://en.wikipedia.org/wiki/Main_Page)

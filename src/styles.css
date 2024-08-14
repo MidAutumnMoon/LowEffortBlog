@@ -36,12 +36,13 @@
         /*
             Basic margin
          */
-        & p,blockquote,pre,ul,ol {
-            @apply mt-[1ch] mb-[1.5ch];
+        & * {
+            @apply my-[1ch];
         }
 
         /*
             Various Headings
+            h5 and h6 are ignored
         */
         & h1,h2,h3,h4 {
             @apply font-semibold;
@@ -49,16 +50,13 @@
 
         & h1 {
             @apply text-3xl;
-            @apply leading-relaxed;
             @apply mt-6;
         }
         & h2 {
             @apply text-2xl;
-            @apply leading-relaxed;
         }
         & h3,h4 {
             @apply text-xl;
-            @apply leading-relaxed;
         }
 
         /*
@@ -107,7 +105,8 @@
         & ul {
             @apply list-disc;
         }
-    }
+
+    } /* End .prose */
 
 }
 

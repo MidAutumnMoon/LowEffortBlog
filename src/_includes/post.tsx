@@ -6,37 +6,24 @@
 export const layout = "base.tsx"
 
 
-const Heading = (
+/**
+ * The big bold title
+ */
+const Title = (
     { title }: { title: string }
 ) => {
-
     return <>
-        <h1
-            class="
-                text-4xl font-bold leading-tight
-                mb-8 mt-4
-            "
-        >
+        <h1 class="text-4xl font-bold leading-tight mb-8">
             { title }
         </h1>
     </>
 }
 
 export default ( data: Lume.Data ) => {
-
     return <article>
-
-        <Heading title={ data.title ?? "<Missing Title>" }/>
-
-        <main
-            class="
-                prose
-                leading-6
-                max-w-full
-            "
-        >
+        <Title title={ data.title ?? "<<Missing Title>>" }/>
+        <main class="prose">
             { data.children }
         </main>
-
     </article>
 }
