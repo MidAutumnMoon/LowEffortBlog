@@ -1,4 +1,4 @@
-name: "Publish Brrr to Cloudflare Pages"
+name: "Publish Swoosh to Cloudflare Pages"
 
 on:
     workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
         -   name: Setup Deno
             uses: denoland/setup-deno@v1
 
-        -   name: Build Brrr
+        -   name: Build Swoosh
             run: deno task build
 
         -   name: Setup pnpm
@@ -41,8 +41,8 @@ jobs:
                 apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                 accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                 wranglerVersion: 3
-                # The reason behind specifing branch "main"
-                # is so miserable and a post has been written
+                # The reason behind specifying branch "main"
+                # is so miserable that a post has been written
                 # just for it. Check it out :(
                 command: |
-                    pages deploy --project-name="brrr" --branch main --commit-dirty=true "_site"
+                    pages deploy --project-name="swoosh" --branch main --commit-dirty=true "_site"
