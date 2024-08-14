@@ -6,6 +6,8 @@ import JsxPreact from "lume/plugins/jsx_preact.ts"
 import Minify from "lume/plugins/minify_html.ts"
 import Highlight from "lume/plugins/code_highlight.ts"
 
+import MarkdownConfig from "./markdown.config.ts"
+
 import Postcss from "lume/plugins/postcss.ts"
 import Tailwind from "lume/plugins/tailwindcss.ts"
 import TailwindOption from "./tailwind.config.ts"
@@ -14,7 +16,6 @@ import Toml from "lume/plugins/toml.ts"
 import Feed from "lume/plugins/feed.ts"
 import Sitemap from "lume/plugins/sitemap.ts"
 
-import Link2Heading from "./_plugins/Link2Heading.ts"
 import ImageDimension from "./_plugins/ImageDimension.ts"
 import { ImageExtensions } from "@lib/extension.ts"
 
@@ -22,6 +23,8 @@ import { ImageExtensions } from "@lib/extension.ts"
 const site = Lume( {
     src: "src",
     location: new URL( "https://sw.418.im/" )
+}, {
+    markdown: MarkdownConfig
 } )
 
 
