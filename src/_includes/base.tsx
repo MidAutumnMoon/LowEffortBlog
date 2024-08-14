@@ -1,3 +1,8 @@
+/**
+ * The base skeleton of all layouts
+ */
+
+
 const Nav = () => <>
     <nav class="text-xl">
         <ul

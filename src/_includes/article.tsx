@@ -1,4 +1,10 @@
+/**
+ * The layouts of articles.
+ */
+
+
 export const layout = "base.tsx"
+
 
 const Heading = (
     { title }: { title: string }
