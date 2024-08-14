@@ -1,31 +1,31 @@
 import { SwDate } from "@lib/date.ts"
 
-
 export const layout = "base.tsx"
-
-// Otherwise this very page also
-// has the type of "article"
 export const type = undefined
-
 export const url = "./"
 
+/**
+ * Tweaks for various components in one place
+ */
+const Options = {
+    MaxTagsAtDisplay: 3,
+} as const
 
-const MaxTagsAtDisplay = 3
 
 /**
  * Show a list of #tags
  */
 const Tags = (
-    { tags }: { tags: string[] }
+    { tags }: { tags?: string[] }
 ) => {
     if ( !tags ) {
         return <></>
     }
 
-    if ( tags.length > MaxTagsAtDisplay ) {
+    if ( tags.length > Options.MaxTagsAtDisplay ) {
         // slice() does NOT include the end element
         // pitfall + 1
-        tags = tags.slice( 0, MaxTagsAtDisplay )
+        tags = tags.slice( 0, Options.MaxTagsAtDisplay )
     }
 
     return <ul
@@ -47,8 +47,8 @@ const MissingTitle = <>
     </span>
 </>
 
-const Article = (
-    { article }: { article: Lume.Data }
+const LinkToPost = (
+    { post }: { post: Lume.Data }
 ) => {
     const date_elem = <div
         class="
@@ -56,7 +56,7 @@ const Article = (
             text-slate-500/80
         "
     >
-        { ( new SwDate( article.date ) ).to_mm_dd() }
+        { ( new SwDate( post.date ) ).to_mm_dd() }
     </div>
 
     return <li
@@ -67,30 +67,32 @@ const Article = (
         "
     >
         { date_elem }
-        <a href={ article.url }>
-            { article.title ?? MissingTitle }
+        <a href={ post.url }>
+            { post.title ?? MissingTitle }
         </a>
-        <Tags tags={ article.tags }/>
+        <Tags tags={ post.tags }/>
     </li>
 }
 
 
-const ArticlesByYear = ( prop: {
+const PostsPerYear = ( { year, posts }: {
     year: string,
-    articles: Lume.Data[]
+    posts: Lume.Data[]
 } ) => {
-    const { year, articles } = prop
-
-    const articles_elems = articles
-        // sort the articles from older (smaller timestamp)
-        // to newer (bigger timestamp)
+    const link_to_posts = posts
+        /**
+         * 1. Sort posts by creation date from older (smaller timestamp)
+         * to newer (bigger timestamp)
+         */
         .sort( ( a, b ) =>
             a.date.getTime() - b.date.getTime()
         )
-        // reverse it so that the newer articles
-        // are sorted first
+        /**
+         * 2. The reverse it so that the newer ones
+         * are at the front of list
+         */
         .reverse()
-        .map( a => <Article article={a}/> )
+        .map( p => <LinkToPost post={p}/> )
 
     return <section
         class="
@@ -106,7 +108,7 @@ const ArticlesByYear = ( prop: {
                 gap-4
             "
         >
-            { articles_elems }
+            { link_to_posts }
         </ul>
     </section>
 }
@@ -114,21 +116,36 @@ const ArticlesByYear = ( prop: {
 
 export default ( data: Lume.Data ) => {
 
-    const articles_by_year = (() => {
-        const articles = data.search.pages( "type=article" )
-        return Object.groupBy( articles,
-            a => a.date.getFullYear()
+    const posts_by_years = (() => {
+        /**
+         * 1. Grab all posts in one array
+         * like [ <post>, <post>, ... ]
+         */
+        const posts = data.search.pages( "type=post" )
+
+        /**
+         * 2. Group posts by full year,
+         * the result object may look like
+         * { 2023: [<post>, ...], 2024: [...] }
+         */
+        const by_year = Object.groupBy( posts,
+            po => po.date.getFullYear()
         )
+
+        return by_year
     })()
 
-    const years_elems = Object.entries( articles_by_year )
-        .filter( ([ _year, articles ]) => !!articles )
+    const years_elems = Object.entries( posts_by_years )
+        /**
+         * Remove years
+         */
+        .filter( ([ _year, posts ]) => !!posts )
         .sort()
         // Make it descending, which means more recent years
         // got displayed first
         .reverse()
-        .map( ([ year, articles ]) =>
-            <ArticlesByYear year={ year } articles={ articles! as Lume.Data[] } />
+        .map( ([ year, posts ]) =>
+            <PostsPerYear year={ year } posts={ posts! as Lume.Data[] } />
         )
 
     return <div
@@ -138,7 +155,7 @@ export default ( data: Lume.Data ) => {
             gap-10
         "
     >
-        {years_elems}
+        { years_elems }
     </div>
 
 }

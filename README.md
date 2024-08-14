@@ -8,6 +8,6 @@
 
 Source codes are licensed under [GPL3](./LICENSE).
 
-Contents of this blog, including but not limited to articles, pictures,
+Contents of this blog, including but not limited to articles/posts, pictures,
 illustrations and audio etc., are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 if not explicitly declared otherwise.

@@ -5,7 +5,7 @@ import { SwID } from "@lib/id.ts"
 export default ( title: string ) => {
 
     if ( !title ) {
-        throw "New article requires a title"
+        throw "New post requires a title"
     }
 
     const slug_path = Slug( title )
@@ -16,7 +16,7 @@ export default ( title: string ) => {
     const id = ( new SwID() ).text()
 
     return {
-        path: `/articles/${year}/${month}/${slug_path}/index.md`,
+        path: `/posts/${year}/${month}/${slug_path}/index.md`,
         content: {
             title, id,
             date: date.toString(),

@@ -13,7 +13,7 @@ const Nav = () => <>
             "
         >
             <li class="grow"><a href="/">Swoosh</a></li>
-            <li><a href="/articles">Articles</a></li>
+            <li><a href="/posts">Posts</a></li>
             <li><a href="/rss">Feed</a></li>
         </ul>
     </nav>

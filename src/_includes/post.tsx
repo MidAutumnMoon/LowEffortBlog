@@ -1,5 +1,5 @@
 /**
- * The layouts of articles.
+ * The layouts of posts.
  */
 
 

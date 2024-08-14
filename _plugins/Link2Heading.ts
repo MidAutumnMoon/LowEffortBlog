@@ -11,7 +11,7 @@ function one_heading( heading: Element ) {
     heading.id = slug
 
     heading.innerHTML = `
-        <a href="#${ slug }" class="article-heading">
+        <a href="#${ slug }" class="post-heading">
             ${text}
         </a>
     `
@@ -19,7 +19,7 @@ function one_heading( heading: Element ) {
 
 
 function one_page( page: Lume.Page ) {
-    if ( page.data.type !== "article" ) {
+    if ( page.data.type !== "post" ) {
         return
     }
 
