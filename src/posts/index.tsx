@@ -4,13 +4,6 @@ export const layout = "base.tsx"
 export const type = undefined
 export const url = "./"
 
-/**
- * Tweaks for various components in one place
- */
-const Options = {
-    MaxTagsAtDisplay: 3,
-} as const
-
 
 /**
  * Show a list of #tags
@@ -19,12 +12,6 @@ const Tags = (
     { tags }: { tags?: string[] }
 ) => {
     if ( !tags ) { return <></> }
-
-    if ( tags.length > Options.MaxTagsAtDisplay ) {
-        // slice() does NOT include the end element
-        // pitfall + 1
-        tags = tags.slice( 0, Options.MaxTagsAtDisplay )
-    }
 
     const tags_string = tags
         .map( t => `#${t}` )
