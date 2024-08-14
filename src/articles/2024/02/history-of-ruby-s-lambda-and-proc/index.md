@@ -1,5 +1,6 @@
 ---
 title: History of Ruby's Lambda and Proc
+id: wY6k6eAEjYf3
 date: '2024-02-27'
 updated: '2024-02-27'
 tags:

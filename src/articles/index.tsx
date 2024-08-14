@@ -1,9 +1,14 @@
 import { BrDate } from "@lib/date.ts"
+import article from "../_includes/article.tsx";
+
+
+export const layout = "base.tsx"
 
 // Otherwise this very page also
 // has the type of "article"
 export const type = undefined
-export const layout = "base.tsx"
+
+export const url = "./"
 
 
 const MaxTagsAtDisplay = 3
@@ -65,7 +70,7 @@ const Article = (
         "
     >
         { date_elem }
-        <a href={article.url}>
+        <a href={ article.url }>
             { article.title ?? MissingTitle }
         </a>
         <Tags tags={ article.tags }/>
@@ -104,7 +109,7 @@ const ArticlesByYear = ( prop: {
                 gap-4
             "
         >
-            {articles_elems}
+            { articles_elems }
         </ul>
     </section>
 }
@@ -126,7 +131,7 @@ export default ( data: Lume.Data ) => {
         // got displayed first
         .reverse()
         .map( ([ year, articles ]) =>
-            <ArticlesByYear year={year} articles={articles! as Lume.Data[]} />
+            <ArticlesByYear year={ year } articles={ articles! as Lume.Data[] } />
         )
 
     return <div

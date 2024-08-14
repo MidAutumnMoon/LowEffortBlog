@@ -9,10 +9,10 @@ import Postcss from "lume/plugins/postcss.ts"
 import Tailwind from "lume/plugins/tailwindcss.ts"
 import TailwindOption from "./tailwind.config.ts"
 
-import SlugifyUrls from "lume/plugins/slugify_urls.ts"
 import Toml from "lume/plugins/toml.ts"
 import Feed from "lume/plugins/feed.ts"
 import Sitemap from "lume/plugins/sitemap.ts"
+import ResolveUrls from "lume/plugins/resolve_urls.ts"
 
 import Link2Heading from "./_plugins/Link2Heading.ts"
 
@@ -28,9 +28,9 @@ const site = Lume( {
  */
 
 
-site.use( SlugifyUrls() )
 site.use( Toml() )
 site.use( JsxPreact() )
+site.use( ResolveUrls() )
 site.use( Link2Heading() )
 
 site.use( Tailwind( {
@@ -58,6 +58,13 @@ site.data( "default_title", "Brrr" )
  */
 
 site.copy( "public", "." )
+
+site.copy( [
+    ".jpg",
+    ".png",
+    ".avif",
+    ".svg"
+] );
 
 
 export default site
