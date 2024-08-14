@@ -37,12 +37,8 @@ const Footer = () => {
 
     return <footer
         class="
-            w-full h-fit
-            py-6
-            flex
-            flex-row
-            flex-nowrap
-            justify-center
+            w-full h-fit py-6
+            flex flex-row justify-center
         "
     >
         <span class="text-center text-xs">
