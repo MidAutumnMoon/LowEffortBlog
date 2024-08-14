@@ -18,9 +18,7 @@ const Options = {
 const Tags = (
     { tags }: { tags?: string[] }
 ) => {
-    if ( !tags ) {
-        return <></>
-    }
+    if ( !tags ) { return <></> }
 
     if ( tags.length > Options.MaxTagsAtDisplay ) {
         // slice() does NOT include the end element
@@ -28,58 +26,56 @@ const Tags = (
         tags = tags.slice( 0, Options.MaxTagsAtDisplay )
     }
 
-    return <ul
-        class="
-            text-xs
-            flex flex-row flex-nowrap
-            gap-1.5
-            text-slate-500/70
-        "
-    >
-        { tags.map( t => <li>#{t}</li> ) }
-    </ul>
+    const tags_string = tags
+        .map( t => `#${t}` )
+        /** \u00A0 whitespace */
+        .join( "\u00A0" )
+
+    return <span class="text-xs text-slate-500/70">
+        { tags_string }
+    </span>
 }
 
-
-const MissingTitle = <>
-    <span class="italic text-slate/70">
-        &lt;Missing Title&gt;
-    </span>
-</>
 
 const LinkToPost = (
     { post }: { post: Lume.Data }
 ) => {
-    const date_elem = <div
-        class="
-            text-xs
-            text-slate-500/80
-        "
-    >
-        { ( new SwDate( post.date ) ).to_mm_dd() }
-    </div>
+    const date_elem = <>
+        <span class="text-slate-500/80 text-xs">
+            { ( new SwDate( post.date ) ).to_mm_dd() }
+        </span>
+    </>
 
-    return <li
-        class="
-            flex flex-row flex-nowrap
-            items-center
-            gap-2
-        "
-    >
-        { date_elem }
+    const post_ref = <>
         <a href={ post.url }>
-            { post.title ?? MissingTitle }
+            { post.title ?? "<<Missing Title>>" }
         </a>
+    </>
+
+    return <li>
+        { date_elem }
+        &nbsp;&nbsp;
+        { post_ref }
+        &nbsp;&nbsp;
         <Tags tags={ post.tags }/>
     </li>
 }
 
 
+/**
+ * A component that display a list of posts
+ * while showing the year
+ */
 const PostsPerYear = ( { year, posts }: {
     year: string,
     posts: Lume.Data[]
 } ) => {
-    const link_to_posts = posts
+
+    const year_elem = <>
+        <h1 class="text-xl">{ year }</h1>
+    </>
+
+    const link_to_posts_elem = posts
         /**
          * 1. Sort posts by creation date from older (smaller timestamp)
          * to newer (bigger timestamp)
@@ -94,22 +90,13 @@ const PostsPerYear = ( { year, posts }: {
         .reverse()
         .map( p => <LinkToPost post={p}/> )
 
-    return <section
-        class="
-            flex flex-col flex-nowrap
-            gap-2
-        "
-    >
-        <h2 class="text-xl">{year}</h2>
-        <ul
-            class="
-                pl-[2ch]
-                flex flex-col flex-nowrap
-                gap-4
-            "
-        >
-            { link_to_posts }
-        </ul>
+    const posts_list_elem = <>
+        <ul class="flex flex-col gap-2">{ link_to_posts_elem }</ul>
+    </>
+
+    return <section class="flex flex-col gap-2">
+        { year_elem }
+        { posts_list_elem }
     </section>
 }
 
@@ -148,13 +135,7 @@ export default ( data: Lume.Data ) => {
             <PostsPerYear year={ year } posts={ posts! as Lume.Data[] } />
         )
 
-    return <div
-        class="
-            py-4
-            flex flex-col flex-nowrap
-            gap-10
-        "
-    >
+    return <div class="py-4 flex flex-col gap-[6ch]">
         { years_elems }
     </div>
 
