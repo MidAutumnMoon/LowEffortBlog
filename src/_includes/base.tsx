@@ -3,7 +3,7 @@
  */
 
 
-const Nav = () => <>
+const Navbar = () => <>
     <nav class="text-xl">
         <ul
             class="
@@ -27,7 +27,7 @@ const Header = () => <>
             py-6
         "
     >
-        <Nav/>
+        <Navbar/>
     </header>
 </>
 
@@ -72,8 +72,7 @@ export default ( data: Lume.Data ) => {
     const stylesheet =
         `/styles.css?cb=${ (new Date()).getTime() }`
 
-    return <html lang="en" class="overflow-x-hidden">
-
+    return <html lang="en">
         <head>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -81,20 +80,11 @@ export default ( data: Lume.Data ) => {
             <link rel="preload" href={ stylesheet } as="style" />
             <link rel="stylesheet" href={ stylesheet } />
         </head>
-
-        <body
-            class="
-                overflow-x-hidden relative
-                mx-4
-                lg:mx-auto
-                lg:max-w-3xl
-            "
-        >
+        <body>
             <Header/>
             <Main { ...data }/>
             <Footer/>
         </body>
-
     </html>
 
 }

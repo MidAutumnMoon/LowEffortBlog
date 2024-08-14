@@ -1,5 +1,3 @@
-import Typography from "@tailwindcss/typography"
-
 import * as Iconify from "@iconify/tailwind"
 import * as IconifyMdi from "@iconify-json/mdi"
 
@@ -12,7 +10,6 @@ const Icons = Iconify.addDynamicIconSelectors( {
 
 export default {
     plugins: [
-        Typography,
         Icons,
     ]
 }

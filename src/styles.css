@@ -1,11 +1,63 @@
 @tailwind base;
 
 @layer base {
+    html, body {
+        @apply overflow-x-hidden;
+        @apply relative;
+        @apply mx-4 lg:mx-auto lg:max-w-[70ch];
+    }
+
     a {
-        @apply underline hover:text-blue-500;
+        @apply underline;
+        @apply text-blue-600 visited:text-blue-800;
     }
 }
 
+
 @tailwind components;
+
+@layer components {
+
+    /*
+        Roll out my own prose because the Tailwind Typography
+        does way too much things not to my taste.
+
+        Roughly based on UnoCSS typography though.
+
+        Notice that this uses modern CSS nesting,
+        which will certainly break on some devices and IDC. :)
+    */
+    .prose {
+        /*
+            Various Headings
+        */
+        & h1 {
+            @apply text-3xl font-semibold;
+            @apply leading-relaxed;
+        }
+        & h2 {
+            @apply text-2xl font-semibold;
+            @apply leading-relaxed;
+        }
+        & h3,h4 {
+            @apply text-xl font-semibold;
+            @apply leading-relaxed;
+        }
+
+        /*
+            Paragraph
+         */
+
+        & p {
+            @apply mt-[1ch] mb-[1.5ch];
+        }
+
+        & code {
+            @apply font-mono;
+        }
+    }
+
+}
+
 
 @tailwind utilities;

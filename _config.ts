@@ -31,7 +31,7 @@ const site = Lume( {
 site.use( Toml() )
 site.use( JsxPreact() )
 site.use( ResolveUrls() )
-site.use( Link2Heading() )
+// site.use( Link2Heading() )
 
 site.use( Tailwind( {
     options: TailwindOption
