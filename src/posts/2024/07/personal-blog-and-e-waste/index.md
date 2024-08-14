@@ -88,3 +88,21 @@ fn fw() -> ft {
     fm
 }
 ```
+
+
+# All Sorts of Lists
+
+1. S
+2. O
+3. M
+4. E
+
+- W
+- H
+- A
+- T
+
+* G
+    * ET
+* B
+    * ORED

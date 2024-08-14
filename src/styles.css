@@ -32,29 +32,38 @@
         which will certainly break on some devices and IDC. :)
     */
     .prose {
+
+        /*
+            Basic margin
+         */
+        & p,blockquote,pre,ul,ol {
+            @apply mt-[1ch] mb-[1.5ch];
+        }
+
         /*
             Various Headings
         */
+        & h1,h2,h3,h4 {
+            @apply font-semibold;
+        }
+
         & h1 {
-            @apply text-3xl font-semibold;
+            @apply text-3xl;
             @apply leading-relaxed;
+            @apply mt-6;
         }
         & h2 {
-            @apply text-2xl font-semibold;
+            @apply text-2xl;
             @apply leading-relaxed;
         }
         & h3,h4 {
-            @apply text-xl font-semibold;
+            @apply text-xl;
             @apply leading-relaxed;
         }
 
         /*
             Blocks
          */
-
-        & p,blockquote,pre {
-            @apply mt-[1ch] mb-[1.5ch];
-        }
 
         & code {
             @apply font-mono;
@@ -75,6 +84,28 @@
             @apply whitespace-pre hyphens-none;
             @apply py-1 px-2;
             tab-size: 4;
+        }
+
+        /*
+            Lists
+         */
+
+        & ol,ul {
+            @apply list-inside;
+
+            & > li {
+                & > * { @apply m-0; }
+                & > ul, & > ol { @apply ps-4; }
+                @apply my-1;
+            }
+        }
+
+        & ol {
+            @apply list-decimal;
+        }
+
+        & ul {
+            @apply list-disc;
         }
     }
 
