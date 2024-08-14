@@ -51,6 +51,11 @@
             & .header-anchor {
                 /* @apply; */
                 @apply text-blue-300/50;
+                @apply hidden;
+            }
+
+            &:hover .header-anchor {
+                @apply inline;
             }
         }
 
@@ -93,7 +98,7 @@
         & figure {
             & figcaption {
                 @apply w-full m-0;
-                @apply text-sm text-blue-400/70 italic text-center;
+                @apply text-sm text-gray-400/70 italic text-center;
             }
         }
 

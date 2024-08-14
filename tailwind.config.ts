@@ -11,5 +11,12 @@ const Icons = Iconify.addDynamicIconSelectors( {
 export default {
     plugins: [
         Icons,
-    ]
+    ],
+    theme: {
+        fontFamily: {
+            sans: "sans-serif",
+            serif: "serif",
+            mono: "monospace"
+        }
+    }
 }

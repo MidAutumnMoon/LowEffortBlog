@@ -19,5 +19,9 @@
     "css.customData": [
         // See https://github.com/tailwindlabs/tailwindcss/discussions/5258
         ".vscode/tailwind.json"
-    ]
+    ],
+    "[markdown]": {
+        "editor.wordWrap": "bounded",
+        "editor.wordWrapColumn": 80
+    }
 }
