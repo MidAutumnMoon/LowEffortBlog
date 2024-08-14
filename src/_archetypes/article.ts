@@ -1,6 +1,6 @@
-import { BrDate } from "@lib/date.ts"
+import { SwDate } from "@lib/date.ts"
 import { Slug } from "@lib/slug.ts"
-import { BrID } from "@lib/id.ts"
+import { SwID } from "@lib/id.ts"
 
 export default ( title: string ) => {
 
@@ -10,17 +10,17 @@ export default ( title: string ) => {
 
     const slug_path = Slug( title )
 
-    const brdate = BrDate.today()
-    const { year, month } = brdate
+    const date = SwDate.today()
+    const { year, month } = date
 
-    const id = ( new BrID() ).text()
+    const id = ( new SwID() ).text()
 
     return {
         path: `/articles/${year}/${month}/${slug_path}/index.md`,
         content: {
             title, id,
-            date: brdate.toString(),
-            updated: brdate.toString(),
+            date: date.toString(),
+            updated: date.toString(),
             content: `\n# ${title}`
         }
     }

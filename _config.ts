@@ -19,7 +19,7 @@ import Link2Heading from "./_plugins/Link2Heading.ts"
 
 const site = Lume( {
     src: "src",
-    location: new URL( "https://br.418.im/" )
+    location: new URL( "https://sw.418.im/" )
 } )
 
 
@@ -50,7 +50,7 @@ site.use( Sitemap() )
  * Data
  */
 
-site.data( "default_title", "Brrr" )
+site.data( "default_title", "Swoosh" )
 
 
 /**

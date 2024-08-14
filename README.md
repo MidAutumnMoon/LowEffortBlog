@@ -1,4 +1,4 @@
-# Br
+# Swoosh
 
 ## Brrr Ideas to Implement
 
@@ -10,4 +10,4 @@ Source codes are licensed under [GPL3](./LICENSE).
 
 Contents of this blog, including but not limited to articles, pictures,
 illustrations and audio etc., are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-if not explictly declared otherwise.
+if not explicitly declared otherwise.

@@ -12,7 +12,7 @@ const Nav = () => <>
                 gap-6
             "
         >
-            <li class="grow"><a href="/">Brrrr</a></li>
+            <li class="grow"><a href="/">Swoosh</a></li>
             <li><a href="/articles">Articles</a></li>
             <li><a href="/rss">Feed</a></li>
         </ul>

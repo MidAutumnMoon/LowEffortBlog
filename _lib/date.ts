@@ -1,4 +1,4 @@
-export class BrDate {
+export class SwDate {
 
     readonly year: string
     readonly month: string
@@ -20,16 +20,16 @@ export class BrDate {
     }
 
 
-    static today(): BrDate {
-        return new BrDate( new Date() )
+    static today(): SwDate {
+        return new SwDate( new Date() )
     }
 
-    static from_string( raw: string ): BrDate {
-        return new BrDate( new Date(raw) )
+    static from_string( raw: string ): SwDate {
+        return new SwDate( new Date(raw) )
     }
 
 
-    same_date( other: BrDate ): boolean {
+    same_date( other: SwDate ): boolean {
         return ( this.year === other.year )
             && ( this.month === other.month )
             && ( this.day === other.day )

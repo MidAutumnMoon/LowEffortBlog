@@ -1,5 +1,4 @@
-import { BrDate } from "@lib/date.ts"
-import article from "../_includes/article.tsx";
+import { SwDate } from "@lib/date.ts"
 
 
 export const layout = "base.tsx"
@@ -51,15 +50,13 @@ const MissingTitle = <>
 const Article = (
     { article }: { article: Lume.Data }
 ) => {
-    const brdate = new BrDate( article.date )
-
     const date_elem = <div
         class="
             text-xs
             text-slate-500/80
         "
     >
-        { brdate.to_mm_dd() }
+        { ( new SwDate( article.date ) ).to_mm_dd() }
     </div>
 
     return <li

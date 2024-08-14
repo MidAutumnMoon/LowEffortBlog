@@ -16,9 +16,9 @@ const NanoID = nanoid.customAlphabet( Alphabet, 12 )
 
 
 /**
- * ID used throughout Br, based on NanoID
+ * ID used throughout Swoosh, based on NanoID
  */
-export class BrID {
+export class SwID {
     readonly #nanoid: string
     readonly #prefix: string
 
@@ -38,7 +38,7 @@ export class BrID {
         return this.text()
     }
 
-    equals( other: BrID ): boolean {
+    equals( other: SwID ): boolean {
         return this.text() === other.text()
     }
 }
