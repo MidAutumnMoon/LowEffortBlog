@@ -1,6 +1,5 @@
 ---
 title: Notes on NixOS in systemd-nspawn
-id: cnaMc9WLbbpA
 date: '2023-11-01'
 updated: '2023-11-01'
 tags:

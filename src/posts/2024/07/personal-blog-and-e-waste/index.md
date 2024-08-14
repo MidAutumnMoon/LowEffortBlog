@@ -1,6 +1,5 @@
 ---
 title: Personal Blog and E-Waste
-id: WRUkKxLjLLWw
 date: '2024-07-29'
 updated: '2024-08-14'
 tags:
@@ -113,3 +112,5 @@ fn fw() -> ft {
 [Link to front page](/)
 
 [External link to Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+
+![MDN logo screenshot](./Untitled.avif)

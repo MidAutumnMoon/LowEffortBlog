@@ -67,5 +67,7 @@ site.data( "default_title", "Swoosh" )
 
 site.copy( "public", "." )
 
+site.loadAssets( [".avif"] )
+
 
 export default site
