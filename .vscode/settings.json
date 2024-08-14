@@ -1,6 +1,7 @@
 {
     "explorer.sortOrder": "filesFirst",
     "cSpell.ignoreWords": [
+        "ABCDEFGHJKLMNPQRTUVWX",
         "Matz",
         "Minicss",
         "NOHZ",
@@ -8,7 +9,9 @@
         "Slugifier",
         "Unocss",
         "YARV",
+        "Yabcdefghijkmnpqrtwxyz",
         "brdate",
+        "nolookalikes",
         "tailwindcss"
     ],
     "css.customData": [

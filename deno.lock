@@ -43,6 +43,7 @@
       "npm:markdown-it-deflist@3.0.0": "npm:markdown-it-deflist@3.0.0",
       "npm:markdown-it@14.1.0": "npm:markdown-it@14.1.0",
       "npm:meriyah@4.5.0": "npm:meriyah@4.5.0",
+      "npm:nanoid": "npm:nanoid@3.3.7",
       "npm:postcss-import@16.1.0": "npm:postcss-import@16.1.0_postcss@8.4.39",
       "npm:postcss@8.4.39": "npm:postcss@8.4.39",
       "npm:preact": "npm:preact@10.23.1",
@@ -1387,7 +1388,8 @@
     "dependencies": [
       "npm:@iconify-json/mdi",
       "npm:@iconify/tailwind",
-      "npm:esbuild"
+      "npm:esbuild",
+      "npm:nanoid"
     ]
   }
 }

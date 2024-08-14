@@ -1,23 +1,24 @@
 {
-    "imports": {
-        "@iconify-json/mdi": "npm:@iconify-json/mdi",
-        "@iconify/tailwind": "npm:@iconify/tailwind",
-        "@lib/": "./_lib/",
-        "@tailwindcss": "npm:@tailwindcss",
-        "esbuild": "npm:esbuild",
-        "lume/": "https://deno.land/x/lume@v2.2.4/"
-    },
+  "imports": {
+    "@iconify-json/mdi": "npm:@iconify-json/mdi",
+    "@iconify/tailwind": "npm:@iconify/tailwind",
+    "@lib/": "./_lib/",
+    "@tailwindcss": "npm:@tailwindcss",
+    "esbuild": "npm:esbuild",
+    "lume/": "https://deno.land/x/lume@v2.2.4/",
+    "nanoid": "npm:nanoid"
+  },
 
-    "tasks": {
-        // TODO: tighten permissions
-        "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
-        "build": "deno task lume",
-        "serve": "deno task lume -s"
-    },
+  "tasks": {
+    // TODO: tighten permissions
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "build": "deno task lume",
+    "serve": "deno task lume -s"
+  },
 
-    "compilerOptions": {
-        "types": ["lume/types.ts"],
-        "jsx": "react-jsx",
-        "jsxImportSource": "npm:preact"
-    }
+  "compilerOptions": {
+    "types": ["lume/types.ts"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "npm:preact"
+  }
 }
