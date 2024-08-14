@@ -30,7 +30,7 @@ By the way, here's a quick note on how to active NOHZ_FULL.
 
 2. Use `lstopo` from `hwloc` package to find the topology of the CPU
 
-    ![svg](./topo.svg)
+    <img src="./topo.svg" style="aspect-ratio:1"></img>
 
     This is the topology of my 4800HS. Each hyper-thread is counted a *core* from kernel's point of view, and notice labels start from 0 instead of 1.
 

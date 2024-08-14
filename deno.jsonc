@@ -3,9 +3,11 @@
     "@iconify-json/mdi": "npm:@iconify-json/mdi",
     "@iconify/tailwind": "npm:@iconify/tailwind",
     "@lib/": "./_lib/",
+    "@std/path": "jsr:@std/path@^1.0.2",
     "@tailwindcss": "npm:@tailwindcss",
     "esbuild": "npm:esbuild",
-    "lume/": "https://deno.land/x/lume@v2.2.4/"
+    "lume/": "https://deno.land/x/lume@v2.2.4/",
+    "sharp": "npm:sharp"
   },
 
   "tasks": {

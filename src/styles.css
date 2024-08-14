@@ -84,6 +84,13 @@
             tab-size: 4;
         }
 
+        & figure {
+            & figcaption {
+                @apply w-full m-0;
+                @apply text-sm text-slate-500 italic text-center;
+            }
+        }
+
         /*
             Lists
          */
@@ -104,6 +111,15 @@
 
         & ul {
             @apply list-disc;
+        }
+
+        /*
+            Multimedia
+         */
+
+        & img {
+            @apply w-full border;
+            @apply text-slate-500/50 italic;
         }
 
     } /* End .prose */

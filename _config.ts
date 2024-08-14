@@ -13,9 +13,10 @@ import TailwindOption from "./tailwind.config.ts"
 import Toml from "lume/plugins/toml.ts"
 import Feed from "lume/plugins/feed.ts"
 import Sitemap from "lume/plugins/sitemap.ts"
-import ResolveUrls from "lume/plugins/resolve_urls.ts"
 
 import Link2Heading from "./_plugins/Link2Heading.ts"
+import ImageDimension from "./_plugins/ImageDimension.ts"
+import { ImageExtensions } from "@lib/extension.ts"
 
 
 const site = Lume( {
@@ -31,8 +32,6 @@ const site = Lume( {
 
 site.use( Toml() )
 site.use( JsxPreact() )
-site.use( ResolveUrls() )
-// site.use( Link2Heading() )
 
 site.use( Highlight( {
     theme: {
@@ -52,6 +51,8 @@ site.use( Minify() )
 
 site.use( Sitemap() )
 // site.use( Feed() )
+// site.use( Link2Heading() )
+site.use( ImageDimension() )
 
 
 /**
@@ -67,10 +68,8 @@ site.data( "default_title", "Swoosh" )
 
 site.copy( "public", "." )
 
-site.copy( [
-    ".avif", ".webp",
-    ".jpeg", ".jpg", ".png"
-] )
+site.copy( ImageExtensions )
+site.copy( [".svg"] )
 
 
 export default site
