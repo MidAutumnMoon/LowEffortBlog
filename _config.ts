@@ -24,7 +24,7 @@ import { ImageExtensions } from "@lib/extension.ts"
 
 const site = Lume( {
     src: "src",
-    location: new URL( "https://sw.418.im/" )
+    location: new URL( "https://sw.418.im/" ),
 } )
 
 
@@ -57,9 +57,19 @@ site.use( EsbuildMinicss() )
 site.use( Minify() )
 
 site.use( Sitemap() )
-// site.use( Feed() )
 site.use( ImageDimension() )
 site.use( ReadingInfo() )
+
+site.use( Feed( {
+    output: "/feed.xml",
+    query: "type=post",
+    info: {
+        title: "Swoosh",
+    },
+    items: {
+        updated: data => new Date( data.updated )
+    }
+} ) )
 
 
 /**
