@@ -40,7 +40,7 @@ const Meta = (
         if ( !sw_updated ) { return <></> }
 
         return sw_date.equals( sw_updated )
-            ? <></>
+            ? `published ${sw_date}`
             : `updated ${sw_updated}`
     } )()
 
