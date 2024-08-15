@@ -48,7 +48,7 @@ Those are two exact same phrase, but left one is `lang="ja"` while the right one
 
 This is well-known phenomena caused by diverged definition of writing and hinting of the same grapheme, which results in really ugly typography if mixed up.
 
-Another pitfall learnt fresh while building this website is that one shouldn't use `system-ui` or `ui-*` in font family if they cares about i18n. Check out this post [*Never, ever use system-ui as the value of font-family*](https://infinnie.github.io/blog/2017/systemui.html) for the reasoning behind it and seeing a more aggressive demonstration of how the experience of an average Chinese user looks like, back to the low-DPI-screen-Windows-XP/7 era.
+Another pitfall learnt fresh while building this website is that one shouldn't use `system-ui` or `ui-*` in font family if they cares about i18n. Check out this post [*Never, ever use system-ui as the value of font-family*](//infinnie.github.io/blog/2017/systemui.html) for the reasoning behind it and seeing a more aggressive demonstration of how the experience of an average Chinese user looks like, back to the low-DPI-screen-Windows-XP/7 era.
 
 <p class="text-gray-500/50">
     (BTW, just FYI, the two pictures above have <i>slightly</i> different heights causing a <i>tiny</i> misalignment.)
@@ -57,6 +57,8 @@ Another pitfall learnt fresh while building this website is that one shouldn't u
 ## Cumulative Layout Shift (CLS)
 
 *web.dev* has an [excellent article](//web.dev/articles/cls) discussing CLS, so no need to repeat words myself.
+
+To combat CLS while keeping the effort low, *1)* this website doesn't do complex layout, *2)* doesn't use webfonts, *3)* uses a Lume plugin to add `height` and `width` to `<img>`s. It ends up pretty well.
 
 
 # Headings
