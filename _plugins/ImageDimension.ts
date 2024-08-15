@@ -57,12 +57,16 @@ async function single_page( page: Lume.Page, site: Lume.Site ) {
                 throw `Not expected code path for ${src} ${sourcePath}`
             }
         })()
+
         const { width, height } = await Sharp( full_path ).metadata()
+
         if ( !width || !height ) {
             continue
         }
+
         img.setAttribute( "height", `${height}` )
         img.setAttribute( "width", `${width}` )
+        img.setAttribute( "loading", "lazy" )
     }
 
 }
