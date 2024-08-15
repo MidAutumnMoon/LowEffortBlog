@@ -124,7 +124,8 @@
 
             & > li {
                 & > * { @apply m-0; }
-                & > ul, & > ol { @apply ps-4; }
+                & > ul, & > ol { @apply ps-6; }
+                & > p { @apply inline-block; }
                 @apply my-1;
             }
         }
