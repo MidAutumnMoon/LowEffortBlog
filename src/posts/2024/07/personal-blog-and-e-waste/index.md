@@ -141,12 +141,10 @@ fn fw() -> ft {
 
 <figure>
     <img src="./Untitled.avif" alt="The beautiful MDN logo.">
-    <figcaption>MDN Logo</figcaption>
+    <figcaption>
+        Can't see the image? Too bad because it's AVIF. Try upgrading your browser or smashing your old iPhone and never buy one again.
+    </figcaption>
 </figure>
-
-
-Can't see the image? Too bad because it's AVIF.
-Try upgrading your browser or smashing your old iPhone and never buy one again.
 
 
 # Tables
