@@ -5,8 +5,7 @@
 
 @layer base {
     html, body {
-        @apply overflow-x-hidden;
-        @apply relative;
+        @apply overflow-x-hidden relative;
         @apply mx-4 lg:mx-auto lg:max-w-[70ch];
         @apply text-lg lg:text-base;
     }

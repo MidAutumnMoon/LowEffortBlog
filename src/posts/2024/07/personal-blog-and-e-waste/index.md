@@ -21,8 +21,6 @@ The remaining of the post will be playground for testing styling and custom feat
 
 There's no article without paragraphs, pay some attention to them and the reading experience will level up instantly.
 
-Here I document some tricks I have done to or would like to have for this website.
-
 ## Max Width
 
 Some study says x characters wide is best and another says y percent is better. I'm comfortable with `70ch` so that's it.
@@ -56,9 +54,9 @@ Another pitfall learnt fresh while building this website is that one shouldn't u
 
 ## Cumulative Layout Shift (CLS)
 
-*web.dev* has an [excellent article](//web.dev/articles/cls) discussing CLS, so no need to repeat words myself.
+CLS is not strictly related to typography but definitely has impact on reading experience. *web.dev* has an [excellent article](//web.dev/articles/cls) discussing CLS, so no need to repeat words myself.
 
-To combat CLS while keeping the effort low, *1)* this website doesn't do complex layout, *2)* doesn't use webfonts, *3)* uses a Lume plugin to add `height` and `width` to `<img>`s. It ends up pretty well.
+To combat CLS while keeping the effort low, this website *1)* doesn't do complex layout, *2)* doesn't use webfonts, *3)* uses a Lume plugin to add `height` and `width` to `<img>`s. It ends up pretty well.
 
 
 # Headings

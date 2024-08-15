@@ -4,19 +4,17 @@
 
 
 const Navbar = () => <>
-    <nav class="text-xl">
-        <ul
-            class="
-                flex flex-row flex-nowrap
-                justify-between
-                gap-6
-            "
-        >
-            <li class="grow"><a href="/">swoosh</a></li>
-            <li><a href="/posts">posts</a></li>
-            <li><a href="/feed.xml">feed</a></li>
-        </ul>
-    </nav>
+    <nav> <ul
+        class="
+            text-lg
+            flex flex-row flex-nowrap gap-6
+            justify-between
+        "
+    >
+        <li class="grow"><a href="/">swoosh</a></li>
+        <li><a href="/posts">posts</a></li>
+        <li><a href="/feed.xml">feed</a></li>
+    </ul> </nav>
 </>
 
 
