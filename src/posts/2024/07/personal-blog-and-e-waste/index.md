@@ -96,10 +96,10 @@ This part checks out some basic text styling.
 
 > Quote of another quote
 >
-> Someone somehow said:
->
-> "Somebody at sometime will inevitably do something
-> somewhat without some meaning"
+> > Someone somehow said:
+> >
+> >"Somebody at sometime will inevitably do something
+> > somewhat without some meaning"
 
 ```
 Code block with no language specified.
