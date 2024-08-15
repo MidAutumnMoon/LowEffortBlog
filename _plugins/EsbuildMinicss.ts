@@ -17,9 +17,7 @@ export default () => ( site: Lume.Site ) => {
 
     site.process( [".css"], async ( css_pages ) => {
         for ( const css of css_pages ) {
-            css.content = (
-                await minify( css.content as string )
-            ).code
+            css.content = ( await minify( css.content as string ) ).code
         }
     } )
 

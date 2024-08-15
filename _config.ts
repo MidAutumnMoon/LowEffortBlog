@@ -1,5 +1,7 @@
 import Lume from "lume/mod.ts"
-import MarkdownConfig from "./markdown.config.ts"
+
+import MarkdownToc from "lume_markdown_plugins/toc.ts"
+import * as MarkdownTocAnchors from "lume_markdown_plugins/toc/anchors.ts"
 
 import Esbuild from "lume/plugins/esbuild.ts"
 import EsbuildMinicss from "./_plugins/EsbuildMinicss.ts"
@@ -23,8 +25,6 @@ import { ImageExtensions } from "@lib/extension.ts"
 const site = Lume( {
     src: "src",
     location: new URL( "https://sw.418.im/" )
-}, {
-    markdown: MarkdownConfig
 } )
 
 
@@ -32,6 +32,10 @@ const site = Lume( {
  * Plugins
  */
 
+site.use( MarkdownToc( {
+    level: 1,
+    anchor: MarkdownTocAnchors.linkInsideHeader()
+} ) )
 
 site.use( Toml() )
 site.use( JsxPreact() )
@@ -54,7 +58,6 @@ site.use( Minify() )
 
 site.use( Sitemap() )
 // site.use( Feed() )
-// site.use( Link2Heading() )
 site.use( ImageDimension() )
 site.use( ReadingInfo() )
 

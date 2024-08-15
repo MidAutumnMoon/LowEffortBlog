@@ -3,11 +3,12 @@
     "@iconify-json/mdi": "npm:@iconify-json/mdi",
     "@iconify/tailwind": "npm:@iconify/tailwind",
     "@lib/": "./_lib/",
-    "@std/path": "jsr:@std/path@^1.0.2",
+    "@std/path": "jsr:@std/path",
     "@tailwindcss": "npm:@tailwindcss",
     "esbuild": "npm:esbuild",
     "lume/": "https://deno.land/x/lume@v2.2.4/",
-    "markdown-it-anchor": "npm:markdown-it-anchor@^9.0.1",
+    "lume_markdown_plugins/": "https://deno.land/x/lume_markdown_plugins@v0.7.0/",
+    "markdown-it-anchor": "npm:markdown-it-anchor",
     "sharp": "npm:sharp"
   },
 

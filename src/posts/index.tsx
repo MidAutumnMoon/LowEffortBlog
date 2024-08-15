@@ -110,10 +110,6 @@ export default ( data: Lume.Data ) => {
     })()
 
     const years_elems = Object.entries( posts_by_years )
-        /**
-         * Remove years
-         */
-        .filter( ([ _year, posts ]) => !!posts )
         .sort()
         // Make it descending, which means more recent years
         // got displayed first
