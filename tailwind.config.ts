@@ -9,14 +9,25 @@ const Icons = Iconify.addDynamicIconSelectors( {
 } )
 
 export default {
+
     plugins: [
         Icons,
     ],
+
     theme: {
         fontFamily: {
             sans: "sans-serif",
             serif: "serif",
             mono: "monospace"
         }
-    }
+    },
+
+    safelist: [
+        /**
+         * .external was added by ExternalLink plugin,
+         * which made Tailwind unable to detect in normal ways
+         */
+        "external",
+    ]
+    
 }

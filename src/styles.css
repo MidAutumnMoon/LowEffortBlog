@@ -15,6 +15,13 @@
         @apply underline;
         @apply text-blue-600 visited:text-blue-800;
     }
+
+    a.external::before {
+        @apply inline-block mr-1;
+        @apply icon-[mdi--external-link];
+        @apply text-center text-sm align-middle;
+        content: "";
+    }
 }
 
 
