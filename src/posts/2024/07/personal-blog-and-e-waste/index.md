@@ -6,9 +6,11 @@ tags:
     - rant
 ---
 
+# Ranting
+
 This blog is built using [Lume](//lume.land/) static site generator, which is written in TypeScript and runs on [Deno](//deno.land), which not only means countless JavaScript libraries is right on the fingertip to be called, but also, unfortunately, the user and maintainer, have to swallow the bitterness comes out of it.
 
-My very first rant on this project would be how awful Deno's dependency management is. It's like newbie wild survivor packs 500mL of juice instead of 1L of water happily thinking this move not only reduces the weight but also carry extra sugar. Import map helps a lot, but it immediately got beaten to the ground by the fact that Deno has no official tool of upgrading dependencies, despite it has been actively developed for almost *10 years*.
+My very first rant on this project would be how awful Deno's dependency management is. It's like newbie wild survivor packs 500mL of juice instead of 1L of water happily thinking this move not only reduces the weight but also carry extra sugar. *Import map* helps a lot, but it immediately got beaten to the ground by the fact that Deno has no official tool of upgrading dependencies, despite it has been actively developed for almost *10 years*.
 
 My second rant and main concern would be, will this project become another e-waste?
 
@@ -19,32 +21,38 @@ The remaining of the post will be playground for testing styling and custom feat
 
 There's no article without paragraphs, pay some attention to them and the reading experience will level up instantly.
 
-Here I document some tricks I have done or would do to this very website.
+Here I document some tricks I have done to or would like to have for this website.
 
 ## Max Width
 
-Some study says x characters wide is best and other study says y percent is better. I'm comfortable with `70ch` so this website uses it as max width.
+Some study says x characters wide is best and another says y percent is better. I'm comfortable with `70ch` so that's it.
 
 ## `lang` Attribute
 
 Every HTMLer learnt to write `<html lang="en">` at some point and never gives it another thought ever again.
 
-This may not be relevant in English that much since characters and punctuations are relatively simple, but because
-
-<span lang="ja">「“关复门”」</span>
-
-<span lang="zh">「“关复门”」</span>
+This may not be relevant for English that much since the characters and punctuations are relatively simple, but the problem unveils itself once one reaches for Asian languages. See this demonstration.
 
 <div class="flex flex-row w-full gap-4">
     <figure class="grow">
-        <img src="./lang-ja.avif" alt="span lang=ja">
-        <figcaption>span lang=ja</figcaption>
+        <img src="./lang-ja.avif" alt="lang-ja.avif">
+        <figcaption lang="ja">Japanese「“关复门”」</figcaption>
     </figure>
     <figure class="grow">
         <img src="./lang-cn.avif" alt="span lang=cn">
-        <figcaption>span lang=cn</figcaption>
+        <figcaption lang="zh">Chinese「“关复门”」</figcaption>
     </figure>
 </div>
+
+Those are two exact same phrase, but left one is `lang="ja"` while the right one is `lang="zh"`, making browser render them using Japanese and Chinese fonts correspondingly.
+
+This is well-known phenomena caused by diverged definition of writing and hinting of the same grapheme, which results in really ugly typography if mixed up.
+
+Another pitfall learnt fresh while building this website is that one shouldn't use `system-ui` or `ui-*` in font family if they cares about i18n.
+
+
+
+Check out this post [*Never, ever use system-ui as the value of font-family*](https://infinnie.github.io/blog/2017/systemui.html) to see more detailed explanation and more aggressive demonstration.
 
 
 # Headings
@@ -143,9 +151,9 @@ Try upgrading your browser or smashing your old iPhone and never buy one again.
 
 # Tables
 
-*Currently not used anywhere, come back later.*
+*Not used anywhere currently, maybe future.*
 
 
 # Formulas and Charts
 
-*Also not used right now.*
+*Also not used right now, but planned.*

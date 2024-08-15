@@ -28,8 +28,12 @@ export class SwDate {
         return new SwDate( new Date(raw) )
     }
 
+    static from_date( date: Date ): SwDate {
+        return new SwDate( date )
+    }
 
-    same_date( other: SwDate ): boolean {
+
+    equals( other: SwDate ): boolean {
         return ( this.year === other.year )
             && ( this.month === other.month )
             && ( this.day === other.day )

@@ -6,6 +6,7 @@
 export const layout = "base.tsx"
 
 import { Node as TocNode } from "lume_markdown_plugins/toc/mod.ts"
+import { SwDate } from "@lib/date.ts"
 
 
 /**
@@ -22,13 +23,32 @@ const Title = (
 }
 
 
+type MetaProps = {
+    words: number,
+    tags: string[],
+    date: Date,
+    updated: string
+}
+
 const Meta = (
-    { words, tags }: { words: number, tags: string[] }
+    { words, tags, date, updated }: MetaProps
 ) => {
-    return <span class="inline-block mb-6 text-gray-600/50 italic">
-        { words } words&nbsp;&middot;&nbsp;
-        { tags.map( t => `#${t}` ).join( "\u00A0" ) }
-    </span>
+    const updated_text = ( () => {
+        const sw_date = SwDate.from_date( date )
+        const sw_updated = SwDate.from_string( updated )
+
+        if ( !sw_updated ) { return <></> }
+
+        return sw_date.equals( sw_updated )
+            ? <></>
+            : `updated ${sw_updated}`
+    } )()
+
+    return <div class="text-gray-600/50 italic flex gap-3 mb-5">
+        <span>{ words } words</span>
+        <span>{ tags.map( t => `#${t}` ).join( "\u00A0" ) }</span>
+        <span class="grow text-end">{ updated_text }</span>
+    </div>
 }
 
 
@@ -61,10 +81,22 @@ export default ( page: Lume.Data ) => {
     const toc = page.toc as TocNode[]
 
     return <article>
+
         <Title title={ title ?? "<<Missing Title>>" }/>
-        <Meta words={ readingInfo.words } tags={ tags } />
+
+        <Meta
+            words={ readingInfo.words }
+            tags={ tags }
+            date={ page.date }
+            updated={ page.updated }
+        />
+
         <Toc toc={toc}/>
-        <main class="prose">{ page.children }</main>
+
+        <main class="prose">
+            { page.children }
+        </main>
+
     </article>
 
 }
