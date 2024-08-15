@@ -54,6 +54,10 @@ Another pitfall learnt fresh while building this website is that one shouldn't u
     (BTW, just FYI, the two pictures above have <i>slightly</i> different heights causing a <i>tiny</i> misalignment.)
 </p>
 
+## Cumulative Layout Shift (CLS)
+
+*web.dev* has an [excellent article](//web.dev/articles/cls) discussing CLS, so no need to repeat words myself.
+
 
 # Headings
 
