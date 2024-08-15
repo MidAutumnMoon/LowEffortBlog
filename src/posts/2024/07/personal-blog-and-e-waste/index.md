@@ -48,11 +48,11 @@ Those are two exact same phrase, but left one is `lang="ja"` while the right one
 
 This is well-known phenomena caused by diverged definition of writing and hinting of the same grapheme, which results in really ugly typography if mixed up.
 
-Another pitfall learnt fresh while building this website is that one shouldn't use `system-ui` or `ui-*` in font family if they cares about i18n.
+Another pitfall learnt fresh while building this website is that one shouldn't use `system-ui` or `ui-*` in font family if they cares about i18n. Check out this post [*Never, ever use system-ui as the value of font-family*](https://infinnie.github.io/blog/2017/systemui.html) for the reasoning behind it and seeing a more aggressive demonstration of how the experience of an average Chinese user looks like, back to the low-DPI-screen-Windows-XP/7 era.
 
-
-
-Check out this post [*Never, ever use system-ui as the value of font-family*](https://infinnie.github.io/blog/2017/systemui.html) to see more detailed explanation and more aggressive demonstration.
+<p class="text-gray-500/50">
+    (BTW, just FYI, the two pictures above have <i>slightly</i> different heights causing a <i>tiny</i> misalignment.)
+</p>
 
 
 # Headings
