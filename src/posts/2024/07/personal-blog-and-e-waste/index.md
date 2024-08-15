@@ -33,11 +33,11 @@ This may not be relevant for English that much since the characters and punctuat
 
 <div class="flex flex-row w-full gap-4">
     <figure class="grow">
-        <img src="./lang-ja.avif" alt="lang-ja.avif">
+        <img src="./lang-ja.avif" alt="lang-ja.avif" class="w-full">
         <figcaption lang="ja">Japanese「“关复门”」</figcaption>
     </figure>
     <figure class="grow">
-        <img src="./lang-cn.avif" alt="span lang=cn">
+        <img src="./lang-cn.avif" alt="span lang=cn" class="w-full">
         <figcaption lang="zh">Chinese「“关复门”」</figcaption>
     </figure>
 </div>

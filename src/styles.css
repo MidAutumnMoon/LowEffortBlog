@@ -107,7 +107,7 @@
 
         & figure {
             & img {
-                @apply m-0;
+                @apply my-0;
             }
             & figcaption {
                 @apply m-0 mt-2;
@@ -141,8 +141,8 @@
             Multimedia
          */
 
-        & img {
-            @apply w-full border;
+        & img,svg {
+            @apply max-w-full h-auto border mx-auto;
             @apply text-blue-400/70 italic;
         }
 
