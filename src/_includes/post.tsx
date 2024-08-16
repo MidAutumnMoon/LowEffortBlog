@@ -12,9 +12,7 @@ import { SwDate } from "@lib/date.ts"
 /**
  * The big bold title
  */
-const Title = (
-    { title }: { title: string }
-) => {
+function Title( { title }: { title: string } ) {
     return <>
         <h1 class="text-4xl font-bold leading-tight my-4">
             { title }
@@ -23,36 +21,46 @@ const Title = (
 }
 
 
-type MetaProps = {
-    words: number,
-    tags: string[],
-    date: Date,
-    updated: string
-}
-
-const Meta = (
-    { words, tags, date, updated }: MetaProps
-) => {
-    const updated_text = ( () => {
-        const sw_date = SwDate.from_date( date )
-        const sw_updated = SwDate.from_string( updated )
-
-        if ( !sw_updated ) { return <></> }
-
-        return sw_date.equals( sw_updated )
-            ? `posted ${sw_date}`
-            : `updated ${sw_updated}`
-    } )()
-
+function Meta(
+    props: {
+        words: number,
+        tags: string[],
+        date: Date,
+        updated: string
+    }
+) {
     return <div class="text-gray-600/50 italic flex gap-3 mb-5">
-        <span>{ words } words</span>
-        <span>{ tags.map( t => `#${t}` ).join( "\u00A0" ) }</span>
-        <span class="grow text-end">{ updated_text }</span>
+
+        {/*
+            renders to "1000 words of #rant"
+        */}
+        <span>
+            { props.words } words of { props.tags.map( t => `#${t}` ).join( "\u00A0" ) }
+        </span>
+
+        {/*
+            renders to "posted y-m-d" or "updated y-m-d" accordingly
+         */}
+        <span class="grow text-end">
+            { ( () => {
+                const posted = SwDate.from_date( props.date )
+                const updated = SwDate.from_string( props.updated )
+
+                if ( !posted || !updated ) {
+                    return <></>
+                }
+
+                return posted.equals( updated )
+                    ? `posted ${posted}`
+                    : `updated ${updated}`
+            } )() }
+        </span>
+
     </div>
 }
 
 
-const Toc = ( { toc }: { toc: TocNode[] } ) => {
+function Toc( { toc }: { toc: TocNode[] } ) {
     if ( !toc.length ) { return <></> }
 
     function Item( { node }: { node: TocNode } ) {
@@ -75,10 +83,10 @@ const Toc = ( { toc }: { toc: TocNode[] } ) => {
 }
 
 
-export default ( page: Lume.Data ) => {
+export default function( page: Lume.Data ) {
 
     const { title, readingInfo, tags } = page
-    const toc = page.toc as TocNode[]
+    const toc = ( page.toc ?? [] ) as TocNode[]
 
     return <article>
 
