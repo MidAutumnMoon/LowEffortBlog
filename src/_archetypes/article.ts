@@ -18,7 +18,7 @@ export default ( title: string ) => {
             title,
             date: date.toString(),
             updated: date.toString(),
-            content: `\n# ${title}`
+            content: ""
         }
     }
 
