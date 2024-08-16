@@ -23,7 +23,7 @@ function Title( { title }: { title: string } ) {
 
 function Meta(
     props: {
-        words: number,
+        reading_info?: { words: number },
         tags: string[],
         date: Date,
         updated: string
@@ -32,10 +32,24 @@ function Meta(
     return <div class="text-gray-600/50 italic flex gap-3 mb-5">
 
         {/*
-            renders to "1000 words of #rant"
+            renders to "1000 words of #rant" or
+            "1000 words" if no tags or nothing if not having both
         */}
         <span>
-            { props.words } words of { props.tags.map( t => `#${t}` ).join( "\u00A0" ) }
+            { ( function() {
+                const { reading_info } = props
+                return !reading_info
+                    ? <></>
+                    : `${reading_info.words} words`
+            } )() }
+
+            { ( function() {
+                const { tags } = props
+                const tag_list = tags.map( t => `#${t}` ).join( "\u00A0" )
+                return tags.length === 0
+                    ? <></>
+                    : `of ${tag_list}`
+            } )() }
         </span>
 
         {/*
@@ -93,7 +107,7 @@ export default function( page: Lume.Data ) {
         <Title title={ title ?? "<<Missing Title>>" }/>
 
         <Meta
-            words={ readingInfo.words }
+            reading_info={ readingInfo }
             tags={ tags }
             date={ page.date }
             updated={ page.updated }
