@@ -40,9 +40,8 @@ function Meta(
                 const { reading_info } = props
                 return !reading_info
                     ? <></>
-                    : `${reading_info.words} words`
+                    : `${reading_info.words} words\u00A0`
             } )() }
-
             { ( function() {
                 const { tags } = props
                 const tag_list = tags.map( t => `#${t}` ).join( "\u00A0" )
