@@ -161,7 +161,10 @@ function generate_toc( tree: hast.Root ) {
         }
 
         return h( "section",
-            { class: Options.TocClassName },
+            {
+                class: Options.TocClassName,
+                style: headings.length === 0 ? "display: none" : ""
+            },
             all( headings )
         )
 
