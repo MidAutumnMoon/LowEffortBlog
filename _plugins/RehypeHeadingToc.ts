@@ -11,10 +11,7 @@ import { heading as IsHeading } from "npm:hast-util-heading"
 import { headingRank as HeadingRank } from "npm:hast-util-heading-rank"
 import { toText as HastToText } from "npm:hast-util-to-text"
 
-import { fromMarkdown as FromMarkdown } from "npm:mdast-util-from-markdown"
-
 import { visit as Visit, SKIP } from "npm:unist-util-visit"
-import { inspect } from "npm:unist-util-inspect"
 
 
 const Options = {
@@ -119,7 +116,7 @@ function generate_toc( tree: hast.Root ) {
          *
          * Ref: https://github.com/lumeland/markdown-plugins/blob/main/toc/mod.ts
          */
-        
+
         const node = { depth: 0, text: "", id: "", children: [] }
         const stack: Heading[] = [ node ]
 
