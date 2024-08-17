@@ -29,7 +29,9 @@ Some study says x characters wide is best and another says y percent is better. 
 
 Every HTMLer learnt to write `<html lang="en">` at some point and never gives it another thought ever again.
 
-This may not be relevant for English that much since the characters and punctuations are relatively simple, but the problem unveils itself once one reaches for Asian languages. See this demonstration.
+This may not be relevant for English that much since the characters and punctuations are relatively simple, but the problem unveils itself once one reaches for Asian languages. See this demonstration[^btw].
+
+[^btw]: BTW, just FYI, these two pictures have <i>slightly</i> different heights causing a <i>tiny</i> misalignment.
 
 <div class="flex flex-row w-full gap-4">
     <figure class="grow">
@@ -48,9 +50,6 @@ This is well-known phenomena caused by diverged definition of writing and hintin
 
 Another pitfall learnt fresh while building this website is that one shouldn't use `system-ui` or `ui-*` in font family if they cares about i18n. Check out this post [*Never, ever use system-ui as the value of font-family*](//infinnie.github.io/blog/2017/systemui.html) for the reasoning behind it and seeing a more aggressive demonstration of how the experience of an average Chinese user looks like, back to the low-DPI-screen-Windows-XP/7 era.
 
-<div class="text-gray-500/50">
-    (BTW, just FYI, the two pictures above have <i>slightly</i> different heights causing a <i>tiny</i> misalignment.)
-</div>
 
 ## Cumulative Layout Shift (CLS)
 
@@ -159,3 +158,14 @@ fn fw() -> ft {
 # Formulas and Charts
 
 *Also not used right now, but planned.*
+
+
+# Github Flavored Markdown
+
+## Footnotes
+
+Footnote[^fn] might be useful[^fn2] in the future[^future]. By the way, when writing, you don't need to scroll to the bottom to add footnotes, they can be placed anywhere and will be aggregated later, at least with the Remark plugin this site is using.
+
+[^fn]: *one footnote later*
+[^fn2]: *another footnote later*
+[^future]: *a future of footnote later*
