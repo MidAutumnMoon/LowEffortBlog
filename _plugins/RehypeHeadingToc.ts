@@ -21,34 +21,33 @@ const Options = {
 
 export default function() {
     return function( tree: hast.Root ) {
-        Visit( tree, "element", visitor )
+        Visit( tree, "element", add_heading_link )
     }
 }
 
 
-function visitor( node: hast.Element )
-    : undefined | typeof SKIP
-{
-    /** 1) Skip non heading elements */
-    if ( !Heading( node ) ) { return SKIP }
+function add_heading_link( node: hast.Element ) {
+    /**
+     * 1) Skip non heading elements
+     */
+    if ( !Heading( node ) ) {
+        return SKIP
+    }
 
     /**
      * 2) Skip headings without id,
      * use rehype-slug to add slugs
      */
-    if ( !node.properties.id ) { return SKIP }
+    if ( !node.properties.id ) {
+        return SKIP
+    }
 
-    add_heading_link( node )
-}
-
-
-function add_heading_link( heading: hast.Element ) {
-    const link: hast.Element = {
+    const anchor_link: hast.Element = {
         type: "element",
         tagName: "a",
         properties: {
             className: Options.AnchorClassName,
-            href: `#${heading.properties.id}`,
+            href: `#${node.properties.id}`,
             ariaHidden: "true",
             tabIndex: "-1",
         },
@@ -56,6 +55,10 @@ function add_heading_link( heading: hast.Element ) {
             { type: "text", value: "#" } satisfies hast.Text
         ]
     }
-    heading.children = [ ...heading.children, link ]
+
+    node.children = [
+        ...node.children,
+        anchor_link
+    ]
 }
 
