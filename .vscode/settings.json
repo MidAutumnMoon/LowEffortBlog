@@ -21,8 +21,13 @@
         // See https://github.com/tailwindlabs/tailwindcss/discussions/5258
         ".vscode/tailwind.json"
     ],
+    "javascript.suggest.autoImports": false,
+    "typescript.suggest.autoImports": false,
     "[markdown][mdx]": {
         "editor.wordWrap": "bounded",
         "editor.wordWrapColumn": 80
-    }
+    },
+    "cSpell.words": [
+        "hastscript"
+    ]
 }
