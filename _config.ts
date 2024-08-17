@@ -1,7 +1,5 @@
 import Lume from "lume/mod.ts"
 
-import MarkdownToc from "lume_markdown_plugins/toc.ts"
-import * as MarkdownTocAnchors from "lume_markdown_plugins/toc/anchors.ts"
 import MDX from "lume/plugins/mdx.ts"
 import MdxOption from "./mdx.config.ts"
 
@@ -34,11 +32,6 @@ const site = Lume( {
 /**
  * Plugins
  */
-
-site.use( MarkdownToc( {
-    level: 1,
-    anchor: MarkdownTocAnchors.linkInsideHeader()
-} ) )
 
 site.use( Toml() )
 site.use( JsxPreact() )
