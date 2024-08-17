@@ -42,8 +42,9 @@
         /*
             Basic margin
          */
+
         & * {
-            @apply my-[1.8ch];
+            @apply my-5;
         }
 
         /*
@@ -52,7 +53,7 @@
         */
         & h1,h2,h3,h4 {
             @apply font-semibold;
-            @apply mt-8 mb-4;
+            @apply mt-6;
 
             & .header-anchor {
                 /* @apply; */
@@ -65,21 +66,23 @@
             }
         }
 
-        & h1 {
-            @apply text-3xl;
-        }
-        & h2 {
-            @apply text-2xl;
-        }
-        & h3,h4 {
-            @apply text-xl;
-        }
+        & h1 { @apply text-3xl; }
+        & h2 { @apply text-2xl; }
+        & h3,h4 { @apply text-xl; }
 
         /*
             Blocks
          */
 
-        & code {
+        & pre {
+            & code { @apply p-0 m-0; }
+            @apply border overflow-x-auto;
+            @apply whitespace-pre hyphens-none;
+            @apply p-2;
+            tab-size: 4;
+        }
+
+        & code:not( pre code ) {
             @apply font-mono;
             @apply bg-blue-200/20;
             @apply px-1;
@@ -87,26 +90,15 @@
 
         & blockquote {
             @apply italic;
-            @apply border-blue-200/20 border-l-[0.8ch] pl-3 py-1;
-            @apply text-gray-600;
+            @apply border-blue-200/20 border-l-[0.5ch] ps-2 py-1;
+            @apply text-gray-800;
 
-            & > * {
-                @apply my-[0.8ch];
-            }
-        }
-
-        & pre {
-            & code { @apply bg-transparent p-0; }
-            @apply border;
-            @apply overflow-x-auto;
-            @apply whitespace-pre hyphens-none;
-            @apply py-1 px-2;
-            tab-size: 4;
+            & > * { @apply my-[0.8ch]; }
         }
 
         & figure {
             & img {
-                @apply my-0;
+                @apply m-0;
             }
             & figcaption {
                 @apply m-0 mt-2;
@@ -119,26 +111,21 @@
          */
 
         & ol,ul {
-            @apply list-inside;
+            @apply list-outside;
+            @apply ps-[2ch];
 
             & > li {
-                & > * { @apply m-0; }
-                & > ul, & > ol { @apply ps-4; }
-                & > p { @apply inline; }
                 @apply m-0;
+                & > * { @apply m-0; }
             }
         }
 
-        & ol {
-            @apply list-decimal;
-        }
+        & ol { @apply list-decimal; }
 
-        & ul {
-            @apply list-disc;
-        }
+        & ul { @apply list-disc; }
 
         & li::marker {
-            @apply text-gray-600/50;
+            @apply text-gray-600/40;
         }
 
         /*
@@ -146,7 +133,7 @@
          */
 
         & img,svg {
-            @apply max-w-full h-auto border mx-auto;
+            @apply border max-w-full h-auto mx-auto;
             @apply text-blue-400/70 italic;
         }
 
@@ -155,10 +142,10 @@
          */
         & section.footnotes, section.table-of-content {
             @apply px-6 py-2 mt-8;
-            @apply bg-blue-200/20 overflow-x-scroll;
+            @apply bg-blue-200/20 text-wrap;
 
             & li {
-                @apply my-2;
+                @apply my-1;
             }
         }
 
