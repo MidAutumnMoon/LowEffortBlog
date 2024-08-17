@@ -125,7 +125,7 @@
         & ul { @apply list-disc; }
 
         & li::marker {
-            @apply text-gray-600/40;
+            @apply text-gray-600/40 text-sm;
         }
 
         /*
