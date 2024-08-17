@@ -4,9 +4,10 @@ date: '2024-07-29'
 updated: '2024-08-17'
 tags:
     - rant
+    - note
 ---
 
-# Ranting
+# Ranting Time
 
 This blog is built using [Lume](//lume.land/) static site generator, which is written in TypeScript and runs on [Deno](//deno.land), which not only means countless JavaScript libraries is right on the fingertip to be called, but also, unfortunately, the user and maintainer, have to swallow the bitterness comes out of it.
 
@@ -29,7 +30,7 @@ Some study says x characters wide is best and another says y percent is better. 
 
 Every HTMLer learnt to write `<html lang="en">` at some point and never gives it another thought ever again.
 
-This may not be relevant for English that much since the characters and punctuations are relatively simple, but the problem unveils itself once one reaches for Asian languages. See this demonstration[^btw].
+This may not be relevant for English that much since the characters and punctuations are relatively simple, but the problem unveils itself once someone reaches out for Asian languages. See this demonstration[^btw].
 
 [^btw]: BTW, just FYI, these two pictures have <i>slightly</i> different heights causing a <i>tiny</i> misalignment.
 
@@ -44,18 +45,28 @@ This may not be relevant for English that much since the characters and punctuat
     </figure>
 </div>
 
-Those are two exact same phrase, but left one is `lang="ja"` while the right one is `lang="zh"`, making browser render them using Japanese and Chinese fonts correspondingly.
+These two phrases have same characters, but the left one is attributed with `lang="ja"` while the right one is `lang="zh"`, making the browser render them using Japanese and Chinese fonts correspondingly.
 
-This is well-known phenomena caused by diverged definition of writing and hinting of the same grapheme, which results in really ugly typography if mixed up.
+This is well-known phenomena caused by the diverged definition of writing and hinting of the same grapheme in different languages, which may result in *really really* ugly typography if mixed up.
 
-Another pitfall learnt fresh while building this website is that one shouldn't use `system-ui` or `ui-*` in font family if they cares about i18n. Check out this post [*Never, ever use system-ui as the value of font-family*](//infinnie.github.io/blog/2017/systemui.html) for the reasoning behind it and seeing a more aggressive demonstration of how the experience of an average Chinese user looks like, back to the low-DPI-screen-Windows-XP/7 era.
+Another pitfall learnt fresh while building this website is that `system-ui` or `ui-*` shouldn't be used in font family if i18n is still a concern. Check out this post [*Never, ever use system-ui as the value of font-family*](//infinnie.github.io/blog/2017/systemui.html) for the reasoning behind it, and see a picture of what the experience of reading Chinese characters looks like, back to the low-DPI-screen-Windows-XP/7 era.
 
+
+# Layout
+
+This part talks about some layout issues.
 
 ## Cumulative Layout Shift (CLS)
 
-CLS is not strictly related to typography but definitely has impact on reading experience. *web.dev* has an [excellent article](//web.dev/articles/cls) discussing CLS, so no need to repeat words myself.
+*web.dev* has an [excellent article](//web.dev/articles/cls) discussing CLS, so no need to repeat the words here.
 
 To combat CLS while keeping the effort low, this website *1)* doesn't do complex layout, *2)* doesn't use webfonts, *3)* uses a Lume plugin to add `height` and `width` to `<img>`s. It ends up pretty well.
+
+## Unintended Horizontal Scroll on Mobile Devices
+
+Ever visited another person's blog on your phone while taking subway, but the page doesn't follow your finger but instead maneuvers left and right? This almost always caused by element overflow, like embedding a video without capping the max width.
+
+*Some efforts* were put into this site to ensure elements don't overflow, and pray for Safari to not screw things up once again.
 
 
 # Headings
@@ -145,14 +156,14 @@ fn fw() -> ft {
 <figure>
     <img src="./Untitled.avif" alt="The beautiful MDN logo." />
     <figcaption>
-        Can't see the image? Too bad because it's AVIF. Try upgrading your browser or smashing your old iPhone and never buy one again.
+        Can't see the image? Too bad because it's AVIF. Try to upgrade your browser or smash your outdated iPhone and never buy one again.
     </figcaption>
 </figure>
 
 
 # Formulas and Charts
 
-*Also not used right now, but planned.*
+*Not used right now, but planned.*
 
 
 # Github Flavored Markdown
@@ -164,6 +175,11 @@ Footnote[^fn] might be useful[^fn2] in the future[^future]. By the way, when wri
 [^fn]: *one footnote later*
 [^fn2]: *another footnote later*
 [^future]: *a future of footnote later*
+
+
+## Tables
+
+*Not used*
 
 
 # MDX
