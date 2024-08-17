@@ -13,6 +13,7 @@
         "YARV",
         "Yabcdefghijkmnpqrtwxyz",
         "brdate",
+        "infinnie",
         "nolookalikes",
         "tailwindcss"
     ],
@@ -20,7 +21,7 @@
         // See https://github.com/tailwindlabs/tailwindcss/discussions/5258
         ".vscode/tailwind.json"
     ],
-    "[markdown]": {
+    "[markdown][mdx]": {
         "editor.wordWrap": "bounded",
         "editor.wordWrapColumn": 80
     }
