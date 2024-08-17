@@ -11,11 +11,23 @@ tags:
 
 This blog is built using [Lume](//lume.land/) static site generator, which is written in TypeScript and runs on [Deno](//deno.land), which not only means countless JavaScript libraries is right on the fingertip to be called, but also, unfortunately, the user and maintainer, have to swallow the bitterness comes out of it.
 
-My very first rant on this project would be how awful Deno's dependency management is. It's like newbie wild survivor packs 500mL of juice instead of 1L of water happily thinking this move not only reduces the weight but also carry extra sugar. *Import map* helps a lot, but it immediately got beaten to the ground by the fact that Deno has no official tool of upgrading dependencies, despite it has been actively developed for almost *10 years*.
+The very first rant on this project would be how awful Deno's dependency management is. It's like newbie wild survivor packs 500mL of juice instead of 1L of water happily thinking this move not only reduces the weight but also carry extra sugar. *Import map* helps a lot, but it immediately got beaten to the ground by the fact that Deno has no official tool of upgrading dependencies, despite it has been actively developed for almost *10 years*.
 
-My second rant and main concern would be, will this project become another e-waste?
+The second rant and main concern is, will this project become another [e-waste](https://en.wikipedia.org/wiki/Electronic_waste)?
 
-The remaining of the post will be playground for testing styling and custom features.
+One type of e-waste is device that is perfectly fine but abandoned due to reasons like not having enough processing power or simply not fun to play with anymore. That would also be the worst future of this blog.
+
+JavaScript is very poorly designed language, and the JavaScript dependency ecosystem is straight up garbage in terms of manageability and security. Developers praise for "velocity", praise for the unrestricted ability to pull in dependencies, but the tax of having this freedom isn't noted anywhere.
+
+The feeling of clean code is good, and the feeling of having clear overview of dataflow in project is the great pleasure. JavaScript with its dependency offers none of it. Ah, [*Motivation is Dead*](https://www.youtube.com/watch?v=lCBF_XSFmng).
+
+The fact this blog is built on top of such a foundation makes me uneasy. If `$life` takes a lot from me keeping me from gardening my JavaScript for months, will it still build? Or worse, is the motivation still for me to re-pickup the JavaScript garbage? Is it really the right choice to do my blog in such way? Let's find out in the future.
+
+Some nice minimalistic text based blogs for reference:
+
+- https://bearblog.dev/
+
+The remaining of the post will be notes for things learnt from building this blog, also serve as a playground for testing styling and custom features.
 
 
 # Typography
@@ -62,7 +74,7 @@ This part talks about some layout issues.
 
 To combat CLS while keeping the effort low, this website *1)* doesn't do complex layout, *2)* doesn't use webfonts, *3)* uses a Lume plugin to add `height` and `width` to `<img>`s. It ends up pretty well.
 
-## Unintended Horizontal Scroll on Mobile Devices
+## Unintentional Horizontal Scroll on Mobile Devices
 
 Ever visited another person's blog on your phone while taking subway, but the page doesn't follow your finger but instead maneuvers left and right? This almost always caused by element overflow, like embedding a video without capping the max width.
 
