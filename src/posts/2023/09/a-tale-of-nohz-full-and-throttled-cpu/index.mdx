@@ -12,13 +12,15 @@ The CPU my laptop equipped is a lovely [R7-4800HS](https://www.amd.com/en/produc
 
 One day I came upon the topic of Linux dynticks and found words on the potential of NOHZ_FULL for saving energy and increasing performance. I decided to yolo a try then *forgot* about it, ...and later found my CPU can't boost past 2.9GHz anymore.
 
-What? Why?? Is my motherboard busted? Is my beloved NixOS betraying me? Is my custom built Kernel punishing me for not RTFM? Frustratedly the situation was beyond what I can debug.
+What? Why?? Is my motherboard busted? Is my beloved NixOS betraying me? Is my custom built Kernel punishing me for not RTFM? Frustratingly the situation was beyond what I can debug.
 
 Until, for some miracle, I noticed the two cores specified for housekeeping sparkled 3.8GHz while monitoring high system load.
 
 *Whaaet a coincident*.
 
 Suspicion raised, is NOHZ_FULL the cause of CPU throttling? Several Web searching later, I found this [LWN thread](https://lwn.net/Articles/816801/) which basically confirmed this theory. After reverting the config, I can do compile at full speed[^1] once again.
+
+[^1]: Ehh, I mean my laptop, not...me myself.
 
 Probably, *NOHZ_FULL* is best suited for beefy server boxes whose four 512-core CPUs constantly runs at the maximum frequency with no dynamic scaling at all. But on a PC, this isn't something worth the attention of typical users, my thought.
 
@@ -36,8 +38,7 @@ By the way, here's a quick note on how to active NOHZ_FULL.
 
 3. Set kernel parameter `nohz_full` to include desired CPUs, for example `nohz_full=2-15`.
 
-    Cores *not included in* the list will *housekeep* interrupts for the others which could potentially stay in deeper C-State longer because of less interrupts, resulting "energy saving".
+    Cores *not included in* the list will *housekeeping* interrupts for the others which could potentially stay in deeper C-State longer because of less interrupts, resulting "energy saving".
 
     One tricky part is that hyper-thread "cores" in the same physical core need to be specified altogether, otherwise it will defeat the purpose of dynticks.
 
-[^1]: Ehh, I mean my laptop, not...me myself.
