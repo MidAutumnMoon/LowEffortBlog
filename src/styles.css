@@ -143,10 +143,14 @@
         & section.footnotes, section.table-of-content {
             @apply px-6 py-2 mt-8;
             @apply bg-blue-200/20 text-wrap;
+        }
 
-            & li {
-                @apply my-1;
-            }
+        & section.footnotes li {
+            @apply my-3;
+        }
+
+        & section.table-of-content li {
+            @apply my-1;
         }
 
         /* & sup:has( > a[data-footnote-ref="true"] ) {
