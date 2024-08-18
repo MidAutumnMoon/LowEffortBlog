@@ -25,7 +25,10 @@ const Tags = (
 
 
 const LinkToPost = (
-    { post }: { post: Lume.Data }
+    { post, lang }: {
+        post: Lume.Data,
+        lang: string | undefined
+    }
 ) => {
     const date_elem = <>
         <span class="text-slate-500/80 text-xs">
@@ -34,7 +37,7 @@ const LinkToPost = (
     </>
 
     const post_ref = <>
-        <a href={ post.url }>
+        <a href={ post.url } lang={ lang ?? "en" }>
             { post.title ?? "<<Missing Title>>" }
         </a>
     </>
@@ -75,7 +78,7 @@ const PostsPerYear = ( { year, posts }: {
          * are at the front of list
          */
         .reverse()
-        .map( p => <LinkToPost post={p}/> )
+        .map( p => <LinkToPost post={ p } lang={ p.lang }/> )
 
     const posts_list_elem = <>
         <ul class="flex flex-col gap-2">{ link_to_posts_elem }</ul>
