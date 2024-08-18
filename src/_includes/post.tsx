@@ -6,6 +6,7 @@
 export const layout = "base.tsx"
 
 import { SwDate } from "@lib/date.ts"
+import Incomplete from "../_components/Incomplete.tsx"
 
 
 /**
@@ -85,6 +86,11 @@ export default function( page: Lume.Data ) {
             date={ page.date }
             updated={ page.updated }
         />
+
+        { page.incomplete ?? false
+            ? <Incomplete />
+            : <></>
+        }
 
         <main class="prose">
             { page.children }

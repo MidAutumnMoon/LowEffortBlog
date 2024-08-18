@@ -1,5 +1,11 @@
 # Swoosh
 
+
+## Special Data
+
+- `incomplete: boolean` An under construction style warning will be added at the front of page
+
+
 ## Brrr Ideas to Implement
 
 - [ ] [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity)
