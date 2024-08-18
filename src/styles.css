@@ -84,7 +84,7 @@
         & code:not( pre code ) {
             @apply font-mono;
             @apply bg-blue-200/20;
-            @apply px-1;
+            @apply ps-1 pe-1;
         }
 
         & blockquote {
