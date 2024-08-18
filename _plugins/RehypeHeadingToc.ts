@@ -160,12 +160,17 @@ function generate_toc( tree: hast.Root ) {
             )
         }
 
+        const heading = h( "h2",
+            { class: "sr-only" },
+            "Table of Content"
+        )
+
         return h( "section",
             {
                 class: Options.TocClassName,
                 style: headings.length === 0 ? "display: none" : ""
             },
-            all( headings )
+            [ heading, all( headings ) ],
         )
 
     } )()
