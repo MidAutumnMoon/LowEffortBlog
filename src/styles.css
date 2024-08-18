@@ -52,7 +52,6 @@
             h5 and h6 are ignored
         */
         & h1,h2,h3,h4 {
-            @apply font-semibold;
             @apply mt-6;
 
             & .header-anchor {
