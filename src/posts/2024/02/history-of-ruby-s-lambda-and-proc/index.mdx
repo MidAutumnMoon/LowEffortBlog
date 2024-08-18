@@ -1,7 +1,7 @@
 ---
 title: History of Ruby's Lambda and Proc
 date: '2024-02-27'
-updated: '2024-08-15'
+updated: '2024-08-17'
 tags:
     - history
     - ruby
@@ -9,9 +9,51 @@ tags:
 
 Got really confused by Ruby having both `lambda` and `proc` one day. They are the same thing but with different semantics, right? If so, what's reasoning behind this miserable design? If not so, what's the real miserable difference between them?
 
-At the beginning of time, Ruby had `Block`, a data structure that contains block of codes, and optionally accepts arguments.
+Author of this post is neither using Ruby at $work, an OK C programmer, a experienced history digger nor even a fluent English writer. So please take everything with a grain of salt, appreciate that!
 
-In [*version 0.95*](https://github.com/ruby/ruby/tree/v0_95), `Block` got renamed to `Proc` with two methods `proc` and `lambda` added to `Kernel`. At that point, they were [aliased to each other](https://github.com/ruby/ruby/blob/fca49a8a69a0f6bb4feae74c6cd0e93d7fac8b36/eval.c#L3025), and the ambiguity just got planted.
+
+# Primitive Era (1994\~200x)
+
+At the [beginning of ~~time~~ git history](https://github.com/ruby/ruby/tree/v0_49), Ruby has the special data structure called `BLOCK`, which contains codes and has its local variables and environment[^0_49_eval_c]. `BLOCK` seems to be what powers `iterators` and `for loops` back then.
+
+[^0_49_eval_c]: https://github.com/ruby/ruby/blob/v0_49/eval.c#L36-L41
+
+Look at this relic sample[^relic_sample] found in `v0.49` from 1994, so strange yet so familiar.
+
+[^relic_sample]: https://github.com/ruby/ruby/blob/v0_49/sample/t2.rb
+
+```ruby
+test = do tt() using i
+  if i == 3; break end
+  println("ttt: ", i);
+end
+```
+
+But it was quickly changed few months after in `v0.50` or `v0.51` (it's still 1994), which gets a step closer to its modern form[^relic_sample_but_v0_50].
+
+[^relic_sample_but_v0_50]: https://github.com/ruby/ruby/blob/v0_51/sample/t2.rb
+
+```ruby
+test = tt{i|
+  if i == 3; break end
+  println("ttt: ", i);
+}
+```
+
+Matz even expressed himself about this in the changelog[^matz_do_changelog]:
+
+[^matz_do_changelog]: https://github.com/ruby/ruby/blob/d450f9d6a28f01b7ca6030a925921dbf35cee439/doc/ChangeLog/ChangeLog-0.50_to_0.60#L336
+
+<figure>
+    <blockquote class="mb-0" lang="ja">
+        \* parse.y:「do expr using var ... end」形式はなくなった. 寂しい気もする. \*BACKWARD INCOMPATIBILITY\*
+    </blockquote>
+    <figcaption>
+        <span>"do expr using var ... end" is no longer a thing. (I) feel a bit lost. \*BACKWARD INCOMPATIBILITY\*</span>
+    </figcaption>
+</figure>
+
+Advance to [*version 0.95*](https://github.com/ruby/ruby/tree/v0_95), `Block` got renamed to `Proc` with two methods `proc` and `lambda` added to `Kernel`. At that point, they were [aliased to each other](https://github.com/ruby/ruby/blob/fca49a8a69a0f6bb4feae74c6cd0e93d7fac8b36/eval.c#L3025), and the ambiguity just got planted.
 
 Passing Ruby *v1.0* through *v1.7*, these two methods remained the same.
 
@@ -24,6 +66,9 @@ During the lifespan of Ruby *v1.8*, the two global function `proc` and `lambda` 
 > [!NOTE]
 > Not sure about the behavior of control flows (return, break etc.) inside proc at that moment because I can't understand the prize-winning usage of `setjmp`/`longjmp` coupled with unhelpful variable names.
 
+
+# YARV Era
+
 Then the big *v1.9.0* came where the YARV virtual machine replaced the old interpreter, alongside with loads of language changes, `proc` and `lambda` started to differ from each other for the first time.
 
 Firstly, [their definition](https://github.com/ruby/ruby/blob/816e8751b1dc600dfcca602524182b1d0558bb67/proc.c#L1592) became different which the VM [was aware of](https://github.com/ruby/ruby/blob/816e8751b1dc600dfcca602524182b1d0558bb67/vm.c#L555). Secondly, the VM gained the ability to [allow control flow](https://github.com/ruby/ruby/blob/a3e1b1ce7ed7e7ffac23015fc2fde56511b30681/insns.def#L1368C5) in lambda, although that "lambda" is not the `lambda` being discussed on. The ambiguity is having its leaves grown bigger and more.
@@ -33,6 +78,9 @@ Enter the Ruby *2.0* era. [Feature #8693](https://bugs.ruby-lang.org/issues/8693
 The ambiguity is fully grown, casting its shadow over all Ruby land.
 
 One last problem is that, there were **one** [huge commit](https://github.com/ruby/ruby/commit/a3e1b1ce7ed7e7ffac23015fc2fde56511b30681) that YARV got merged from sources out-of-tree, so consequently history commits are lost. Worse, the `yarv-dev` mailing list is long gone and non indexable, ultimately I can't answer the question of the title :( Asking Matz himself might be the last resort.
+
+
+# Conclude
 
 To conclude, why does Ruby have both `lambda` and `proc` and they differ?
 
