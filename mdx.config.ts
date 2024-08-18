@@ -1,6 +1,6 @@
 import * as lume_mdx from "lume/plugins/mdx.ts"
 
-import RehypeSlug from "npm:rehype-slug"
+import RehypeSlug from "rehype-slug"
 import RehypeHeadingToc from "./_plugins/RehypeHeadingToc.ts"
 
 

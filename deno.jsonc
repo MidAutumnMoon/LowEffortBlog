@@ -1,25 +1,32 @@
 {
-    "imports": {
-        "@iconify-json/mdi": "npm:@iconify-json/mdi",
-        "@iconify/tailwind": "npm:@iconify/tailwind",
-        "@lib/": "./_lib/",
-        "@std/path": "jsr:@std/path",
-        "@tailwindcss": "npm:@tailwindcss",
-        "esbuild": "npm:esbuild",
-        "lume/": "https://deno.land/x/lume@v2.2.4/",
-        "sharp": "npm:sharp"
-    },
+  "imports": {
+    "@iconify-json/mdi": "npm:@iconify-json/mdi@^1.1.68",
+    "@iconify/tailwind": "npm:@iconify/tailwind@^1.1.2",
+    "@lib/": "./_lib/",
+    "@std/path": "jsr:@std/path@^1.0.2",
+    "esbuild": "npm:esbuild@^0.23.1",
+    "hast": "npm:@types/hast@^3.0.4",
+    "hast-util-heading": "npm:hast-util-heading@^3.0.0",
+    "hast-util-heading-rank": "npm:hast-util-heading-rank@^3.0.0",
+    "hast-util-to-text": "npm:hast-util-to-text@^4.0.2",
+    "hastscript": "npm:hastscript@^9.0.0",
+    "lume/": "https://deno.land/x/lume@v2.2.4/",
+    "preact": "npm:preact@^10.23.2",
+    "rehype-slug": "npm:rehype-slug@^6.0.0",
+    "sharp": "npm:sharp@^0.33.5",
+    "unist-util-visit": "npm:unist-util-visit@^5.0.0"
+  },
 
-    "tasks": {
-        // TODO: tighten permissions
-        "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
-        "build": "deno task lume",
-        "serve": "deno task lume -s"
-    },
+  "tasks": {
+    // TODO: tighten permissions
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "build": "deno task lume",
+    "serve": "deno task lume -s"
+  },
 
-    "compilerOptions": {
-        "types": ["lume/types.ts"],
-        "jsx": "react-jsx",
-        "jsxImportSource": "npm:preact"
-    }
+  "compilerOptions": {
+    "types": ["lume/types.ts"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  }
 }

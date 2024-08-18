@@ -3,15 +3,14 @@
  * a table of content.
  */
 
+import type * as hast from "hast"
 
-import * as hast from "npm:@types/hast"
+import { h } from 'hastscript'
+import { heading as IsHeading } from "hast-util-heading"
+import { headingRank as HeadingRank } from "hast-util-heading-rank"
+import { toText as HastToText } from "hast-util-to-text"
 
-import { h } from 'npm:hastscript'
-import { heading as IsHeading } from "npm:hast-util-heading"
-import { headingRank as HeadingRank } from "npm:hast-util-heading-rank"
-import { toText as HastToText } from "npm:hast-util-to-text"
-
-import { visit as Visit, SKIP } from "npm:unist-util-visit"
+import { visit as Visit, SKIP } from "unist-util-visit"
 
 
 const Options = {
