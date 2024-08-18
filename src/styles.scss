@@ -28,14 +28,13 @@
 
 @layer components {
 
+    $NotProse: ":not( :where( .not-prose, .not-prose * ) )";
+
     /*
         Roll out my own prose because the Tailwind Typography
         does way too much things not to my taste.
 
         Roughly based on UnoCSS typography though.
-
-        Notice that this uses modern CSS nesting,
-        which will certainly break on some devices and IDC. :)
     */
     .prose {
 
@@ -43,7 +42,7 @@
             Basic margin
          */
 
-        & * {
+        & *#{$NotProse} {
             @apply my-5;
         }
 
@@ -51,7 +50,7 @@
             Various Headings
             h5 and h6 are ignored
         */
-        & h1,h2,h3,h4 {
+        & :where( h1, h2, h3, h4 )#{$NotProse} {
             @apply mt-6;
 
             & .header-anchor {
@@ -65,29 +64,32 @@
             }
         }
 
-        & h1 { @apply text-4xl; }
-        & h2 { @apply text-2xl; }
-        & h3,h4 { @apply text-xl; }
+        & h1#{$NotProse} { @apply text-4xl; }
+
+        & h2#{$NotProse} { @apply text-2xl; }
+
+        & :where( h3,h4 )#{$NotProse} { @apply text-xl; }
 
         /*
             Blocks
          */
 
-        & pre {
-            & code { @apply p-0 m-0; }
+        & pre#{$NotProse} {
             @apply border-blue-100 border overflow-x-auto;
             @apply whitespace-pre hyphens-none;
             @apply p-2;
             tab-size: 4;
+
+            & code { @apply p-0 m-0; }
         }
 
-        & code:not( pre code ) {
+        & code:not( pre code )#{$NotProse} {
             @apply font-mono;
             @apply bg-blue-200/20;
             @apply ps-1 pe-1;
         }
 
-        & blockquote {
+        & blockquote#{$NotProse} {
             @apply italic;
             @apply border-blue-100 border-[1px] border-l-8;
             @apply ps-2 pe-2 py-1;
@@ -96,7 +98,7 @@
             & > * { @apply my-[0.8ch]; }
         }
 
-        & figure {
+        & figure#{$NotProse} {
             & img {
                 @apply m-0 mx-auto;
             }
@@ -110,7 +112,7 @@
             Lists
          */
 
-        & ol,ul {
+        & :where( ol,ul )#{$NotProse} {
             @apply list-outside;
             @apply ps-[2ch];
 
@@ -120,11 +122,11 @@
             }
         }
 
-        & ol { @apply list-decimal; }
+        & ol#{$NotProse} { @apply list-decimal; }
 
-        & ul { @apply list-disc; }
+        & ul#{$NotProse} { @apply list-disc; }
 
-        & li::marker {
+        & :where( li )#{$NotProse}::marker {
             @apply text-gray-400 text-sm;
         }
 
@@ -132,7 +134,7 @@
             Multimedia
          */
 
-        & img,svg {
+        & :where( img, svg )#{$NotProse} {
             @apply border-blue-100 border max-w-full h-auto mx-auto;
             @apply text-blue-400/70 italic;
         }

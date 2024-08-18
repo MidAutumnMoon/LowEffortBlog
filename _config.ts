@@ -12,6 +12,7 @@ import Highlight from "lume/plugins/code_highlight.ts"
 import Postcss from "lume/plugins/postcss.ts"
 import Tailwind from "lume/plugins/tailwindcss.ts"
 import TailwindOption from "./tailwind.config.ts"
+import Sass from "lume/plugins/sass.ts"
 
 import Toml from "lume/plugins/toml.ts"
 import Feed from "lume/plugins/feed.ts"
@@ -47,6 +48,7 @@ site.use( Highlight( {
 site.use( Tailwind( {
     options: TailwindOption
 } ) )
+site.use( Sass() )
 site.use( Postcss() )
 
 site.use( Esbuild() )
