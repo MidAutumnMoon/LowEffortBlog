@@ -28,7 +28,7 @@ function Meta(
         updated: string
     }
 ) {
-    return <div class="text-gray-600/50 italic flex gap-3 mb-5" lang="en">
+    return <div class="text-gray-500 italic flex gap-3 mb-5" lang="en">
 
         {/*
             renders to "1000 words of #rant" or

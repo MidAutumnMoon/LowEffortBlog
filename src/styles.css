@@ -103,7 +103,7 @@
             }
             & figcaption {
                 @apply m-0 mt-2;
-                @apply text-sm text-gray-600/50 italic text-center;
+                @apply text-sm text-gray-400 italic text-center;
             }
         }
 
@@ -126,7 +126,7 @@
         & ul { @apply list-disc; }
 
         & li::marker {
-            @apply text-gray-600/40 text-sm;
+            @apply text-gray-400 text-sm;
         }
 
         /*
