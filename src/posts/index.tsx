@@ -121,7 +121,7 @@ export default ( data: Lume.Data ) => {
             <PostsPerYear year={ year } posts={ posts! as Lume.Data[] } />
         )
 
-    return <div class="py-4 flex flex-col gap-[6ch]">
+    return <div class="py-4 flex flex-col gap-8">
         { years_elems }
     </div>
 
