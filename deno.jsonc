@@ -21,7 +21,8 @@
     // TODO: tighten permissions
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "build": "deno task lume",
-    "serve": "deno task lume -s"
+    "serve": "deno task lume -s",
+    "update": "deno run -A 'https://deno.land/x/nudd/cli.ts' -- update deno.jsonc"
   },
 
   "compilerOptions": {
