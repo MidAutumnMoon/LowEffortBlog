@@ -3,7 +3,7 @@ export const layout = "base.tsx"
 export default () => {
     return <div class="
         flex flex-col gap-4 justify-center items-center
-        w-full h-[50svh]
+        w-full h-[60svh]
     ">
         <span class="font-mono">
             under heavy construction
