@@ -19,7 +19,8 @@ export default function() {
         <p
             class="
                 w-full h-full rounded-lg
-                text-center text-lg font-bold p-6 bg-[#fef100]
+                p-6 bg-[#fef100]
+                text-center text-lg font-bold
             "
         >
             Content Incomplete or Under Rewriting

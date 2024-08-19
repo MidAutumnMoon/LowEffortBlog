@@ -10,16 +10,16 @@ incomplete: true
 
 Got really confused by Ruby having both `lambda` and `proc` one day. They are the same thing but with different semantics, right? If so, what's reasoning behind this miserable design? If not so, what's the real miserable difference between them?
 
-Author of this post is neither using Ruby at $work, an OK C programmer, a experienced history digger nor even a fluent English writer. So please take everything with a grain of salt, appreciate that!
+Author of this post is neither using Ruby at $work, an OK C programmer, a experienced history digger nor even a fluent English writer. So please take everything with a grain of salt Appreciate that!
 
 
 # Primitive Era (1994\~200x)
 
-At the [beginning of ~~time~~ git history](https://github.com/ruby/ruby/tree/v0_49), Ruby has the special data structure called `BLOCK`, which contains codes and has its local variables and environment[^0_49_eval_c]. `BLOCK` seems to be what powers `iterators` and `for loops` back then.
+At the [beginning of ~~time~~ git history](https://github.com/ruby/ruby/tree/v0_49), Ruby already had iterator and `do end` of its early form. Under the hood, both `for` loops and `do end` are implemented using a special data structure called `BLOCK`, which contains code, can accept arguments and has its own environment[^0_49_eval_c], making it essentially `closure` in modern terms.
 
 [^0_49_eval_c]: https://github.com/ruby/ruby/blob/v0_49/eval.c#L36-L41
 
-Look at this relic sample[^relic_sample] found in `v0.49` from 1994, so strange yet so familiar.
+Here's a relic sample[^relic_sample] found in `v0.49` from 1994, the `do end` block looks so strange yet so familiar.
 
 [^relic_sample]: https://github.com/ruby/ruby/blob/v0_49/sample/t2.rb
 
@@ -30,7 +30,7 @@ test = do tt() using i
 end
 ```
 
-But it was quickly changed few months after in `v0.50` or `v0.51` (it's still 1994), which gets a step closer to its modern form[^relic_sample_but_v0_50].
+But it was quickly changed to bracket style few months after between `v0.50` and `v0.51` (still in 1994), and its internal name was also changed to `SCOPE` respectively [^relic_sample_but_v0_50].
 
 [^relic_sample_but_v0_50]: https://github.com/ruby/ruby/blob/v0_51/sample/t2.rb
 
