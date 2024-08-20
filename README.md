@@ -1,4 +1,6 @@
-# Swoosh
+# Low Effort Blog
+
+<sup>Effort</sup><sub>Motivation</sub>
 
 
 ## Special Data

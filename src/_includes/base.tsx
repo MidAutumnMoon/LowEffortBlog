@@ -11,7 +11,9 @@ const Navbar = () => <>
             justify-between
         "
     >
-        <li class="grow"><a href="/">swoosh</a></li>
+        <li class="grow"><a href="/">
+            [&nbsp;&nbsp;&nbsp;leb&nbsp;&nbsp;&nbsp;]
+        </a></li>
         <li><a href="/posts">posts</a></li>
         <li><a href="/feed.xml">feed</a></li>
     </ul> </nav>
@@ -73,7 +75,12 @@ export default ( data: Lume.Data ) => {
             <title>{ data.title ?? data.default_title }</title>
             <link rel="preload" href={ stylesheet } as="style" />
             <link rel="stylesheet" href={ stylesheet } />
-            <link rel="alternate" type="application/rss+xml" title="RSS Feed for Swoosh" href="/feed.xml" />
+            <link
+                rel="alternate"
+                type="application/rss+xml"
+                title="RSS Feed for LowEffortBlog"
+                href="/feed.xml"
+            />
         </head>
         <body>
             <Header/>

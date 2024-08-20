@@ -1,6 +1,6 @@
 export const layout = "base.tsx"
 
-export default () => {
+export default ( data: Lume.Data ) => {
     return <div class="
         flex flex-col gap-4 justify-center items-center
         w-full h-[60svh]
@@ -9,7 +9,7 @@ export default () => {
             under heavy construction
         </span>
         <span class="font-mono">
-            check out <a href="//github.com/MidAutumnMoon/Swoosh">source code</a>
+            check out <a href={ data.git_repo }>source code</a>
         </span>
     </div>
 }

@@ -26,7 +26,7 @@ import ExternalLink from "./_plugins/ExternalLink.ts"
 
 const site = Lume( {
     src: "src",
-    location: new URL( "https://sw.418.im/" ),
+    location: new URL( "https://leb.418.im/" ),
 } )
 
 
@@ -67,7 +67,7 @@ site.use( Feed( {
     output: "/feed.xml",
     query: "type=post",
     info: {
-        title: "Swoosh",
+        title: "LowEffortBlog",
     },
     items: {
         updated: data => new Date( data.updated )
@@ -79,7 +79,8 @@ site.use( Feed( {
  * Data
  */
 
-site.data( "default_title", "Swoosh" )
+site.data( "default_title", "leb" )
+site.data( "git_repo", "https://github.com/MidAutumnMoon/LowEffortBlog" )
 
 
 /**

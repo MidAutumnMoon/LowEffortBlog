@@ -1,4 +1,4 @@
-name: "Publish Swoosh to Cloudflare Pages"
+name: "Publish LEB to Cloudflare Pages"
 
 on:
     workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
         -   name: Setup Deno
             uses: denoland/setup-deno@v1
 
-        -   name: Build Swoosh
+        -   name: Build LEB
             run: deno task build
 
         -   name: Setup pnpm
@@ -45,4 +45,4 @@ jobs:
                 # is so miserable that a post has been written
                 # just for it. Check it out :(
                 command: |
-                    pages deploy --project-name="swoosh" --branch main --commit-dirty=true "_site"
+                    pages deploy --project-name="loweffortblog" --branch main --commit-dirty=true "_site"
