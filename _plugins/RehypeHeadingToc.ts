@@ -49,10 +49,6 @@ function is_valid_heading( node: hast.Element ): boolean {
     return true
 }
 
-function text( value: string ): hast.Text {
-    return { type: "text", value }
-}
-
 
 /**
  * Add an anchor after each heading linking to the heading itself
@@ -62,18 +58,16 @@ function add_heading_link( tree: hast.Root ) {
         if ( !is_valid_heading( node ) ) {
             return SKIP
         }
-        const anchor_link: hast.Element = {
-            type: "element",
-            tagName: "a",
-            properties: {
-                href: `#${node.properties.id}`,
+        node.children.push( h(
+            "a",
+            {
+                href: `#${ node.properties.id }`,
                 className: Options.AnchorClassName,
-                ariaHidden: "true",
-                tabIndex: "-1",
+                ariaHidden: true,
+                tabIndex: -1,
             },
-            children: [ text( Options.AnchorSymbol ) ]
-        }
-        node.children.push( anchor_link )
+            Options.AnchorSymbol
+        ) )
     } )
 }
 
@@ -150,26 +144,33 @@ function generate_toc( tree: hast.Root ) {
         }
 
         function one( head: Heading ): hast.Element {
-            const link = h( "a",
+            const link = h(
+                "a",
                 { href: `#${head.id}` },
                 [ head.text ]
             )
-            return h( "li",
+            return h(
+                "li",
                 [ link, all( head.children ) ]
             )
         }
 
-        const heading = h( "h2",
+        const heading = h(
+            "h2",
             { class: "sr-only" },
             "Table of Content"
         )
 
-        return h( "section",
+        return h(
+            "section",
             {
                 class: Options.TocClassName,
                 style: headings.length === 0 ? "display: none" : ""
             },
-            [ heading, all( headings ) ],
+            [
+                heading,
+                all( headings )
+            ],
         )
 
     } )()
