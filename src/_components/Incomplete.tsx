@@ -9,7 +9,7 @@ const background_style = `
 export default function() {
     return <section
         style={background_style}
-        class="not-prose p-4 rounded-lg"
+        class="not-prose p-4"
     >
 
         <h1 class="sr-only">
@@ -18,7 +18,7 @@ export default function() {
 
         <p
             class="
-                w-full h-full rounded-lg
+                w-full h-full
                 p-6 bg-[#fef100]
                 text-center text-lg font-bold
             "
