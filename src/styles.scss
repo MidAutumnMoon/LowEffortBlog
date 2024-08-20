@@ -43,7 +43,7 @@
          */
 
         & *#{$NotProse} {
-            @apply my-5;
+            @apply my-5 break-words;
         }
 
         /*
