@@ -51,17 +51,16 @@
             h5 and h6 are ignored
         */
         & :where( h1, h2, h3, h4 )#{$NotProse} {
-            @apply mt-6;
+            @apply mt-6 py-1 w-fit;
             @apply text-balance;
 
             & .header-anchor {
-                /* @apply; */
-                @apply text-blue-300/50 ms-1;
-                @apply hidden;
+                @apply ms-1;
+                @apply text-transparent;
             }
 
             &:hover .header-anchor {
-                @apply inline;
+                @apply text-blue-200;
             }
         }
 
@@ -149,6 +148,10 @@
 
         & section.footnotes li {
             @apply my-3;
+
+            &:target {
+                @apply font-bold;
+            }
         }
 
         & section.table-of-content li {

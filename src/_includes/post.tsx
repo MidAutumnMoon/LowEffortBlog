@@ -14,7 +14,7 @@ import Incomplete from "../_components/Incomplete.tsx"
  */
 function Title( { title }: { title: string } ) {
     return <>
-        <h1 class="text-4xl font-bold leading-tight my-4">
+        <h1 class="text-4xl font-bold my-4 text-balance">
             { title }
         </h1>
     </>
