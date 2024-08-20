@@ -92,7 +92,7 @@
         & blockquote#{$NotProse} {
             @apply italic;
             @apply border-blue-100 border border-l-8;
-            @apply ps-2 pe-2 py-1;
+            @apply ps-3 pe-3 py-1;
             @apply text-gray-500 text-balance;
 
             & > * { @apply my-2; }

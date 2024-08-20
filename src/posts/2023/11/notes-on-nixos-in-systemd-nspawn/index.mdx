@@ -1,12 +1,15 @@
 ---
 title: Notes on NixOS in systemd-nspawn
 date: '2023-11-01'
-updated: '2023-11-01'
+updated: '2024-08-20'
 tags:
     - linux
     - nix
-incomplete: true
 ---
+
+<comp.Note>
+    This post was originally written during the period that the author is obsessed with Roam Research and Logseq, but unfortunately this writing style made the content really difficult to read on phones so was quickly abandoned.
+</comp.Note>
 
 - https://hub.nspawn.org/images/ provides NixOS tarball
     - Has a sane default configuration.nix
@@ -30,12 +33,14 @@ incomplete: true
 
 - Start the container `machinectl start nickname`
 
-- Configure the inside NixOS
+- Configure the guest NixOS
     - To access the container `machinectl shell root@nickname`
-    - Do a channel update
+    - Do a channel update or flake update[^update]
     - Edit `/etc/nixos/configuration.nix`
-        - Set `services.openssh.enable = true;` so that it looks like being a normal system
+        - Enable sshd by `services.openssh.enable = true;`
             - Change the port to not conflict with the host's sshd
     - Do a `nixos-rebuild`
+
+[^update]: This is the most tedious part but motivation isn't enough for me to talk about it.
 
 That should be everything.

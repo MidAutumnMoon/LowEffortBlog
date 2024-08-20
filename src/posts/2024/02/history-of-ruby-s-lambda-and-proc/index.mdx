@@ -1,7 +1,7 @@
 ---
 title: History of Ruby's Lambda and Proc
 date: '2024-02-27'
-updated: '2024-08-17'
+updated: '2024-08-19'
 tags:
     - history
     - ruby
@@ -10,7 +10,7 @@ incomplete: true
 
 Got really confused by Ruby having both `lambda` and `proc` one day. They are the same thing but with different semantics, right? If so, what's reasoning behind this miserable design? If not so, what's the real miserable difference between them?
 
-Author of this post is neither using Ruby at $work, an OK C programmer, a experienced history digger nor even a fluent English writer. So please take everything with a grain of salt Appreciate that!
+Author of this post is neither using Ruby at $work, an OK C programmer, a experienced history digger nor even a fluent English writer. So please take everything with a grain of salt. Appreciate that!
 
 
 # Primitive Era (1994\~200x)
@@ -30,7 +30,9 @@ test = do tt() using i
 end
 ```
 
-But it was quickly changed to bracket style few months after between `v0.50` and `v0.51` (still in 1994), and its internal name was also changed to `SCOPE` respectively [^relic_sample_but_v0_50].
+But it was quickly changed to brace style[^brace_style] few months later in `v0.51` (still in 1994)[^relic_sample_but_v0_50], although it continued to be called `DO` internally.
+
+[^brace_style]: Quick note: Ruby already had hash at this moment, which also uses the brace symbol.
 
 [^relic_sample_but_v0_50]: https://github.com/ruby/ruby/blob/v0_51/sample/t2.rb
 
@@ -54,7 +56,14 @@ Matz even expressed himself about this in the changelog[^matz_do_changelog]:
     </figcaption>
 </figure>
 
+Then in `v0.54`, `DO` was renamed to `ITER` internally, although the implementation seems to be unchanged.
+
+At this moment, neither did `proc` nor `lambda` exist.
+
 Advance to [*version 0.95*](https://github.com/ruby/ruby/tree/v0_95), `Block` got renamed to `Proc` with two methods `proc` and `lambda` added to `Kernel`. At that point, they were [aliased to each other](https://github.com/ruby/ruby/blob/fca49a8a69a0f6bb4feae74c6cd0e93d7fac8b36/eval.c#L3025), and the ambiguity just got planted.
+
+
+# Ruby 1.0 Era
 
 Passing Ruby *v1.0* through *v1.7*, these two methods remained the same.
 
@@ -70,6 +79,8 @@ During the lifespan of Ruby *v1.8*, the two global function `proc` and `lambda` 
 
 # YARV Era
 
+The complexity of
+
 Then the big *v1.9.0* came where the YARV virtual machine replaced the old interpreter, alongside with loads of language changes, `proc` and `lambda` started to differ from each other for the first time.
 
 Firstly, [their definition](https://github.com/ruby/ruby/blob/816e8751b1dc600dfcca602524182b1d0558bb67/proc.c#L1592) became different which the VM [was aware of](https://github.com/ruby/ruby/blob/816e8751b1dc600dfcca602524182b1d0558bb67/vm.c#L555). Secondly, the VM gained the ability to [allow control flow](https://github.com/ruby/ruby/blob/a3e1b1ce7ed7e7ffac23015fc2fde56511b30681/insns.def#L1368C5) in lambda, although that "lambda" is not the `lambda` being discussed on. The ambiguity is having its leaves grown bigger and more.
@@ -81,11 +92,13 @@ The ambiguity is fully grown, casting its shadow over all Ruby land.
 One last problem is that, there were **one** [huge commit](https://github.com/ruby/ruby/commit/a3e1b1ce7ed7e7ffac23015fc2fde56511b30681) that YARV got merged from sources out-of-tree, so consequently history commits are lost. Worse, the `yarv-dev` mailing list is long gone and non indexable, ultimately I can't answer the question of the title :( Asking Matz himself might be the last resort.
 
 
-# Conclude
+# Conclusion
 
-To conclude, why does Ruby have both `lambda` and `proc` and they differ?
+So why does Ruby have both `lambda` and `proc` doing almost the same thing?
 
 Dunno. To my guess, maybe "because we want and we can" and "no one wants to clean up" and "everyone will be mad about breaking changes".
+
+Another thing worth mentioning is that there are a lot of valuable information in the changelog, reading through it is like watching a documentary of animal evolution history (reword)
 
 {/*
     1) Even only reading the tiny portion of the Ruby codebase, the reason why Matz regretting introducing threads to Ruby can be quite understandable.
