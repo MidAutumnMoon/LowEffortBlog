@@ -7,7 +7,7 @@
     html, body {
         @apply overflow-x-hidden relative;
         @apply mx-2 lg:mx-auto lg:max-w-[70ch];
-        @apply text-lg lg:text-base;
+        @apply text-lg lg:text-base break-words;
     }
 
     a {
@@ -42,8 +42,8 @@
             Basic margin
          */
 
-        & *#{$NotProse} {
-            @apply my-5 break-words;
+        & > * {
+            @apply my-5;
         }
 
         /*
@@ -91,19 +91,19 @@
 
         & blockquote#{$NotProse} {
             @apply italic;
-            @apply border-blue-100 border-[1px] border-l-8;
+            @apply border-blue-100 border border-l-8;
             @apply ps-2 pe-2 py-1;
             @apply text-gray-500 text-balance;
 
-            & > * { @apply m-0 my-2; }
+            & > * { @apply my-2; }
         }
 
         & figure#{$NotProse} {
             & img {
-                @apply m-0 mx-auto;
+                @apply mx-auto;
             }
             & figcaption {
-                @apply m-0 mt-2;
+                @apply mt-1;
                 @apply text-sm text-gray-500 italic text-center;
             }
         }
@@ -116,8 +116,7 @@
             @apply list-outside ps-[2em];
 
             & > li {
-                @apply my-1;
-                & > * { @apply my-1; }
+                @apply mt-1;
             }
         }
 
@@ -134,15 +133,15 @@
          */
 
         & :where( img, svg )#{$NotProse} {
-            @apply border-blue-100 border max-w-full h-auto mx-auto;
-            @apply text-blue-400/70 italic;
+            @apply border-blue-100 border max-w-full mx-auto;
+            @apply italic;
         }
 
         /*
             Footnote & ToC
          */
-        & section.footnotes, section.table-of-content {
-            @apply px-3 py-1 my-8;
+        & section:where( .footnotes, .table-of-content ) {
+            @apply p-3 my-6;
             @apply bg-blue-200/20 text-balance;
         }
 
