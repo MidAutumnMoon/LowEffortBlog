@@ -15,6 +15,7 @@
       "jsr:@std/front-matter@0.224.3": "jsr:@std/front-matter@0.224.3",
       "jsr:@std/fs@0.229.3": "jsr:@std/fs@0.229.3",
       "jsr:@std/fs@^1.0.0-rc.5": "jsr:@std/fs@1.0.1",
+      "jsr:@std/fs@^1.0.1": "jsr:@std/fs@1.0.1",
       "jsr:@std/html@1.0.0": "jsr:@std/html@1.0.0",
       "jsr:@std/http@0.224.5": "jsr:@std/http@0.224.5",
       "jsr:@std/io@^0.224.3": "jsr:@std/io@0.224.4",
@@ -108,7 +109,10 @@
         ]
       },
       "@std/fs@1.0.1": {
-        "integrity": "d6914ca2c21abe591f733b31dbe6331e446815e513e2451b3b9e472daddfefcb"
+        "integrity": "d6914ca2c21abe591f733b31dbe6331e446815e513e2451b3b9e472daddfefcb",
+        "dependencies": [
+          "jsr:@std/path@^1.0.2"
+        ]
       },
       "@std/html@1.0.0": {
         "integrity": "389f2b8b0021ee75966003b307b849813a300d1c554cef8d69aec2d5d3922ff9"
@@ -2691,6 +2695,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@std/fs@^1.0.1",
       "jsr:@std/path@^1.0.2",
       "npm:@iconify-json/mdi@^1.1.68",
       "npm:@iconify/tailwind@^1.1.2",

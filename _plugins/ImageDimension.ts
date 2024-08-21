@@ -5,8 +5,12 @@
 
 
 import * as path from "@std/path"
+import * as fs from "@std/fs"
+
 import { ImageExtensions } from "@lib/extension.ts"
 import Sharp from "sharp"
+
+import { log } from "lume/core/utils/log.ts"
 
 
 async function single_page( page: Lume.Page, site: Lume.Site ) {
@@ -54,9 +58,15 @@ async function single_page( page: Lume.Page, site: Lume.Site ) {
                 const image = path.join( dir, src )
                 return site.src( image )
             } else {
+                // TODO: this is code after drunk
                 throw `Not expected code path for ${src} ${sourcePath}`
             }
         })()
+
+        if ( !await fs.exists( full_path, { isFile: true } ) ) {
+            log.error( `${full_path} doesn't not exists! Typo?` )
+            continue
+        }
 
         const { width, height } = await Sharp( full_path ).metadata()
 

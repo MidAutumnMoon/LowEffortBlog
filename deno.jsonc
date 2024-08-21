@@ -3,6 +3,7 @@
     "@iconify-json/mdi": "npm:@iconify-json/mdi@^1.1.68",
     "@iconify/tailwind": "npm:@iconify/tailwind@^1.1.2",
     "@lib/": "./_lib/",
+    "@std/fs": "jsr:@std/fs@^1.0.1",
     "@std/path": "jsr:@std/path@^1.0.2",
     "esbuild": "npm:esbuild@^0.23.1",
     "hast": "npm:@types/hast@^3.0.4",
