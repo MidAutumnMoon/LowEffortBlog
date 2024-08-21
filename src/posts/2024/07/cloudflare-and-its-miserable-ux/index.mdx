@@ -1,76 +1,91 @@
 ---
 title: Cloudflare and Its Miserable UX
 date: '2024-07-30'
-updated: '2024-07-30'
+updated: '2024-08-21'
 tags:
-    - rant
-incomplete: true
+    - misery
+    - devops
 ---
 
-To start off, Cloudflare Pages (abbreviated as Pages)
-has the concept of "preview" and "production" deployments.
+[Cloudflare Pages](https://pages.cloudflare.com/) (abbreviated as Pages) has a concept of *preview* and *production* deployments. When coupled with Git, one branch can be set to the production branch, all others will be treated as preview branches automatically.
 
-The idea behind this separation is that the each "non-production branch"
-(such as a pull request) gets a unique and not changing URL that always follows
-the branch so that the developer could easily preview the latest changes.
+*This is the first actor on stage.*
 
-Once the dev is satisfied with the change, it then can be merged into the
-"production branch" so that Cloudflare Pages could make it the latest production deployment.
+For each preview branch, e.g. pull requests, an unique URL such as `9ad3c263.<project>.pages.dev` is generated for *previewing* changes without effecting *production*.
 
-As another background knowledge, a Pages project can be created by
-connecting a Github repo, uploading assets manually, or using Wrangler CLI.
+*This is the second actor.*
 
-So far so clear, everyone is happy.
+Website on Pages is called "project".
 
-And the caveat hits like a truck.
+The most convenient way to create a project is by connecting to a Github repository, such way Pages can track branches and build the website automatically. Another two ways are using *wrangler* from command line or uploading assets through Cloudflare dashboard.
 
-The Github way and the Wrangler way have the option to choose which branch
-would be the production branch and also have option to change it later
-in the web dashboard, while the manual-uploading way has a implicit "main" branch
-and has NO F* WAY to tweak it in the dashboard, as kindly stated in the document:
+*This is the third actor.*
 
-> If your project is a Direct Upload project, you will not have the option to configure production branch controls. To update your production branch, you will need to manually call the Update Project
-endpoint in the API.
+Cloudflare dashboard for Pages shows that status of deployments, and tracks all history deployments for rollback. Other settings like custom domain or changing the production branch can be found in different panels.
 
-So sweet, so miserable, but as long as one sticks with one certain way,
-everything should be fine...
+![Pages dashboard](./dashboard.avif)
 
-Not me apparently.
+*This is the forth actor.*
 
-During the development of this site, this Pages project was created via manual uploading
-in order to check the look and feel and setup subdomain etc., and later
-a Github Action workflow was added to automate the deployment.
+This blog is built using Lume which only runs on Deno. It is not something Cloudflare Pages supports that can build for me, so this rules out the connecting-to-git-repo way mentioned above.
 
-The deployment won't f* go production.
+Also because this website uses Deno, installing wrangler through npm is not preferable. Besides, wrangler is so annoying to use to the degree that even Terraform seems likable[^terraform_page].
 
-Not a me bug, checked.
+[^terraform_page]: Also, managing Pages with Terraform is viable: https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/pages_project
 
-Not a Wrangler bug, checked?
+Apparently the only way left for me is to upload assets manually. It was quick and easy, in no time project was ready and custom domain was assigned, life was happy. It's time to setup Github Action to build and publish the website.
 
-Not a Pages bug, checked...supposedly?
+*The final actor is here to start off the show.*
 
-Spent around 1 hour of my miserable life poking YAML and trying to find
-another miserable person on the web who happens to run into the same miserable situation,
-and nope... until the Google decided to sparkle dusts of its knowledge on me somehow.
+The caveat hits me like so:
 
-Of course there is [an official documentation](https://developers.cloudflare.com/pages/configuration/branch-build-controls/).
+<pre class="font-mono">
+.                       The Caveat Train
+.
+.        Author             @@@""""""""""""""""""""*
+.                         @" ___ ___________ __ __
+.          O             II__[ ] | [ ] [ ] | __ _
+.          |            \{======|_|=========| __ _
+.         / \          /oO--000'"`-OO---OO-'
+.**********************************************************
+</pre>
 
-The project has a implicit "main" production branch,
-while the branch the workflow is running against is "master",
-which is a "preview branch" as far as Pages concerning.
+All deployments made by uploading using wrangler in Github Action **did not** go production. More confusingly, when the same wrangler upload command was ran on my local machine it still didn't update the production.
 
-The miserable matryoshka is completed.
+What?
 
-Of course the dashboard is hiding information from the user,
-and of course the trusty Wrangler CLI which had been rewritten
-who cares how many times gives no feedback,
-and of course it's buried in the f* documentation.
+Google yielded nothing, Cloudflare forum had no similar reports and no issues on this problem were found. It was so frustrating and out loud calling me to quite.
 
-And add insult to injury, as stated in the document, an API call is needed
-to change the branch for Pages projects created by manual-uploading.
+Then Google decided to sparkle some dust of its wisdom onto me, guiding me to the documentation of Cloudflare Pages with this sentence:
 
-That's far less memorable than going rant in a blog, not gonna do that.
-The aftermath can still be seen in the source code of this site,
-if you cares enough to dig for that.
+> If your project is a Direct Upload project, you will **not** have the option to configure production branch controls. To update your production branch, you will need to manually call the Update Project endpoint in the API...
 
-Just another day of average devops, and so glad I'm not full-timely one of them.
+Branch?
+
+Upon closer observation, all production deployments, i.e. upload via the dashboard, have the `main` branch, whereas deployments made using wrangler have `master` branch, which matches the main branch of the git repo...
+
+After changing the command to this, following deployments were finally being pushed to production.
+
+```bash
+wrangler pages deploy --branch "main" ...
+```
+
+Turns out, Pages sets an implicit `main` branch as production branch if not specified, while wrangler uses the local branch it is running against. As mentioned above, all changed happened outside production branch are only previews, so the mismatch of branches is what causing this problem.
+
+*Such a miserable CLI, it says nothing about branches, which could easily save hours of frustration.*
+
+If you read the quote above of the official documentation, there's **nothing** related to the branch thing in the dashboard because this project was created by manual uploading. Adding insult to injury, in order to change the branch, a f* API call by hand is needed.
+
+*Congrats that Cloudflare is stepping into the grown up company world doing what other big tech do: inconsistent UI/UX. If they ever slightly mentions the branch thing in the dashboard, hours of miserable life could be saved.*
+
+The documentation of course has everything, but only when the search engine decides that the miserable user has suffered enough to have a taste of the knowledge.
+
+What a misery matryoshka as gift for everyday devops.
+
+By the way, because Pages keeps track of deployments, the miserable history is well preserved. Here's a screenshot of some failed deployments right before the problem was solved:
+
+<comp.Pic
+    src="./miserable-history.avif"
+    alt="History record of miserable deployments"
+    caption="In case of failure, f* harder always solves it."
+/>
