@@ -28,7 +28,7 @@
 
 @layer components {
 
-    $NotProse: ":not( :where( .not-prose, .not-prose * ) )";
+    $Prose: ":not( :where( .not-prose, .not-prose * ) )";
 
     /*
         Roll out my own prose because the Tailwind Typography
@@ -43,15 +43,14 @@
          */
 
         & > * {
-            @apply my-5;
+            @apply mb-5;
         }
 
         /*
             Various Headings
             h5 and h6 are ignored
         */
-        & :where( h1, h2, h3, h4 )#{$NotProse} {
-            @apply mt-6 py-1 w-fit;
+        & :where( h1, h2, h3, h4 )#{$Prose} {
             @apply text-balance;
 
             & .header-anchor {
@@ -64,17 +63,19 @@
             }
         }
 
-        & h1#{$NotProse} { @apply text-4xl; }
+        & h1#{$Prose} {
+            @apply text-3xl mt-9;
+        }
 
-        & h2#{$NotProse} { @apply text-2xl; }
+        & h2#{$Prose} { @apply text-2xl; }
 
-        & :where( h3,h4 )#{$NotProse} { @apply text-xl; }
+        & :where( h3,h4 )#{$Prose} { @apply text-xl; }
 
         /*
             Blocks
          */
 
-        & pre#{$NotProse} {
+        & pre#{$Prose} {
             @apply border-blue-100 border overflow-x-auto;
             @apply whitespace-pre hyphens-none;
             @apply p-2;
@@ -83,13 +84,13 @@
             & code { @apply p-0 m-0; }
         }
 
-        & code:not( pre code )#{$NotProse} {
+        & code:not( pre code )#{$Prose} {
             @apply font-mono;
             @apply bg-blue-200/20;
             @apply ps-1 pe-1;
         }
 
-        & blockquote#{$NotProse} {
+        & blockquote#{$Prose} {
             @apply italic;
             @apply border-blue-100 border border-l-8;
             @apply ps-3 pe-3 py-1;
@@ -98,7 +99,7 @@
             & > * { @apply my-2; }
         }
 
-        & figure#{$NotProse} {
+        & figure#{$Prose} {
             & img {
                 @apply mx-auto;
             }
@@ -112,27 +113,24 @@
             Lists
          */
 
-        & :where( ol,ul )#{$NotProse} {
+        & :where( ol,ul )#{$Prose} {
             @apply list-outside ps-[2em];
 
             & > li {
                 @apply mt-1;
+                &::marker { @apply text-gray-500; }
             }
         }
 
-        & ol#{$NotProse} { @apply list-decimal; }
+        & ol#{$Prose} { @apply list-decimal; }
 
-        & ul#{$NotProse} { @apply list-disc; }
-
-        & :where( li )#{$NotProse}::marker {
-            @apply text-gray-500;
-        }
+        & ul#{$Prose} { @apply list-disc; }
 
         /*
             Multimedia
          */
 
-        & :where( img, svg )#{$NotProse} {
+        & :where( img, svg )#{$Prose} {
             @apply border-blue-100 border max-w-full mx-auto;
             @apply italic;
         }
