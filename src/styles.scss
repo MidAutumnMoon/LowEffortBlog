@@ -64,12 +64,16 @@
         }
 
         & h1#{$Prose} {
-            @apply text-3xl mt-9;
+            @apply text-3xl mt-10;
         }
 
-        & h2#{$Prose} { @apply text-2xl; }
+        & h2#{$Prose} {
+            @apply text-2xl mt-4;
+        }
 
-        & :where( h3,h4 )#{$Prose} { @apply text-xl; }
+        & :where( h3,h4 )#{$Prose} {
+            @apply text-xl mt-4;
+        }
 
         /*
             Blocks
