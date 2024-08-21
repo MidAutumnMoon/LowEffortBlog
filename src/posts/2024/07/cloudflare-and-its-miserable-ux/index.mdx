@@ -7,37 +7,42 @@ tags:
     - devops
 ---
 
-[Cloudflare Pages](https://pages.cloudflare.com/) (abbreviated as Pages) has a concept of *preview* and *production* deployments. When coupled with Git, one branch can be set to the production branch, all others will be treated as preview branches automatically.
+[Cloudflare Pages](https://pages.cloudflare.com/) (abbreviated as Pages) has a concept of *preview* and *production* deployment. When coupled with Git, one branch can set to be the production branch, all others will be treated as preview branches automatically.
 
-*This is the first actor on stage.*
+For each preview branch, e.g. pull request, an unique URL such as `9ad3c263.<project>.pages.dev` is generated for *previewing* changes without effecting *production*.
 
-For each preview branch, e.g. pull requests, an unique URL such as `9ad3c263.<project>.pages.dev` is generated for *previewing* changes without effecting *production*.
+*This is our first actor on stage.*
+
+Website hosted on Pages is called "project".
+
+The most convenient way to create a project is by connecting to a Github or Gitlab repository, such way Pages can track branches and build the website automatically if changes are made. Another two ways are using [*wrangler*](https://developers.cloudflare.com/workers/wrangler/) from command line or uploading assets manually through Cloudflare dashboard.
 
 *This is the second actor.*
 
-Website on Pages is called "project".
+Pages dashboard shows that status of deployments, and also tracks all history deployments for rollback. Other settings like custom domain or changing the production branch can be found in different panels.
 
-The most convenient way to create a project is by connecting to a Github repository, such way Pages can track branches and build the website automatically. Another two ways are using *wrangler* from command line or uploading assets through Cloudflare dashboard.
+<comp.Pic
+    src="./dashboard.avif"
+    alt="Cloudflare Dashboard for Pages"
+    caption="
+        Forgive me for the broken English,
+        vocabulary wasn't there when writing commit messages.
+    "
+/>
 
 *This is the third actor.*
 
-Cloudflare dashboard for Pages shows that status of deployments, and tracks all history deployments for rollback. Other settings like custom domain or changing the production branch can be found in different panels.
+This blog is built using Lume which only runs on Deno. It is not something Cloudflare Pages supports that can build for me, so this ruled out the connecting-to-git-repo way to create project.
 
-![Pages dashboard](./dashboard.avif)
+Also because this website uses Deno, installing wrangler through npm is not preferable. Besides, wrangler is so annoying to use to the degree that even Terraform seems likable[^terraform_doc].
 
-*This is the forth actor.*
+[^terraform_doc]: Also, managing Pages with Terraform is viable: https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/pages_project
 
-This blog is built using Lume which only runs on Deno. It is not something Cloudflare Pages supports that can build for me, so this rules out the connecting-to-git-repo way mentioned above.
-
-Also because this website uses Deno, installing wrangler through npm is not preferable. Besides, wrangler is so annoying to use to the degree that even Terraform seems likable[^terraform_page].
-
-[^terraform_page]: Also, managing Pages with Terraform is viable: https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/pages_project
-
-Apparently the only way left for me is to upload assets manually. It was quick and easy, in no time project was ready and custom domain was assigned, life was happy. It's time to setup Github Action to build and publish the website.
+Apparently the only way left for me was to upload assets manually. It was quick and easy, in no time project was ready and custom domain was assigned, life was happy. Time to integrate Github Action for building and publishing the website.
 
 *The final actor is here to start off the show.*
 
-The caveat hits me like so:
+Then the caveat hit me like so:
 
 <pre class="font-mono">
 .                       The Caveat Train
@@ -50,39 +55,39 @@ The caveat hits me like so:
 .**********************************************************
 </pre>
 
-All deployments made by uploading using wrangler in Github Action **did not** go production. More confusingly, when the same wrangler upload command was ran on my local machine it still didn't update the production.
+All deployments created using wrangler from Github Action **did not** go production. More confusingly, running the same wrangler deploy command on local machine still didn't update the production.
 
 What?
 
-Google yielded nothing, Cloudflare forum had no similar reports and no issues on this problem were found. It was so frustrating and out loud calling me to quite.
+There wasn't any hidden CLI options and related environment variable made no effects, Google yielded nothing, Cloudflare forum had no similar reports and no issues on this problem were found. Hours passed YAML poked, it was getting more frustrating and out loud calling me to quite.
 
-Then Google decided to sparkle some dust of its wisdom onto me, guiding me to the documentation of Cloudflare Pages with this sentence:
+Suddenly, somehow, Google decided to sparkle some dust of its wisdom onto me, guiding me to the [documentation of Cloudflare Pages](https://developers.cloudflare.com/pages/configuration/branch-build-controls/) with this warning:
 
 > If your project is a Direct Upload project, you will **not** have the option to configure production branch controls. To update your production branch, you will need to manually call the Update Project endpoint in the API...
 
 Branch?
 
-Upon closer observation, all production deployments, i.e. upload via the dashboard, have the `main` branch, whereas deployments made using wrangler have `master` branch, which matches the main branch of the git repo...
+Upon closer observation, all production deployments, i.e. uploaded via the dashboard, had the `main` branch, whereas deployments made using wrangler had `master` branch, which matches the main branch of the git repo...
 
-After changing the command to this, following deployments were finally being pushed to production.
+After changing the wrangler command to this, finally, following deployments were being pushed to production.
 
 ```bash
 wrangler pages deploy --branch "main" ...
 ```
 
-Turns out, Pages sets an implicit `main` branch as production branch if not specified, while wrangler uses the local branch it is running against. As mentioned above, all changed happened outside production branch are only previews, so the mismatch of branches is what causing this problem.
+It turns out, Pages implicitly sets `main` as production branch if not specified, while wrangler uses the local branch it is running against by default. As mentioned above, all branches besides production are automatically preview branches. The mismatch is the root cause of this problem.
 
-*Such a miserable CLI, it says nothing about branches, which could easily save hours of frustration.*
+*Wrangler has such a miserable CLI UX. It mentions nothing about branches, which could easily save hours of frustration.*
 
-If you read the quote above of the official documentation, there's **nothing** related to the branch thing in the dashboard because this project was created by manual uploading. Adding insult to injury, in order to change the branch, a f* API call by hand is needed.
+Read the quote above from the official documentation. Nothing related to branch will be found in the miserable dashboard, not even a most slight hint because the project was created by manual uploading. Guess low power users don't need those information anyway. Adding insult to injury, in order to change the branch, a f* API call by hand is needed.
 
-*Congrats that Cloudflare is stepping into the grown up company world doing what other big tech do: inconsistent UI/UX. If they ever slightly mentions the branch thing in the dashboard, hours of miserable life could be saved.*
+*Congrats that Cloudflare is stepping into the grown up company world doing what other big techs do: inconsistent UI/UX. If there were even a single word mentioning the branches in the dashboard, hours of miserable life could be saved.*
 
-The documentation of course has everything, but only when the search engine decides that the miserable user has suffered enough to have a taste of the knowledge.
+Of course the documentation has everything, but only devops those who have suffered enough can be granted to have a taste of such caged knowledge.
 
 What a misery matryoshka as gift for everyday devops.
 
-By the way, because Pages keeps track of deployments, the miserable history is well preserved. Here's a screenshot of some failed deployments right before the problem was solved:
+By the way, because Pages keeps a history of deployments, the misery journey is well preserved. Here's a screenshot of some failed deployments right before the problem was solved:
 
 <comp.Pic
     src="./miserable-history.avif"
