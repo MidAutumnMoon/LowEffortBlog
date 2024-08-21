@@ -68,7 +68,7 @@
         }
 
         & h2#{$Prose} {
-            @apply text-2xl mt-4;
+            @apply text-2xl mt-6;
         }
 
         & :where( h3,h4 )#{$Prose} {
