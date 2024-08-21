@@ -77,6 +77,12 @@ export default function( page: Lume.Data ) {
     const { title, readingInfo, tags } = page
 
     return <article>
+
+        { page.incomplete ?? false
+            ? <page.comp.Incomplete />
+            : <></>
+        }
+
         <Title title={ title ?? "<<Missing Title>>" }/>
 
         <Meta
@@ -85,11 +91,6 @@ export default function( page: Lume.Data ) {
             date={ page.date }
             updated={ page.updated }
         />
-
-        { page.incomplete ?? false
-            ? <page.comp.Incomplete />
-            : <></>
-        }
 
         <main class="prose">
             { page.children }
