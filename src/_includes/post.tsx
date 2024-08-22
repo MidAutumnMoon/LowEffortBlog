@@ -68,7 +68,7 @@ function Meta(
         components.push( c )
     }
 
-    return <div class="text-gray-400 italic mb-4" lang="en">
+    return <div class="text-gray-400 italic mb-3" lang="en">
         { components }
     </div>
 }

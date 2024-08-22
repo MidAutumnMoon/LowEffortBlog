@@ -28,8 +28,6 @@
 
 @layer components {
 
-    $Prose: ":not( :where( .not-prose, .not-prose * ) )";
-
     /*
         Roll out my own prose because the Tailwind Typography
         does way too much things not to my taste.
@@ -37,6 +35,12 @@
         Roughly based on UnoCSS typography though.
     */
     .prose {
+
+        $Prose: ":not( :where( .not-prose, .not-prose * ) )";
+
+        @mixin SlimeBorder {
+            @apply border border-blue-200/35;
+        }
 
         /*
             Basic margin
@@ -80,7 +84,8 @@
          */
 
         & pre#{$Prose} {
-            @apply border-blue-100 border overflow-x-auto;
+            @include SlimeBorder();
+            @apply overflow-x-auto;
             @apply whitespace-pre hyphens-none;
             @apply p-2;
             tab-size: 4;
@@ -95,10 +100,10 @@
         }
 
         & blockquote#{$Prose} {
-            @apply italic;
-            @apply border-blue-100 border border-l-8;
+            @include SlimeBorder();
+            @apply border-l-8;
             @apply ps-3 pe-3 py-1;
-            @apply text-gray-500 text-balance;
+            @apply italic text-gray-600 text-balance;
 
             & > * { @apply my-2; }
         }
@@ -135,7 +140,8 @@
          */
 
         & :where( img, svg )#{$Prose} {
-            @apply border-blue-100 border max-w-full mx-auto;
+            @include SlimeBorder();
+            @apply max-w-full mx-auto;
             @apply italic;
         }
 
@@ -150,9 +156,7 @@
         & section.footnotes li {
             @apply my-3;
 
-            &:target {
-                @apply font-semibold;
-            }
+            &:target { @apply font-bold; }
         }
 
         & section.table-of-content li {
@@ -162,6 +166,7 @@
         & a[data-footnote-ref] {
             &::before { content: "[" }
             &::after { content: "]" }
+            &:target { @apply font-bold; }
         }
 
     } /* End .prose */
