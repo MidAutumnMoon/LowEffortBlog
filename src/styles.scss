@@ -20,6 +20,10 @@
         @apply inline-block ml-[2px] text-xs align-middle;
         content: "";
     }
+
+    code.hljs {
+        @apply bg-transparent;
+    }
 }
 
 

@@ -21,7 +21,7 @@ export default function(
     >
 
         {/* yellow-400 will make the text harder to read */}
-        <p class="text-yellow-500 mb-3 flex gap-2">
+        <p class="text-yellow-600 mb-3 flex gap-2">
             <span class="icon-[mdi--warning-outline] w-6 h-6"></span>
             <span class="">Warning</span>
         </p>
