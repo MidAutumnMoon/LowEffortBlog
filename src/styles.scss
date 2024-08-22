@@ -6,7 +6,7 @@
 @layer base {
     html, body {
         @apply overflow-x-hidden relative;
-        @apply mx-2 lg:mx-auto lg:max-w-[70ch];
+        @apply mx-3 lg:mx-auto lg:max-w-[70ch];
         @apply text-lg lg:text-base break-words;
     }
 
