@@ -3,64 +3,59 @@
  */
 
 
-const Navbar = () => <>
-    <nav> <ul
-        class="
-            text-lg
-            flex flex-row flex-nowrap gap-6
-            justify-between
-        "
-    >
-        <li class="grow"><a href="/">
-            [&nbsp;&nbsp;&nbsp;leb&nbsp;&nbsp;&nbsp;]
-        </a></li>
-        <li><a href="/posts">posts</a></li>
-        <li><a href="/feed.xml">feed</a></li>
-    </ul> </nav>
-</>
+function Header() {
+    const List = <ul class="text-lg flex gap-6">
+        <li class="grow">
+            <a href="/">ᕙ(&nbsp;&nbsp;&nbsp;leb&nbsp;&nbsp;&nbsp;)ᕗ</a>
+        </li>
+        <li>
+            <a href="/posts">posts</a>
+        </li>
+        <li>
+            <a href="/feed.xml">feed</a>
+        </li>
+    </ul>
 
-
-const Header = () => <>
-    <header
-        class="
-            w-full
-            py-6
-        "
-    >
-        <Navbar/>
+    return <header class="w-full py-6">
+        <nav> { List } </nav>
     </header>
-</>
+}
 
 
-const Footer = () => {
-    const this_year = ( new Date() ).getFullYear()
+function Footer () {
+    const BackToTop = <div class="text-center">
+        <a href="#">↑ Back to Top ↑</a>
+    </div>
+
+    const Copyright = <span class="text-center">
+        &copy; MidAutumnMoon 2023-{ ( new Date() ).getFullYear() }
+        &nbsp;&middot;&nbsp;
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
+    </span>
 
     return <footer
         class="
-            w-full h-fit py-6
-            flex flex-row justify-center
+            w-full h-fit my-8
+            flex flex-col justify-center gap-6
+            text-sm
         "
     >
-        <span class="text-center text-xs">
-            &copy; MidAutumnMoon 2023-{ this_year }
-            &nbsp;&middot;&nbsp;
-            <a href="https://creativecommons.org/licenses/by-sa/4.0/">
-                CC BY-SA 4.0
-            </a>
-        </span>
+        { BackToTop }
+        { Copyright }
     </footer>
 }
 
 
-const Main = ( data: Lume.Data ) => <>
-    {/* "lang" effects typography, be careful with it */}
-    <main
+function Main( data: Lume.Data ) {
+    // "lang" effects typography, be careful with it
+    return <main
         lang={ data.lang ?? "en" }
         class="py-2"
+        id="website-body"
     >
         { data.children }
     </main>
-</>
+}
 
 
 export default ( data: Lume.Data ) => {
