@@ -77,6 +77,7 @@ async function single_page( page: Lume.Page, site: Lume.Site ) {
         img.setAttribute( "height", `${height}` )
         img.setAttribute( "width", `${width}` )
         img.setAttribute( "loading", "lazy" )
+        img.setAttribute( "decoding", "async" )
     }
 
 }
