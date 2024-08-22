@@ -16,9 +16,8 @@
     }
 
     a.external::after {
-        @apply inline-block ml-[2px];
         @apply icon-[mdi--external-link];
-        @apply text-center text-sm align-middle;
+        @apply inline-block ml-[2px] text-xs align-middle;
         content: "";
     }
 }

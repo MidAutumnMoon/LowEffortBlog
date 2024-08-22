@@ -50,7 +50,7 @@ function Main( data: Lume.Data ) {
     // "lang" effects typography, be careful with it
     return <main
         lang={ data.lang ?? "en" }
-        class="py-2"
+        class="bg-white"
         id="website-body"
     >
         { data.children }
@@ -62,6 +62,11 @@ export default ( data: Lume.Data ) => {
 
     const stylesheet =
         `/styles.css?cb=${ (new Date()).getTime() }`
+
+    const body_style = `
+        background-image: radial-gradient( #8b91ff45 1.1px, white 1.1px );
+        background-size: 22px 22px;
+    `
 
     return <html lang="en">
         <head>
@@ -77,7 +82,7 @@ export default ( data: Lume.Data ) => {
                 href="/feed.xml"
             />
         </head>
-        <body>
+        <body style={ body_style }>
             <Header/>
             <Main { ...data }/>
             <Footer/>
