@@ -32,5 +32,7 @@
         "hastscript",
         "hljs",
         "nudd"
-    ]
+    ],
+    // Mess up with math depsite the expression is totaly valid.
+    "mdx.server.enable": false,
 }

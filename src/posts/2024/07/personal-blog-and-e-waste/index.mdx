@@ -172,8 +172,15 @@ Notice there's a mark indicating external links.
 
 # Formulas and Charts
 
-*Not used right now, but planned.*
+[rehype-mathjax](https://www.npmjs.com/package/rehype-mathjax) is used for adding math support. Formulas are rendered to SVGs during building, no JavaScript or CSS is shipped to client.
 
+$$
+f(a) = \frac{1}{2\pi i} \oint\frac{f(z)}{z-a}dz
+$$
+
+Inline $\LaTeX$ also works.
+
+*Charts are not used yet.*
 
 # Github Flavored Markdown
 

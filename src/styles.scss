@@ -148,6 +148,11 @@
             @apply italic;
         }
 
+        & mjx-container {
+            & svg { @apply border-none; }
+            &:not( [display] ) { @apply inline-block align-middle; }
+        }
+
         /*
             Footnote & ToC
          */
