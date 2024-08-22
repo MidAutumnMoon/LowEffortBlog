@@ -6,17 +6,16 @@
 export const layout = "base.tsx"
 
 import { SwDate } from "@lib/date.ts"
+import type { JSX } from "preact"
 
 
 /**
  * The big bold title
  */
 function Title( { title }: { title: string } ) {
-    return <>
-        <h1 class="text-4xl font-bold my-4 text-balance">
-            { title }
-        </h1>
-    </>
+    return <h1 class="text-4xl font-bold text-balance mb-6">
+        { title }
+    </h1>
 }
 
 
@@ -28,46 +27,49 @@ function Meta(
         updated: string
     }
 ) {
-    return <div class="text-gray-500 italic flex gap-3 mb-5" lang="en">
+    const { reading_info, tags, date, updated } = props
 
-        {/*
-            renders to "1000 words of #rant" or
-            "1000 words" if no tags or nothing if not having both
-        */}
-        <span>
-            { ( function() {
-                const { reading_info } = props
-                return !reading_info
-                    ? <></>
-                    : `${reading_info.words} words\u00A0`
-            } )() }
-            { ( function() {
-                const { tags } = props
-                const tag_list = tags.map( t => `#${t}` ).join( "\u00A0" )
-                return tags.length === 0
-                    ? <></>
-                    : `of ${tag_list}`
-            } )() }
-        </span>
+    const components: JSX.Element[] = []
 
-        {/*
-            renders to "posted y-m-d" or "updated y-m-d" accordingly
-         */}
-        <span class="grow text-end">
-            { ( () => {
-                const posted = SwDate.from_date( props.date )
-                const updated = SwDate.from_string( props.updated )
+    // renders to "x words"
+    if ( reading_info ) {
+        const { words } = reading_info
+        components.push( <>{words} words</> )
+    }
 
-                if ( !posted || !updated ) {
-                    return <></>
-                }
+    // adds " of " between if both reading_info and tags
+    // are presented
+    if ( reading_info && tags?.length ) {
+        components.push( <>&nbsp;of&nbsp;</> )
+    }
 
-                return posted.equals( updated )
-                    ? `posted ${posted}`
-                    : `updated ${updated}`
-            } )() }
-        </span>
+    // renders to "#tag #tag"
+    if ( tags?.length ) {
+        const tag_list = tags
+            .map( t => `#${t}` )
+            .join( "\u00A0" )
+        components.push( <>{tag_list}</> )
+    }
 
+    // adds a comma if both sections have content
+    if ( components.length && date && updated ) {
+        components.push( <>,&nbsp;</> )
+    }
+
+    // renders to "posted on y-m-d" or "updated on y-m-d"
+    if ( date && updated ) {
+        const sw_posted = SwDate.from_date( date )
+        const sw_updated = SwDate.from_string( updated )
+
+        const c = sw_posted.equals( sw_updated )
+            ? <>posted on {sw_posted.toString()}</>
+            : <>updated on {sw_updated.toString()}</>
+
+        components.push( c )
+    }
+
+    return <div class="text-gray-400 italic mb-4" lang="en">
+        { components }
     </div>
 }
 
@@ -78,12 +80,10 @@ export default function( page: Lume.Data ) {
 
     return <article>
 
-        { page.incomplete ?? false
-            ? <page.comp.Incomplete />
+        { page.incomplete
+            ? <> <page.comp.Incomplete /> <br /> </>
             : <></>
         }
-
-        <Title title={ title ?? "<<Missing Title>>" }/>
 
         <Meta
             reading_info={ readingInfo }
@@ -92,9 +92,12 @@ export default function( page: Lume.Data ) {
             updated={ page.updated }
         />
 
+        <Title title={ title ?? "<<Missing Title>>" }/>
+
         <main class="prose">
             { page.children }
         </main>
+
     </article>
 
 }
