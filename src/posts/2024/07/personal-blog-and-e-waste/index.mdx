@@ -85,7 +85,7 @@ Ever visited another person's blog on your phone while taking the subway, the pa
 
 # Headings
 
-My rule of thumb is, online articles should only use at most two levels of headings, like `<h1>` with some `<h2>`. Readers may lost their sense of structure of the article pretty quickly if headings are nested too deeply.
+My rule of thumb is, headings in online articles should be limited to at most two levels, like `<h1>` with some `<h2>`. Deeply nested headings may cause the reader to lose their sense of structure of the article.
 
 ## `<h2>` Heading
 
@@ -97,7 +97,7 @@ Styled the same as `<h3>`, since it's very rarely used (on this website).
 
 ##### `<h5>` and `<h6>` Headings
 
-Never used so they are not styled, Tailwind Preflight would make look like normal text.
+Never used so they are not styled, Tailwind Preflight should remove default styles from them.
 
 
 # Text Styling
@@ -140,8 +140,8 @@ fn fw() -> ft {
 
 1. Several lists are more lister than others.
 2. Often the moon stops orbiting to have a rest.
-3. M
-4. E
+3. Mocking what other monkeys do is what makes salt to not spoil.
+4. Epic examination took place in nyctophobia tunnel.
 
 - W
 - H
@@ -152,6 +152,8 @@ fn fw() -> ft {
     * ET
 * B
     * ORED
+
+*No sense no problem. It simply makes me feel relaxed.*
 
 
 # Links and Multimedia Resources
@@ -186,7 +188,7 @@ Inline $\LaTeX$ also works.
 
 ## Footnotes
 
-Footnote[^fn] might be useful[^fn2] in the future[^future]. By the way, when writing, you don't need to scroll to the bottom to add footnotes, they can be placed anywhere and will be aggregated later, at least with the Remark plugin this site is using.
+Footnote[^fn] might be useful[^fn2] in the future[^future]. By the way, footnotes aren't required to be placed at the bottom of article. They can be inserted anywhere and aggregated later on, at least with the Remark plugin this site is using.
 
 [^fn]: *one footnote later*
 [^fn2]: *another footnote later*
@@ -200,12 +202,12 @@ Footnote[^fn] might be useful[^fn2] in the future[^future]. By the way, when wri
 
 # Sidenotes
 
-*May be really nice to have but take some efforts to implement and tweak, on TODO list for now.*
+*May be really nice to have but it will take some efforts to implement and tweak On TODO list for now.*
 
 
 # MDX
 
-This section demonstrates some of the components.
+This section demonstrates some custom components.
 
 ## Note, Warning and Caution
 
