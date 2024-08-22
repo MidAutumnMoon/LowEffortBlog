@@ -1,7 +1,7 @@
 ---
 title: Cloudflare and Its Miserable UX
 date: '2024-07-30'
-updated: '2024-08-21'
+updated: '2024-08-22'
 tags:
     - misery
     - devops
@@ -55,11 +55,13 @@ Then the caveat hit me like so:
 .**********************************************************
 </pre>
 
-All deployments created using wrangler from Github Action **did not** go production. More confusingly, running the same wrangler deploy command on local machine still didn't update the production.
+All deployments created using wrangler from Github Action **did not** go production. Running the same wrangler deploy command on local machine still didn't update the production.
 
 What?
 
-There wasn't any hidden CLI options and related environment variable made no effects, Google yielded nothing, Cloudflare forum had no similar reports and no issues on this problem were found. Hours passed YAML poked, it was getting more frustrating and out loud calling me to quite.
+More confusingly, the Github Action setup and wrangler command are copied from another website project which it is known to work just fine.
+
+There wasn't any hidden CLI options and related environment variable had no effects, Google yielded nothing, Cloudflare forum had no similar reports and no issues on this problem were found. Hours passed YAML poked, it was getting more frustrating and out loud calling me to quite.
 
 Suddenly, somehow, Google decided to sparkle some dust of its wisdom onto me, guiding me to the [documentation of Cloudflare Pages](https://developers.cloudflare.com/pages/configuration/branch-build-controls/) with this warning:
 
@@ -91,6 +93,6 @@ By the way, because Pages keeps a history of deployments, the misery journey is 
 
 <comp.Pic
     src="./miserable-history.avif"
-    alt="History record of miserable deployments"
+    alt="Screenshot of history record of miserable deployments"
     caption="In case of failure, f* harder always solves it."
 />
