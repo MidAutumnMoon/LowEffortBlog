@@ -7,6 +7,15 @@ import RehypeHeadingToc from "./_plugins/RehypeHeadingToc.ts"
 import RehypeMathjax from "rehype-mathjax"
 
 
+const MathjaxOption
+    : NonNullable< Parameters<typeof RehypeMathjax>[0] > =
+{
+    tex: {
+        // Apparently this is not deeply merged
+        packages: [ "base", "ams" ]
+    }
+}
+
 export default {
 
     remarkPlugins: [
@@ -22,7 +31,7 @@ export default {
     rehypePlugins: [
         RehypeSlug,
         RehypeHeadingToc,
-        RehypeMathjax,
+        [ RehypeMathjax, MathjaxOption ],
     ]
 
 } satisfies lume_mdx.Options

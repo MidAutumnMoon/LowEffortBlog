@@ -149,6 +149,7 @@
         }
 
         & mjx-container {
+            @apply block;
             & svg { @apply border-none; }
             &:not( [display] ) { @apply inline-block align-middle; }
         }
