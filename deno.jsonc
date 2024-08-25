@@ -1,7 +1,7 @@
 {
   "imports": {
     "@iconify-json/mdi": "npm:@iconify-json/mdi@1.1.68",
-    "@iconify/tailwind": "npm:@iconify/tailwind@1.1.2",
+    "@iconify/tailwind": "npm:@iconify/tailwind@1.1.3",
     "@lib/": "./_lib/",
     "@std/fs": "jsr:@std/fs@1.0.1",
     "@std/path": "jsr:@std/path@1.0.2",

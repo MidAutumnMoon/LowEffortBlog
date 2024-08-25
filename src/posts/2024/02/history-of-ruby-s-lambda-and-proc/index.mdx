@@ -1,11 +1,10 @@
 ---
 title: History of Ruby's Lambda and Proc
 date: '2024-02-27'
-updated: '2024-08-19'
+updated: '2024-08-25'
 tags:
     - history
     - ruby
-incomplete: true
 ---
 
 Got really confused by Ruby having both `lambda` and `proc` one day. They are the same thing but with different semantics, right? If so, what's reasoning behind this miserable design? If not so, what's the real miserable difference between them?
@@ -13,30 +12,38 @@ Got really confused by Ruby having both `lambda` and `proc` one day. They are th
 Author of this post is neither using Ruby at $work, an OK C programmer, a experienced history digger nor even a fluent English writer. So please take everything with a grain of salt. Appreciate that!
 
 
-# Primitive Era (1994\~200x)
+# The Primitive Era (1994)
 
-At the [beginning of ~~time~~ git history](https://github.com/ruby/ruby/tree/v0_49), Ruby already had iterator and `do end` of its early form. Under the hood, both `for` loops and `do end` are implemented using a special data structure called `BLOCK`, which contains code, can accept arguments and has its own environment[^0_49_eval_c], making it essentially `closure` in modern terms.
+At the [beginning of ~~time~~ labeled git history](https://github.com/ruby/ruby/tree/v0_49), `v0.49`, Ruby already had pretty solid iterator implementation. There were also `for in` and `do end` syntaxes of their early forms for utilizing iterators[^0_49_spec_of_iter].
 
-[^0_49_eval_c]: https://github.com/ruby/ruby/blob/v0_49/eval.c#L36-L41
+    [^0_49_spec_of_iter]: v0.49 Spec: https://github.com/ruby/ruby/blob/v0_49/spec#L507
 
-Here's a relic sample[^relic_sample] found in `v0.49` from 1994, the `do end` block looks so strange yet so familiar.
+Under the hood, both `for in` and `do end` are implemented using a special data structure called `BLOCK`[^0_49_eval_c_block], which contains code, can accept arguments and captures its surrounding environment, making it essentially `closure` in today's term.
 
-[^relic_sample]: https://github.com/ruby/ruby/blob/v0_49/sample/t2.rb
+    [^0_49_eval_c_block]: https://github.com/ruby/ruby/blob/v0_49/eval.c#L36-L41
+
+The `BLOCK` structure was a hardcoded in C back then. However, hero's journey always starts off small.
+
+Here's a relic sample[^relic_sample] found in `v0.49` from 1994. The `do end` block looks so strange yet so familiar. Fascinating!
+
+    [^relic_sample]: https://github.com/ruby/ruby/blob/v0_49/sample/t2.rb
 
 ```ruby
+# tt is a function that calls yield()
 test = do tt() using i
   if i == 3; break end
   println("ttt: ", i);
 end
 ```
 
-But it was quickly changed to brace style[^brace_style] few months later in `v0.51` (still in 1994)[^relic_sample_but_v0_50], although it continued to be called `DO` internally.
+However the syntax was quickly changed to the brace style[^brace_style] few months later in `v0.51`[^0_51_spec_of_iter], making it look a lot more like today's block. Although its internal name was continued to be called `DO`.
 
-[^brace_style]: Quick note: Ruby already had hash at this moment, which also uses the brace symbol.
+    [^brace_style]: Ruby already had hash (called `Dict` though) at this moment, which had `{a=>b,...}` syntax. From the parser's perspective, the vertical bar in block `{param| ...body}` seems to be the only thing that distinguish them. This syntax choice will hunt the Ruby parser(s) for decades...
 
-[^relic_sample_but_v0_50]: https://github.com/ruby/ruby/blob/v0_51/sample/t2.rb
+    [^0_51_spec_of_iter]: v0.51 Spec https://github.com/ruby/ruby/blob/v0_51/spec#L550
 
 ```ruby
+# same tt as above
 test = tt{i|
   if i == 3; break end
   println("ttt: ", i);
@@ -45,25 +52,122 @@ test = tt{i|
 
 Matz even expressed himself about this in the changelog[^matz_do_changelog]:
 
-[^matz_do_changelog]: https://github.com/ruby/ruby/blob/d450f9d6a28f01b7ca6030a925921dbf35cee439/doc/ChangeLog/ChangeLog-0.50_to_0.60#L336
+    [^matz_do_changelog]: Matz's words in changelog: https://github.com/ruby/ruby/blob/d450f9d6a28f01b7ca6030a925921dbf35cee439/doc/ChangeLog/ChangeLog-0.50_to_0.60#L336
 
 <figure>
     <blockquote class="mb-0" lang="ja">
         \* parse.y:「do expr using var ... end」形式はなくなった. 寂しい気もする. \*BACKWARD INCOMPATIBILITY\*
     </blockquote>
     <figcaption>
-        <span>"do expr using var ... end" is no longer a thing. (I) feel a bit lost. \*BACKWARD INCOMPATIBILITY\*</span>
+        <span>"do expr using var ... end" syntax is no longer a thing. (I) feel a bit lost. \*BACKWARD INCOMPATIBILITY\*</span>
     </figcaption>
 </figure>
 
-Then in `v0.54`, `DO` was renamed to `ITER` internally, although the implementation seems to be unchanged.
+Few releases later in version `0.53` or `0.54`, `DO` was renamed to `ITER` internally. The implementation seems to be unchanged.
 
-At this moment, neither did `proc` nor `lambda` exist.
-
-Advance to [*version 0.95*](https://github.com/ruby/ruby/tree/v0_95), `Block` got renamed to `Proc` with two methods `proc` and `lambda` added to `Kernel`. At that point, they were [aliased to each other](https://github.com/ruby/ruby/blob/fca49a8a69a0f6bb4feae74c6cd0e93d7fac8b36/eval.c#L3025), and the ambiguity just got planted.
+At this moment, in the cold winter of 1994, neither did `proc` nor `lambda` exist yet.
 
 
-# Ruby 1.0 Era
+# The Era of Lost History (1995)
+
+## Born of `Block`
+
+`Proc` wasn't born from nothing.
+
+December 19 1994, `v0.62` was released. An **object** `Block` was introduced[^changelog_block_object], with a singleton method `new` and an instance method `do`[^0_62_block_spec].
+
+    [^changelog_block_object]: Related changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3933
+
+    [^0_62_block_spec]: Spec: https://github.com/ruby/ruby/blob/v0_62/spec#L1415
+
+Unlike the `BLOCK` C structure, this is an object that exists in the Ruby object hierarchy. Calling `Block.new` in the place of an iterator, e.g. in a function, will create an object which holds both the reference to the iterator's environment and the codes passed to it. The `do` method later can be called to execute the code. It's basically the internal `BLOCK` structure exposed to the Ruby environment.
+
+Here's an sample from `v0.62`[^0_62_blk_sample]:
+
+```ruby
+def foo()
+  $block = Block.new
+end
+
+foo(){i | print "i = ", i, "\n"}
+$block.do(2)
+```
+
+    [^0_62_blk_sample]: https://github.com/ruby/ruby/blob/v0_62/sample/blk.rb
+
+As the sun of 1994 sets, this change is like a shooting star, shines through the freezing night sky, followed by the dawn of 1995, and also the dawn of modern Ruby.
+
+## `v0.7x`
+
+Few notable things happened during `v0.7x` releases.
+
+- `Dict` was renamed `Hash`[^dict_hash_rename_changelog].
+
+- Block `{ |param| ...body }` now uses two vertical bars to denote the parameter[^two_bar_block_parameter]. Ruby is finally Ruby.
+
+    [^dict_hash_rename_changelog]: Dict->Hash changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3557
+
+    [^two_bar_block_parameter]: Changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3478
+
+So few things were changed during `v0.7x`, it was the calm before the storm.
+
+## From `Block` to `Proc`, The Lost History of Ruby
+
+Archaeology always has tragedy.
+
+All the release of `v0.8x` up until `v0.95` are lost, which is essentially half of 1995. What left is few words from the changelog that records the reflection of Ruby's development.
+
+Few interesting bits found reading the changelog:
+
+- `protect resque ensure end` was renamed to `begin resque ensure end` in `v0.66`[^v_0_66_begin_changelog]. Yes, *resque* instead of *rescue*. But it was corrected to `rescue` in `v0.83`. Matz was ashamed about this typo in the changelog lol[^resque_typo_changelog].
+
+- `!` and `?` are allowed after method names. Core methods were adopted to use them[^question_and_bang_in_method_names].
+
+    [^v_0_66_begin_changelog]: Changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3724
+
+    [^resque_typo_changelog]: resque typo changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3185
+
+    [^question_and_bang_in_method_names]: Changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3100-L3117
+
+The twin `proc` and `lambda`, the main characters this article is tracking, were born under the shadow of history. It almost seems, this tragedy is purposefully set up for them.
+
+On December 14, 1995, during the development of `v0.94`, `lambda` was introduced as a `Kernel` method, with changes to the scoping rule of block.
+
+The next day, December 15, `proc` was introduced as a **friendly alias** to `lambda`.
+
+Three days later, December 18, the object `Block` was renamed `Proc`, and `v0.94` was released.
+
+All these happened in few lines of changelog[^0_94_changelog]. And coincidentally, the release date was December 18, 1995. It was only *few hours to the exact same day*, December 19, on which `v0.62` was released, the release where `Block` was added.
+
+    [^0_94_changelog]: v0.94 Changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L2754-L2774
+
+History sometimes scares me.
+
+## End of 1995
+
+At this point, Ruby got `lambda` and `proc`. Although they were exact the same,
+as this snippet shows from `eval.c` of CRuby source code[^v0_95_eval_c]:
+
+```c
+rb_define_private_method(cKernel, "lambda", f_lambda, 0);
+rb_define_private_method(cKernel, "proc", f_lambda, 0);
+```
+
+    [^v0_95_eval_c]: eval.c: https://github.com/ruby/ruby/blob/v0_95/eval.c#L3017C1-L3027C2
+
+To my surprise, `lambda` is actually the elder brother of `proc`, but *proc* the name became such a signature of Ruby.
+
+The relationship between them reads like stories of ancient Roman Empire, and also serves as a warning to every programming language designer about the danger of ambiguity.
+
+
+# Break Time: Life of `do end` Syntax
+
+`do end` is such an iconic syntax of Ruby. But it was not born this way or stayed the same through the history of Ruby. It with `Proc` is the unsplittable pair of Ruby foundation, so this section summarizes its life to this day(2024).
+
+It seems that Ruby had `do end` syntax very early on, and may even be the first of few keywords of Ruby. But as said above, it was changed to brace style, meaning there were no `do end` syntax for a period of time.
+
+
+# The Ruby 1.0 Era
 
 Passing Ruby *v1.0* through *v1.7*, these two methods remained the same.
 
@@ -77,7 +181,7 @@ During the lifespan of Ruby *v1.8*, the two global function `proc` and `lambda` 
 > Not sure about the behavior of control flows (return, break etc.) inside proc at that moment because I can't understand the prize-winning usage of `setjmp`/`longjmp` coupled with unhelpful variable names.
 
 
-# YARV Era
+# The YARV Era
 
 The complexity of
 
@@ -92,13 +196,23 @@ The ambiguity is fully grown, casting its shadow over all Ruby land.
 One last problem is that, there were **one** [huge commit](https://github.com/ruby/ruby/commit/a3e1b1ce7ed7e7ffac23015fc2fde56511b30681) that YARV got merged from sources out-of-tree, so consequently history commits are lost. Worse, the `yarv-dev` mailing list is long gone and non indexable, ultimately I can't answer the question of the title :( Asking Matz himself might be the last resort.
 
 
-# Conclusion
+# Today (2024 Sep.) and Future
 
 So why does Ruby have both `lambda` and `proc` doing almost the same thing?
 
 Dunno. To my guess, maybe "because we want and we can" and "no one wants to clean up" and "everyone will be mad about breaking changes".
 
-Another thing worth mentioning is that there are a lot of valuable information in the changelog, reading through it is like watching a documentary of animal evolution history (reword)
+Another thing worth mentioning is that, **a lot** of interesting histories are buried in the changelog.
+
+information in the changelog, reading through it is like watching a documentary of animal evolution history (reword)
+
+
+# Editing Notes and Thoughts on This Article
+
+The article was
+
+Diving through the history commits of Ruby, seeing it evolves gives me a strange feeling.
+
 
 {/*
     1) Even only reading the tiny portion of the Ruby codebase, the reason why Matz regretting introducing threads to Ruby can be quite understandable.

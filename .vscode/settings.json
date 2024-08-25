@@ -31,7 +31,8 @@
     "cSpell.words": [
         "hastscript",
         "hljs",
-        "nudd"
+        "nudd",
+        "resque"
     ],
     // Mess up with math depsite the expression is totaly valid.
     "mdx.server.enable": false,

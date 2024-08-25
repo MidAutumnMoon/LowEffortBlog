@@ -129,7 +129,7 @@
             @apply list-outside ps-[2em];
 
             & > li {
-                @apply mt-1;
+                @apply mb-3;
                 &::marker { @apply text-gray-500; }
             }
         }
