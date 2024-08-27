@@ -98,25 +98,25 @@ $block.do(2)
 
 As the sun of 1994 sets, this change is like a shooting star, shines through the freezing night sky, followed by the dawn of 1995, and also the dawn of modern Ruby.
 
-## `v0.7x`
+## `v0.7x`, First Half of 1995
 
-Few notable things happened during `v0.7x` releases.
+Few notable things happened in this period of time.
 
 - `Dict` was renamed `Hash`[^dict_hash_rename_changelog].
 
-- Block `{ |param| ...body }` now uses two vertical bars to denote the parameter[^two_bar_block_parameter]. Ruby is finally Ruby.
+- Block `{ |param| [body] }` now uses two vertical bars to denote the parameters[^two_bar_block_parameter]. Ruby is finally Ruby.
 
     [^dict_hash_rename_changelog]: Dict->Hash changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3557
 
     [^two_bar_block_parameter]: Changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3478
 
-So few things were changed during `v0.7x`, it was the calm before the storm.
+So few changes were made across `v0.7x` releases. It was the calm before the storm.
 
-## From `Block` to `Proc`, The Lost History of Ruby
+## From `Block` to `Proc`, The Lost History of 1995
 
 Archaeology always has tragedy.
 
-All the release of `v0.8x` up until `v0.95` are lost, which is essentially half of 1995. What left is few words from the changelog that records the reflection of Ruby's development.
+All the release of `v0.8x` up until `v0.95` are lost, which is essentially the second half of 1995. What left is few words from the changelog that records the reflection of Ruby's transformation towards modern.
 
 Few interesting bits found reading the changelog:
 
@@ -124,11 +124,11 @@ Few interesting bits found reading the changelog:
 
 - `!` and `?` are allowed after method names. Core methods were adopted to use them[^question_and_bang_in_method_names].
 
-    [^v_0_66_begin_changelog]: Changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3724
+    [^v_0_66_begin_changelog]: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3724
 
     [^resque_typo_changelog]: resque typo changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3185
 
-    [^question_and_bang_in_method_names]: Changelog: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3100-L3117
+    [^question_and_bang_in_method_names]: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L3100-L3117
 
 The twin `proc` and `lambda`, the main characters this article is tracking, were born under the shadow of history. It almost seems, this tragedy is purposefully set up for them.
 
@@ -146,8 +146,8 @@ History sometimes scares me.
 
 ## End of 1995
 
-At this point, Ruby got `lambda` and `proc`. Although they were exact the same,
-as this snippet shows from `eval.c` of CRuby source code[^v0_95_eval_c]:
+`lambda` and `proc` are here. Although they hadn't started to diverge yet,
+as shown by this snippet from `eval.c` of `v0.95` of CRuby source code[^v0_95_eval_c]:
 
 ```c
 rb_define_private_method(cKernel, "lambda", f_lambda, 0);
@@ -156,20 +156,20 @@ rb_define_private_method(cKernel, "proc", f_lambda, 0);
 
     [^v0_95_eval_c]: eval.c: https://github.com/ruby/ruby/blob/v0_95/eval.c#L3017C1-L3027C2
 
-To my surprise, `lambda` is actually the elder brother of `proc` and both of them dated back to 1995. However *proc* the name became such a signature of Ruby.
+To my surprise, `lambda` actually is the elder brother of `proc`, and both of them dated back to 1995. However, *proc* the name became such a signature of Ruby instead of its brother.
 
-Stepping into the next era, things will get complicated very quick. But first take a quick break.
+Stepping into the next era, things will get complicated very quickly. But first take a quick break.
 
 
 # Break Time: Life of `do end` Syntax
 
-`do end` is an iconic syntax of Ruby. But it was not born this way or stayed the same through the history of Ruby. It with `Proc` is the unsplittable pair of Ruby foundation, so this section summarizes its evolution to this day (2024).
+`do end` is a very iconic syntax of Ruby. But it was neither born this way nor always stayed the same through the history of Ruby.
 
-It seems that Ruby had `do using end` syntax very early on, and may even be the first of few keywords of Ruby. But it was changed to brace style `{param| ...body}` in `v0.51`, Oct 14 1994, meaning there were no `do end` syntax for a period of time.
+It seems that Ruby had `do using end` syntax very early on, and may even be the first of few keywords of Ruby. But it was changed to brace style `{ param| [body] }` in `v0.51`, Oct 1994, meaning there were no `do end` syntax for a period of time.
 
-With the release of `v0.76`, May 19 1995, two vertical bars were used to quote the parameters of block `{ |param| ...body }`, which is one of the forms of today's block syntax.
+With the release of `v0.76`, May 1995, two vertical bars were required to quote the parameters `{ |param| [body] }`. This remained as one form of today's block.
 
-Advancing time, during the development of `v0.99`, Aug 29 1996, the `do end` syntax was finally added back. Here's the translated changelog[^1996_do_end_changelog]:
+Advancing time, during the development of `v0.99`, in Aug 1996, the removed `do end` syntax was finally welcomed back. Here's the related changelog[^1996_do_end_changelog]:
 
 <figure>
     <blockquote lang="ja">
@@ -180,11 +180,11 @@ Advancing time, during the development of `v0.99`, Aug 29 1996, the `do end` syn
     </figcaption>
 </figure>
 
-Where the "old syntax" refers to `{ |param| body }`.
+where the "old syntax" refers to `{ |param| [body] }`.
 
     [^1996_do_end_changelog]: https://github.com/ruby/ruby/blob/76e0ea28ea5f39913ed51c3628afa1a1fa679554/doc/ChangeLog/ChangeLog-0.60_to_1.1#L1856
 
-Well, that's *The History of Ruby's `do end` Block and `{ || }` Block*. Nice title for an article isn't it?
+Well, that'd be *The History of Ruby's `do end` and `{||}` Block*. Nice title for an article isn't it?
 
 
 # The Ruby 1.0 Era
