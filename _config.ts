@@ -22,6 +22,7 @@ import ReadingInfo from "lume/plugins/reading_info.ts"
 import ImageDimension from "./_plugins/ImageDimension.ts"
 import { ImageExtensions } from "@lib/extension.ts"
 import ExternalLink from "./_plugins/ExternalLink.ts"
+import Meta from "lume/plugins/metas.ts"
 
 
 const site = Lume( {
@@ -73,6 +74,8 @@ site.use( Feed( {
         updated: data => new Date( data.updated )
     }
 } ) )
+
+site.use( Meta())
 
 
 /**

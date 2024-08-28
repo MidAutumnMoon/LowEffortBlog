@@ -1,0 +1,5 @@
+[metas]
+title = "=title"
+lang = "=lang"
+image = "$ img attr(src)"
+generator = true
