@@ -1,5 +1,6 @@
 [metas]
 title = "=title"
 lang = "=lang"
+description = "$ main#article-content > p"
 image = "$ img attr(src)"
 generator = true

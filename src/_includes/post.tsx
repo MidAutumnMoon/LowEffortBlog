@@ -94,7 +94,7 @@ export default function( page: Lume.Data ) {
 
         <Title title={ title ?? "<<Missing Title>>" }/>
 
-        <main class="prose">
+        <main class="prose" id="article-content">
             { page.children }
         </main>
 
