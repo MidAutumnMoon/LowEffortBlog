@@ -20,7 +20,7 @@ export default function(
         "
     >
 
-        <p class="text-blue-500 mb-3 flex gap-2">
+        <p class="text-blue-500 mb-3 flex gap-2" lang="en">
             <span class="icon-[mdi--information-outline] w-6 h-6"></span>
             <span class="">Note</span>
         </p>
