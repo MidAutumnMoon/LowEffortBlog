@@ -29,7 +29,7 @@
       "jsr:@std/toml@^1.0.1": "jsr:@std/toml@1.0.1",
       "jsr:@std/yaml@1.0.4": "jsr:@std/yaml@1.0.4",
       "jsr:@std/yaml@^1.0.4": "jsr:@std/yaml@1.0.4",
-      "npm:@iconify-json/mdi@1.1.68": "npm:@iconify-json/mdi@1.1.68",
+      "npm:@iconify-json/mdi@1.2.0": "npm:@iconify-json/mdi@1.2.0",
       "npm:@iconify/tailwind@1.1.3": "npm:@iconify/tailwind@1.1.3",
       "npm:@js-temporal/polyfill@0.4.4": "npm:@js-temporal/polyfill@0.4.4",
       "npm:@mdx-js/mdx@3.0.1": "npm:@mdx-js/mdx@3.0.1",
@@ -259,8 +259,8 @@
         "integrity": "sha512-BHpFFeslkWrXWyUPnbKm+xYYVYruCinGcftSBaa8zoF9hZO4BcSCFUvHVTtzpIY6YzUnYtuEhZ+C9iEXjxnasg==",
         "dependencies": {}
       },
-      "@iconify-json/mdi@1.1.68": {
-        "integrity": "sha512-7//TKCiXLU6kNWeOJRTBbisofVO7rF1sD1TZTL4/V9nqlmVNczQ5IOY0GgKOTsitkcTnX9GXgrgbjw3OI5B69w==",
+      "@iconify-json/mdi@1.2.0": {
+        "integrity": "sha512-E9/3l5Syg3wfuarorFodhn4s8YorxhH3U3U20LaNBNiqw1kFNIDWhF6HymuzAD35k7RH0OBasJ+ZUyFtVVV6eg==",
         "dependencies": {
           "@iconify/types": "@iconify/types@2.0.0"
         }
@@ -2899,7 +2899,7 @@
     "dependencies": [
       "jsr:@std/fs@1.0.2",
       "jsr:@std/path@1.0.3",
-      "npm:@iconify-json/mdi@1.1.68",
+      "npm:@iconify-json/mdi@1.2.0",
       "npm:@iconify/tailwind@1.1.3",
       "npm:@types/hast@3.0.4",
       "npm:esbuild@0.23.1",
