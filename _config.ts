@@ -4,7 +4,6 @@ import MDX from "lume/plugins/mdx.ts"
 import MdxOption from "./mdx.config.ts"
 
 import Esbuild from "lume/plugins/esbuild.ts"
-import EsbuildMinicss from "./_plugins/EsbuildMinicss.ts"
 import JsxPreact from "lume/plugins/jsx_preact.ts"
 import Minify from "lume/plugins/minify_html.ts"
 import Highlight from "lume/plugins/code_highlight.ts"
@@ -53,7 +52,6 @@ site.use( Sass() )
 site.use( Postcss() )
 
 site.use( Esbuild() )
-site.use( EsbuildMinicss() )
 site.use( Minify() )
 
 site.use( Sitemap() )
