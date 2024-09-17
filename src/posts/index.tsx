@@ -8,47 +8,42 @@ export const url = "./"
 /**
  * Show a list of #tags
  */
-const Tags = (
+const ShowTags = (
     { tags }: { tags?: string[] }
 ) => {
     if ( !tags ) { return <></> }
 
-    const tags_string = tags
-        .map( t => `#${t}` )
-        /** \u00A0 whitespace */
-        .join( "\u00A0" )
-
-    return <span class="text-xs text-slate-500/70">
-        { tags_string }
+    return <span class="text-sm text-slate-400">
+        { ( tags.map( t => `#${t}` ).join( "\u00A0" ) ) }
     </span>
 }
 
 
-const LinkToPost = (
-    { post, lang }: {
-        post: Lume.Data,
-        lang: string | undefined
-    }
+/**
+ * Show a post entry with its date and tags etc.
+ */
+const ShowPost = (
+    { post }: { post: Lume.Data }
 ) => {
-    const date_elem = <>
-        <span class="text-slate-500/80 text-xs">
+    const ShowDate = <>
+        <span class="text-slate-400 text-sm tabular-nums">
             { ( new SwDate( post.date ) ).to_mm_dd() }
         </span>
     </>
 
-    const post_ref = <>
-        <a href={ post.url } lang={ lang ?? "en" }>
+    const ShowLinkToPost = <>
+        <a href={ post.url } lang={ post.lang ?? "en" }>
             { post.title ?? "<<Missing Title>>" }
         </a>
     </>
 
-    return <li>
-        { date_elem }
+    return <>
+        { ShowDate }
         &nbsp;&nbsp;
-        { post_ref }
+        { ShowLinkToPost }
         &nbsp;&nbsp;
-        <Tags tags={ post.tags }/>
-    </li>
+        <ShowTags tags={ post.tags }/>
+    </>
 }
 
 
@@ -56,16 +51,12 @@ const LinkToPost = (
  * A component that display a list of posts
  * while showing the year
  */
-const PostsPerYear = ( { year, posts }: {
+const ShowPostsByYear = ( { year, posts }: {
     year: string,
     posts: Lume.Data[]
 } ) => {
 
-    const year_elem = <>
-        <h1 class="text-xl">{ year }</h1>
-    </>
-
-    const link_to_posts_elem = posts
+    const ShowPostEntries = posts
         /**
          * 1. Sort posts by creation date from older (smaller timestamp)
          * to newer (bigger timestamp)
@@ -78,16 +69,17 @@ const PostsPerYear = ( { year, posts }: {
          * are at the front of list
          */
         .reverse()
-        .map( p => <LinkToPost post={ p } lang={ p.lang }/> )
-
-    const posts_list_elem = <>
-        <ul class="flex flex-col gap-2">{ link_to_posts_elem }</ul>
-    </>
+        .map( p => <li><ShowPost post={ p }/></li> )
 
     return <section class="flex flex-col gap-2">
-        { year_elem }
-        { posts_list_elem }
+        <h1 class="text-xl">
+            { year }
+        </h1>
+        <ul class="flex flex-col gap-2">
+            { ShowPostEntries }
+        </ul>
     </section>
+
 }
 
 
@@ -112,17 +104,17 @@ export default ( data: Lume.Data ) => {
         return by_year
     })()
 
-    const years_elems = Object.entries( posts_by_years )
+    const ShowPostsByYears = Object.entries( posts_by_years )
         .sort()
         // Make it descending, which means more recent years
         // got displayed first
         .reverse()
         .map( ([ year, posts ]) =>
-            <PostsPerYear year={ year } posts={ posts! as Lume.Data[] } />
+            <ShowPostsByYear year={ year } posts={ posts! as Lume.Data[] } />
         )
 
-    return <div class="py-4 flex flex-col gap-8">
-        { years_elems }
+    return <div class="py-2 flex flex-col gap-8">
+        { ShowPostsByYears }
     </div>
 
 }
