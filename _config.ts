@@ -5,7 +5,6 @@ import MdxOption from "./mdx.config.ts"
 
 import Esbuild from "lume/plugins/esbuild.ts"
 import JsxPreact from "lume/plugins/jsx_preact.ts"
-import Minify from "lume/plugins/minify_html.ts"
 import Highlight from "lume/plugins/code_highlight.ts"
 
 import Postcss from "lume/plugins/postcss.ts"
@@ -22,6 +21,7 @@ import ImageDimension from "./_plugins/ImageDimension.ts"
 import { ImageExtensions } from "@lib/extension.ts"
 import ExternalLink from "./_plugins/ExternalLink.ts"
 import Meta from "lume/plugins/metas.ts"
+import Sri from "lume/plugins/sri.ts"
 
 
 const site = Lume( {
@@ -50,9 +50,7 @@ site.use( Tailwind( {
 } ) )
 site.use( Sass() )
 site.use( Postcss() )
-
 site.use( Esbuild() )
-site.use( Minify() )
 
 site.use( Sitemap() )
 site.use( ImageDimension() )
@@ -74,6 +72,7 @@ site.use( Feed( {
 } ) )
 
 site.use( Meta())
+site.use( Sri() )
 
 
 /**
