@@ -1,6 +1,7 @@
 import { SwDate } from "@lib/date.ts"
 import { Slug } from "@lib/slug.ts"
 
+
 export default ( title: string ) => {
 
     if ( !title ) {
@@ -13,12 +14,11 @@ export default ( title: string ) => {
     const { year, month } = date
 
     return {
-        path: `/posts/${year}/${month}/${slug_path}/index.md`,
+        path: `/posts/${year}/${month}/${slug_path}/index.mdx`,
         content: {
-            title,
+            title, content: "",
             date: date.toString(),
             updated: date.toString(),
-            content: ""
         }
     }
 
