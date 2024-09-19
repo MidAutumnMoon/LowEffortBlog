@@ -3,26 +3,45 @@
  */
 
 
-function ShowHeader() {
-    const List = <ul class="text-lg flex gap-6">
-        <li class="grow">
-            <a href="/">ᕙ(&nbsp;&nbsp;&nbsp;leb&nbsp;&nbsp;&nbsp;)ᕗ</a>
-        </li>
-        <li>
-            <a href="/posts">posts</a>
-        </li>
-        <li>
-            <a href="/feed.xml">feed</a>
-        </li>
-    </ul>
+function ShowSiteHeader( data: Lume.Data ) {
 
-    return <header class="w-full py-6">
-        <nav> { List } </nav>
+    function ShowSiteTitle() {
+        return <a href="/"
+            style="text-decoration:none"
+            class="block my-4 flex gap-4 items-center"
+        >
+            <div id="site-icon" class="bg-slate-500 w-[60px] h-[60px] text-white p-1 text-sm">
+                here be icon
+            </div>
+            <h1 class="text-3xl font-bold">
+                { data.site_title ?? "<<!!No Title!!>>" }
+            </h1>
+        </a>
+    }
+
+    function ShowNav() {
+        return <ul class="text-lg flex gap-6">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/posts">Posts</a>
+            </li>
+            <li>
+                <a href="/feed.xml">Feed</a>
+            </li>
+        </ul>
+    }
+
+    return <header class="mb-8">
+        <ShowSiteTitle/>
+        <ShowNav/>
     </header>
+
 }
 
 
-function ShowFooter() {
+function ShowSiteFooter() {
     const ShowBackToTop = <div class="text-center">
         <a href="#">↑ Back to Top ↑</a>
     </div>
@@ -34,11 +53,7 @@ function ShowFooter() {
     </span>
 
     return <footer
-        class="
-            w-full h-fit my-8
-            flex flex-col justify-center gap-6
-            text-sm
-        "
+        class="my-4 flex flex-col justify-center gap-4 text-sm"
     >
         { ShowBackToTop }
         { ShowCopyright }
@@ -46,9 +61,9 @@ function ShowFooter() {
 }
 
 
-function ShowMain( data: Lume.Data ) {
+function ShowMainContent( data: Lume.Data ) {
     // "lang" effects typography, be careful with it
-    return <main lang={ data.lang ?? "en" } id="website-body">
+    return <main lang={ data.lang ?? "en" }>
         { data.children }
     </main>
 }
@@ -56,24 +71,50 @@ function ShowMain( data: Lume.Data ) {
 
 export default ( data: Lume.Data ) => {
 
+    function LinkStylesheet() {
+        // For idiot Safari,
+        // otherwise it caches everything even in dev mode.
+        const cache_bust = crypto.randomUUID()
+        return <>
+            <link rel="preload" href={ `/styles.css?cb=${cache_bust}` } as="style" />
+            <link rel="stylesheet" href={ `/styles.css?cb=${cache_bust}` } />
+        </>
+    }
+
+    function LinkFeed() {
+        return <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS Feed for LowEffortBlog"
+            href="/feed.xml"
+        />
+    }
+
+    function LinkScript() {
+        return <></>
+    }
+
+    function Title( data: Lume.Data ) {
+        const site_title = data.site_title ?? "<<!!No Title!!>>"
+        const title = data.title ? `${data.title} | ` : ""
+        return <title>
+            { title }{ site_title }
+        </title>
+    }
+
     return <html lang="en">
         <head>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>{ data.title ?? data.default_title }</title>
-            <link rel="preload" href="/styles.css" as="style" />
-            <link rel="stylesheet" href="/styles.css" />
-            <link
-                rel="alternate"
-                type="application/rss+xml"
-                title="RSS Feed for LowEffortBlog"
-                href="/feed.xml"
-            />
+            <Title { ...data } />
+            <LinkStylesheet/>
+            <LinkScript/>
+            <LinkFeed/>
         </head>
         <body>
-            <ShowHeader/>
-            <ShowMain { ...data }/>
-            <ShowFooter/>
+            <ShowSiteHeader { ...data } />
+            <ShowMainContent { ...data } />
+            <ShowSiteFooter/>
         </body>
     </html>
 

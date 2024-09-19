@@ -79,7 +79,7 @@ site.use( Sri() )
  * Data
  */
 
-site.data( "default_title", "leb" )
+site.data( "site_title", "LowEffortBlog" )
 site.data( "git_repo", "https://github.com/MidAutumnMoon/LowEffortBlog" )
 
 
