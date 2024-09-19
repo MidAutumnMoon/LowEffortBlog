@@ -3,7 +3,7 @@
  */
 
 
-function Header() {
+function ShowHeader() {
     const List = <ul class="text-lg flex gap-6">
         <li class="grow">
             <a href="/">ᕙ(&nbsp;&nbsp;&nbsp;leb&nbsp;&nbsp;&nbsp;)ᕗ</a>
@@ -22,12 +22,12 @@ function Header() {
 }
 
 
-function Footer () {
-    const BackToTop = <div class="text-center">
+function ShowFooter() {
+    const ShowBackToTop = <div class="text-center">
         <a href="#">↑ Back to Top ↑</a>
     </div>
 
-    const Copyright = <span class="text-center">
+    const ShowCopyright = <span class="text-center">
         &copy; MidAutumnMoon 2023-{ ( new Date() ).getFullYear() }
         &nbsp;&middot;&nbsp;
         <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
@@ -40,18 +40,15 @@ function Footer () {
             text-sm
         "
     >
-        { BackToTop }
-        { Copyright }
+        { ShowBackToTop }
+        { ShowCopyright }
     </footer>
 }
 
 
-function Main( data: Lume.Data ) {
+function ShowMain( data: Lume.Data ) {
     // "lang" effects typography, be careful with it
-    return <main
-        lang={ data.lang ?? "en" }
-        id="website-body"
-    >
+    return <main lang={ data.lang ?? "en" } id="website-body">
         { data.children }
     </main>
 }
@@ -59,16 +56,13 @@ function Main( data: Lume.Data ) {
 
 export default ( data: Lume.Data ) => {
 
-    const stylesheet =
-        `/styles.css?cb=${ (new Date()).getTime() }`
-
     return <html lang="en">
         <head>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <title>{ data.title ?? data.default_title }</title>
-            <link rel="preload" href={ stylesheet } as="style" />
-            <link rel="stylesheet" href={ stylesheet } />
+            <link rel="preload" href="/styles.css" as="style" />
+            <link rel="stylesheet" href="/styles.css" />
             <link
                 rel="alternate"
                 type="application/rss+xml"
@@ -77,9 +71,9 @@ export default ( data: Lume.Data ) => {
             />
         </head>
         <body>
-            <Header/>
-            <Main { ...data }/>
-            <Footer/>
+            <ShowHeader/>
+            <ShowMain { ...data }/>
+            <ShowFooter/>
         </body>
     </html>
 
