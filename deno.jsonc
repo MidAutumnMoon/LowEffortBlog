@@ -5,7 +5,7 @@
     "@lib/": "./_lib/",
     "@std/fs": "jsr:@std/fs@1.0.3",
     "@std/path": "jsr:@std/path@1.0.6",
-    "esbuild": "npm:esbuild@0.23.1",
+    "esbuild": "npm:esbuild@0.24.0",
     "hast": "npm:@types/hast@3.0.4",
     "hast-util-heading": "npm:hast-util-heading@3.0.0",
     "hast-util-heading-rank": "npm:hast-util-heading-rank@3.0.0",
