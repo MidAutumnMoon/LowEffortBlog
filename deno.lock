@@ -22,6 +22,7 @@
       "jsr:@std/front-matter@1.0.4": "jsr:@std/front-matter@1.0.4",
       "jsr:@std/fs@1.0.2": "jsr:@std/fs@1.0.2",
       "jsr:@std/fs@1.0.3": "jsr:@std/fs@1.0.3",
+      "jsr:@std/fs@1.0.4": "jsr:@std/fs@1.0.4",
       "jsr:@std/fs@^1.0.2": "jsr:@std/fs@1.0.3",
       "jsr:@std/fs@^1.0.3": "jsr:@std/fs@1.0.3",
       "jsr:@std/html@1.0.0": "jsr:@std/html@1.0.0",
@@ -42,6 +43,7 @@
       "jsr:@std/path@1.0.6": "jsr:@std/path@1.0.6",
       "jsr:@std/path@^1.0.3": "jsr:@std/path@1.0.4",
       "jsr:@std/path@^1.0.4": "jsr:@std/path@1.0.6",
+      "jsr:@std/path@^1.0.6": "jsr:@std/path@1.0.6",
       "jsr:@std/streams@^1.0.3": "jsr:@std/streams@1.0.3",
       "jsr:@std/streams@^1.0.4": "jsr:@std/streams@1.0.4",
       "jsr:@std/toml@1.0.1": "jsr:@std/toml@1.0.1",
@@ -73,7 +75,7 @@
       "npm:postcss@8.4.45": "npm:postcss@8.4.45",
       "npm:preact-render-to-string@6.5.10": "npm:preact-render-to-string@6.5.10_preact@10.23.2",
       "npm:preact@10.23.2": "npm:preact@10.23.2",
-      "npm:preact@10.24.0": "npm:preact@10.24.0",
+      "npm:preact@10.24.2": "npm:preact@10.24.2",
       "npm:rehype-mathjax@6.0.0": "npm:rehype-mathjax@6.0.0",
       "npm:rehype-raw@7.0.0": "npm:rehype-raw@7.0.0",
       "npm:rehype-sanitize@6.0.0": "npm:rehype-sanitize@6.0.0",
@@ -146,6 +148,12 @@
         "integrity": "3cb839b1360b0a42d8b367c3093bfe4071798e6694fa44cf1963e04a8edba4fe",
         "dependencies": [
           "jsr:@std/path@^1.0.4"
+        ]
+      },
+      "@std/fs@1.0.4": {
+        "integrity": "2907d32d8d1d9e540588fd5fe0ec21ee638134bd51df327ad4e443aaef07123c",
+        "dependencies": [
+          "jsr:@std/path@^1.0.6"
         ]
       },
       "@std/html@1.0.0": {
@@ -2137,8 +2145,8 @@
         "integrity": "sha512-kKYfePf9rzKnxOAKDpsWhg/ysrHPqT+yQ7UW4JjdnqjFIeNUnNcEJvhuA8fDenxAGWzUqtd51DfVg7xp/8T9NA==",
         "dependencies": {}
       },
-      "preact@10.24.0": {
-        "integrity": "sha512-aK8Cf+jkfyuZ0ZZRG9FbYqwmEiGQ4y/PUO4SuTWoyWL244nZZh7bd5h2APd4rSNDYTBNghg1L+5iJN3Skxtbsw==",
+      "preact@10.24.2": {
+        "integrity": "sha512-1cSoF0aCC8uaARATfrlz4VCBqE8LwZwRfLgkxJOQwAlQt6ayTmi0D9OF7nXid1POI5SZidFuG9CnlXbDfLqY/Q==",
         "dependencies": {}
       },
       "property-information@6.5.0": {
@@ -3250,7 +3258,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/fs@1.0.3",
+      "jsr:@std/fs@1.0.4",
       "jsr:@std/path@1.0.6",
       "npm:@iconify-json/mdi@1.2.0",
       "npm:@iconify/tailwind@1.1.3",
@@ -3260,7 +3268,7 @@
       "npm:hast-util-heading@3.0.0",
       "npm:hast-util-to-text@4.0.2",
       "npm:hastscript@9.0.0",
-      "npm:preact@10.24.0",
+      "npm:preact@10.24.2",
       "npm:rehype-mathjax@6.0.0",
       "npm:rehype-slug@6.0.0",
       "npm:remark-math@6.0.0",
