@@ -12,14 +12,17 @@ import type { JSX } from "preact"
 /**
  * The big bold title
  */
-function Title( { title }: { title: string } ) {
-    return <h1 class="text-4xl font-bold text-balance mb-6">
+function ShowTitle( { title }: { title: string } ) {
+    return <h1
+        class="text-4xl font-bold text-balance mb-6"
+        data-pagefind-meta="title"
+    >
         { title }
     </h1>
 }
 
 
-function Meta(
+function ShowMeta(
     props: {
         reading_info?: { words: number },
         tags: string[],
@@ -65,7 +68,9 @@ function Meta(
             ? <>posted on {sw_posted.toString()}</>
             : <>updated on {sw_updated.toString()}</>
 
-        components.push( c )
+        components.push(
+            <span data-pagefind-ignore>{c}</span>
+        )
     }
 
     return <div class="text-gray-400 italic mb-3" lang="en">
@@ -85,14 +90,14 @@ export default function( page: Lume.Data ) {
             : <></>
         }
 
-        <Meta
+        <ShowMeta
             reading_info={ readingInfo }
             tags={ tags }
             date={ page.date }
             updated={ page.updated }
         />
 
-        <Title title={ title ?? "<<Missing Title>>" }/>
+        <ShowTitle title={ title ?? "<<Missing Title>>" }/>
 
         <main class="prose" id="article-content">
             { page.children }

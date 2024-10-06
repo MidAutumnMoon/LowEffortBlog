@@ -22,6 +22,7 @@ import { ImageExtensions } from "@lib/extension.ts"
 import ExternalLink from "./_plugins/ExternalLink.ts"
 import Meta from "lume/plugins/metas.ts"
 import Sri from "lume/plugins/sri.ts"
+import Pagefind from "lume/plugins/pagefind.ts"
 
 
 const site = Lume( {
@@ -73,6 +74,16 @@ site.use( Feed( {
 
 site.use( Meta())
 site.use( Sri() )
+
+site.use( Pagefind( {
+    ui: {
+        containerId: "pagefind-search",
+        showSubResults: true,
+        translations: {
+            placeholder: "Press '/' to search"
+        }
+    }
+} ) )
 
 
 /**

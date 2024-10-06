@@ -113,7 +113,7 @@ export default ( data: Lume.Data ) => {
             <ShowPostsByYear year={ year } posts={ posts! as Lume.Data[] } />
         )
 
-    return <div class="py-2 flex flex-col gap-8">
+    return <div class="py-2 flex flex-col gap-8" data-pagefind-ignore>
         { ShowPostsByYears }
     </div>
 

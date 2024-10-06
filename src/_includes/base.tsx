@@ -33,7 +33,7 @@ function ShowSiteHeader( data: Lume.Data ) {
         </ul>
     }
 
-    return <header class="mb-8">
+    return <header lang="en" class="mb-8">
         <ShowSiteTitle/>
         <ShowNav/>
     </header>
@@ -53,6 +53,7 @@ function ShowSiteFooter() {
     </span>
 
     return <footer
+        lang="en"
         class="my-4 flex flex-col justify-center gap-4 text-sm"
     >
         { ShowBackToTop }
@@ -63,9 +64,14 @@ function ShowSiteFooter() {
 
 function ShowMainContent( data: Lume.Data ) {
     // "lang" effects typography, be careful with it
-    return <main lang={ data.lang ?? "en" }>
+    return <main lang={ data.lang ?? "en" } data-pagefind-body>
         { data.children }
     </main>
+}
+
+
+function ShowPagefind() {
+    return <div id="pagefind-search"></div>
 }
 
 
@@ -91,7 +97,13 @@ export default ( data: Lume.Data ) => {
     }
 
     function LinkScript() {
-        return <></>
+        const scripts = [
+            "/scripts/main.js"
+        ].map( s => <>
+            <script type="module" src={s}></script>
+            <link rel="modulepreload" href={s}/>
+        </> )
+        return <>{scripts}</>
     }
 
     function Title( data: Lume.Data ) {
@@ -102,7 +114,7 @@ export default ( data: Lume.Data ) => {
         </title>
     }
 
-    return <html lang="en">
+    return <html lang={ data.lang ?? "en" }>
         <head>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -113,6 +125,7 @@ export default ( data: Lume.Data ) => {
         </head>
         <body>
             <ShowSiteHeader { ...data } />
+            <ShowPagefind/>
             <ShowMainContent { ...data } />
             <ShowSiteFooter/>
         </body>
