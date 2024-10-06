@@ -34,6 +34,7 @@
         "hastscript",
         "hljs",
         "nudd",
+        "Pixi",
         "resque"
     ],
     // Mess up with math depsite the expression is totaly valid.
