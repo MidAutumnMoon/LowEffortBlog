@@ -33,7 +33,7 @@ function ShowSiteHeader( data: Lume.Data ) {
         </ul>
     }
 
-    return <header lang="en" class="mb-8">
+    return <header lang="en" class="mb-6">
         <ShowSiteTitle/>
         <ShowNav/>
     </header>
@@ -71,7 +71,7 @@ function ShowMainContent( data: Lume.Data ) {
 
 
 function ShowPagefind() {
-    return <div id="pagefind-search"></div>
+    return <div id="pagefind-search" lang="en"></div>
 }
 
 

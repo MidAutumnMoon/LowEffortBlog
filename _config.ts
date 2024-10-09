@@ -82,6 +82,9 @@ site.use( Pagefind( {
         translations: {
             placeholder: "Press '/' to search"
         }
+    },
+    indexing: {
+        forceLanguage: "ja"
     }
 } ) )
 
